@@ -30,5 +30,23 @@ namespace DataBaseControl.Repository
         {
             return _context.Players.ToList();
         }
+
+        public bool IsAPlayer (Player player)
+        {
+            return _context.Players.Any(x => x.Name == player.Name);
+        }
+
+        public bool RegisterNewPlayer (Player player)
+        {
+            if (player.Name != null)
+            {
+                player.PlayerType = Entities.Enam.PlayerType.User;
+                _context.Players.Add(player);
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

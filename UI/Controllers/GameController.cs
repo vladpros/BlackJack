@@ -1,4 +1,5 @@
 ﻿using DataBaseControl;
+using DataBaseControl.Entities;
 using DataBaseControl.Repository;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,13 @@ namespace UI.Controllers
         public ActionResult Start()
         {
             ViewBag.Player = _player.GetAllPlayer().OrderByDescending(x => x.Name);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Play(string player, int botsNumber)
+        {
+            
             return View();
         }
     }

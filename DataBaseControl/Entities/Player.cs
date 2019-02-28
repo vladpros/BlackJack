@@ -18,6 +18,7 @@ namespace DataBaseControl.Entities
         {
             Games = new List<Game>();
             PlayerInTurns = new List<PlayerInTurn>();
+            Point = 0;
         }
     }
 }

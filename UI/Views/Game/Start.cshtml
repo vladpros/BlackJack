@@ -7,13 +7,23 @@
 <h2>Start</h2>
 
 <div>
-    <form name="test" method="get" action="">
-        <input list="player">
-            <datalist id="player">
-                @foreach (var p in @ViewBag.Player) {
-                <option value="@p.Name"></option>
-                }
-            </datalist>
+    <form name="test" method="post" action="Play">
+        <input name="Player" list="player">
+        <select name="botsNumber">
+            <option selectedvalue="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
         <input type="submit" value="Отправить">
     </form>
 </div>
+
+
+<datalist id="player">
+    @foreach (var p in @ViewBag.Player)
+    {
+        <option value="@p.Name"></option>
+    }
+</datalist>
