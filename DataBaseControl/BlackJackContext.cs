@@ -13,7 +13,6 @@ namespace DataBaseControl
         public DbSet<Game> Games { get; set; }
         public DbSet<Turn> Turns { get; set; }
         public DbSet<PlayerInTurn> PlayerInTurns { get; set; }
-        public DbSet<Card> Cards { get; set; }
 
     }
 }

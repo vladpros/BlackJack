@@ -49,28 +49,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlackJackContext.cs" />
-    <Compile Include="Entities\Card.cs" />
     <Compile Include="Entities\Enam\GameStatus.cs" />
     <Compile Include="Entities\Enam\LearCard.cs" />
     <Compile Include="Entities\Enam\NumberCard.cs" />
     <Compile Include="Entities\Enam\PlayerType.cs" />
     <Compile Include="Entities\Game.cs" />
-    <Compile Include="Entities\GamePlayer.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\PlayerInTurn.cs" />
     <Compile Include="Entities\Turn.cs" />
+    <Compile Include="Migrations\201902281441104_q.cs" />
+    <Compile Include="Migrations\201902281441104_q.Designer.cs">
+      <DependentUpon>201902281441104_q.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\DefaultGenericReposytory.cs" />
     <Compile Include="Repository\GameRepository.cs" />
     <Compile Include="Repository\Interface\IGenericRepository.cs" />
-    <Compile Include="Migrations\201902271122235_1 migration.cs" />
-    <Compile Include="Migrations\201902271122235_1 migration.Designer.cs">
-      <DependentUpon>201902271122235_1 migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902271338189_3 migration.cs" />
-    <Compile Include="Migrations\201902271338189_3 migration.Designer.cs">
-      <DependentUpon>201902271338189_3 migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\PlayerRepository.cs" />
   </ItemGroup>
@@ -79,11 +73,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201902271122235_1 migration.resx">
-      <DependentUpon>201902271122235_1 migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902271338189_3 migration.resx">
-      <DependentUpon>201902271338189_3 migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902281441104_q.resx">
+      <DependentUpon>201902281441104_q.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

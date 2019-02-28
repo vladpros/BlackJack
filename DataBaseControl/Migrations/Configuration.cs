@@ -1,7 +1,9 @@
 namespace DataBaseControl.Migrations
 {
+    using System;
+    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-
+    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DataBaseControl.BlackJackContext>
     {
@@ -12,7 +14,7 @@ namespace DataBaseControl.Migrations
 
         protected override void Seed(DataBaseControl.BlackJackContext context)
         {
-            
+            //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
