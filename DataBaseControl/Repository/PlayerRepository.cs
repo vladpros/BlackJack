@@ -42,6 +42,7 @@ namespace DataBaseControl.Repository
             {
                 player.PlayerType = Entities.Enam.PlayerType.User;
                 _context.Players.Add(player);
+                _context.SaveChanges();
 
                 return true;
             }

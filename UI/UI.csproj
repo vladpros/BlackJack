@@ -178,7 +178,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Game\Start.cshtml" />
     <Content Include="Views\LeaderBoard\Index.cshtml" />
-    <Content Include="Views\Game\Play.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

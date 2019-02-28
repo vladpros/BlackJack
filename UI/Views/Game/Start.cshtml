@@ -3,23 +3,24 @@
     ViewBag.Title = "Start";
 }
 
+<script src='@Url.Content("~/Scripts/jquery-3.3.1.min.js")' type="text/javascript"></script>
+
 
 <h2>Start</h2>
 
 <div>
-    <form name="test" method="post" action="Play">
-        <input name="Player" list="player">
+    <form name="test" method="post" action="Dawnload">
+        <input name="Player" list="player" class="dropdawnPlayers" required>
         <select name="botsNumber">
-            <option selectedvalue="1">1</option>
+            <option selected value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
         </select>
-        <input type="submit" value="Отправить">
+        <button type="submit" class="button">Отправить</button>
     </form>
 </div>
-
 
 <datalist id="player">
     @foreach (var p in @ViewBag.Player)

@@ -1,10 +1,7 @@
 ﻿using DataBaseControl;
 using DataBaseControl.Entities;
 using DataBaseControl.Repository;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace UI.Controllers
@@ -27,10 +24,15 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Play(string player, int botsNumber)
+        public ActionResult Dawnload(string player, int botsNumber)
         {
-            
-            return View();
+
+            if(!_player.IsAPlayer(new Player { Name = player }))
+            {
+                _player.RegisterNewPlayer(new Player { Name = player });
+            }
+
+            return Redirect($"~/Home/Index");
         }
     }
 }
