@@ -10,9 +10,9 @@
     <form name="test" method="get" action="">
         <input list="player">
             <datalist id="player">
-                <option value="Чебурашка"></option>
-                <option value="Крокодил Гена"></option>
-                <option value="Шапокляк"></option>
+                @foreach (var p in @ViewBag.Player) {
+                <option value="@p.Name"></option>
+                }
             </datalist>
         <input type="submit" value="Отправить">
     </form>
