@@ -24,9 +24,8 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Dawnload(string player, int botsNumber)
+        public ActionResult CheckUser(string player, int botsNumber)
         {
-
             if(!_player.IsAPlayer(new Player { Name = player }))
             {
                 _player.RegisterNewPlayer(new Player { Name = player });

@@ -7,6 +7,7 @@ namespace DataBaseControl.Entities
     public class Player
     {
         public long Id { get; set; }
+
         [Required]
         public string Name { get; set; }
         public int Point { get; set; }

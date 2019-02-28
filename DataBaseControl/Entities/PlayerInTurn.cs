@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-
+﻿
 namespace DataBaseControl.Entities
 {
     public class PlayerInTurn
