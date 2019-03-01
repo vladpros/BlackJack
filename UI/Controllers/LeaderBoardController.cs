@@ -1,26 +1,21 @@
-﻿using DataBaseControl;
-using DataBaseControl.Repository;
-using System.Web.Mvc;
-using System.Linq;
-using DataBaseControl.Repository.Interface;
+﻿using System.Web.Mvc;
+using Logick;
 
 namespace UI.Controllers
 {
     public class LeaderBoardController : Controller
     {
 
-        private BlackJackContext _db;
-        private IPlayerRepository _player;
+        private DataControl _dataControl;
 
         public LeaderBoardController()
         {
-            _db = new BlackJackContext();
-            _player = new PlayerRepository(_db);
+            _dataControl = new DataControl();
         }
 
         public ActionResult Index()
         {
-            ViewBag.Player = _player.GetAllUser().OrderByDescending(x => x.Point);
+            ViewBag.Player = _dataControl.GetUserOrdered();
             return View();
         }
     }

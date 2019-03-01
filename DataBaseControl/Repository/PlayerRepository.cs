@@ -27,20 +27,6 @@ namespace DataBaseControl.Repository
             return _context.Players.Any(x => x.Name == player.Name);
         }
 
-        public bool RegisterNewPlayer (Player player)
-        {
-            if (player.Name != null)
-            {
-                player.PlayerType = Entities.Enam.PlayerType.User;
-                _context.Players.Add(player);
-                _context.SaveChanges();
-
-                return true;
-            }
-
-            return false;
-        }
-
         public List<Player> GetAllUser()
         {
             return GetAllType(Entities.Enam.PlayerType.User);
@@ -71,6 +57,11 @@ namespace DataBaseControl.Repository
             {
                 Create(player);
             }
+        }
+
+        public Player SearchPlayerWithName(string name)
+        {
+            return _context.Players.Include(c => c.Games).Where(x => x.Name == name).FirstOrDefault();
         }
     }
 }

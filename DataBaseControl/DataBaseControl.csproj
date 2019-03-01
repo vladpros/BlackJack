@@ -59,10 +59,9 @@
     <Compile Include="Entities\Game.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Turn.cs" />
-    <Compile Include="Entities\Round.cs" />
-    <Compile Include="Migrations\201903011147430_1.cs" />
-    <Compile Include="Migrations\201903011147430_1.Designer.cs">
-      <DependentUpon>201903011147430_1.cs</DependentUpon>
+    <Compile Include="Migrations\201903011550576_1.cs" />
+    <Compile Include="Migrations\201903011550576_1.Designer.cs">
+      <DependentUpon>201903011550576_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\DefaultGenericReposytory.cs" />
@@ -80,8 +79,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903011147430_1.resx">
-      <DependentUpon>201903011147430_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903011550576_1.resx">
+      <DependentUpon>201903011550576_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

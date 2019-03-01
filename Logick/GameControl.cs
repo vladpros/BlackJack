@@ -9,21 +9,18 @@ namespace Logick
 {
     public class GameControl
     {
-        Random _random;
-        IPlayerRepository _player;
-        IGameRepository _game;
-        BlackJackContext _db;
+        private Random _random;
+        private IPlayerRepository _player;
+        private IGameRepository _game;
+        private BlackJackContext _db;
+        private ITurnRepository _turn;
 
         public GameControl()
         {
             _db = new BlackJackContext();
             _random = new Random();
             _player = new PlayerRepository(_db);
-        }
-
-        public void TakeCard(Turn player)
-        {
-              
+            _game = new GameRepository(_db);
         }
 
         public Game StartGame (Player player, int botsNumber)
@@ -36,10 +33,19 @@ namespace Logick
 
             _game.Create(game);
 
-            return new Game();
+            return game;
         }
 
-        public List<Player> GenPlayers (Player player, int botsNumber)
+        private Card GiveCard(Deck deck)
+        {
+            int rand = _random.Next(0, deck.NumberCard);
+            Card card = deck.Cards[rand];
+            deck.Cards.RemoveAt(rand);
+
+            return card;
+        }
+
+        private List<Player> GenPlayers (Player player, int botsNumber)
         {
             List<Player> players = new List<Player>();
             players.Add(player);
@@ -47,15 +53,38 @@ namespace Logick
 
             for (int i = 0; i < botsNumber; i++)
             {
-                int k = _random.Next(0, bots.Count);
-                players.Add(bots[k]);
-                bots.RemoveAt(k);
+                int rand = _random.Next(0, bots.Count);
+                players.Add(bots[rand]);
+                bots.RemoveAt(rand);
             }
 
             List<Player> dealer = _player.GetAllDealer();
-            players.Add(bots[_random.Next(0, dealer.Count)]);
+            players.Add(dealer[_random.Next(0, dealer.Count)]);
 
             return players;
+        }
+
+        private void DoFirstRound(Game game)
+        {
+            Deck deck = new Deck();
+            foreach(var player in game.Players)
+            {
+                DoTurn(player, game, deck);
+                DoTurn(player, game, deck);
+            }
+        }
+
+        private void DoTurn(Player player, Game game, Deck deck)
+        {
+            Card card = GiveCard(deck);
+            _turn.Create(
+                new Turn
+                {
+                    Game = game,
+                    Player = player,
+                    LearCard = card.LearCard,
+                    NumberCard = card.NumberCard,
+                });
         }
     }
 }

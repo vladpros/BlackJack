@@ -178,6 +178,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Game\Start.cshtml" />
     <Content Include="Views\LeaderBoard\Index.cshtml" />
+    <Content Include="Views\Game\GameShow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -200,6 +201,10 @@
     <ProjectReference Include="..\DataBaseControl\DataBaseControl.csproj">
       <Project>{eab3856d-a30a-49d5-a02a-69d423fca973}</Project>
       <Name>DataBaseControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logick\Logick.csproj">
+      <Project>{55261EA1-E7E6-41A2-97BE-38EA43629FED}</Project>
+      <Name>Logick</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

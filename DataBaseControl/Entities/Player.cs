@@ -19,7 +19,7 @@ namespace DataBaseControl.Entities
         {
             Games = new List<Game>();
             Turns = new List<Turn>();
-            Point = 0;
+            Point = 100;
         }
     }
 }

@@ -5,7 +5,13 @@ namespace DataBaseControl.Entities
     public class Deck
     {
         public List<Card> Cards { get; set; }
-        public int NumberCard { get; set; }
+        public int NumberCard
+        {
+            get
+            {
+                return Cards.Count;
+            }
+        }
 
         public Deck ()
         {
@@ -21,7 +27,6 @@ namespace DataBaseControl.Entities
                         });
                 }
             }
-            NumberCard = 52;
         }
     }
 }

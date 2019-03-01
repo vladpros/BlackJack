@@ -1,10 +1,9 @@
 namespace DataBaseControl.Migrations
 {
-    using DataBaseControl.Entities;
-    using DataBaseControl.Repository;
-    using DataBaseControl.Repository.Interface;
+    using System;
+    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-
+    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DataBaseControl.BlackJackContext>
     {
@@ -15,43 +14,10 @@ namespace DataBaseControl.Migrations
 
         protected override void Seed(DataBaseControl.BlackJackContext context)
         {
-            IPlayerRepository playerRepository = new PlayerRepository(context);
+            //  This method will be called after migrating to the latest version.
 
-            playerRepository.AddOrUpdate(
-                new Player
-                {
-                    Name = "BobB",
-                    PlayerType = Entities.Enam.PlayerType.Bot,
-                    Point = 100
-                });
-            playerRepository.AddOrUpdate(
-                new Player
-                {
-                    Name = "TomB",
-                    PlayerType = Entities.Enam.PlayerType.Bot,
-                    Point = 100
-                });
-            playerRepository.AddOrUpdate(
-                new Player
-                {
-                    Name = "JarryB",
-                    PlayerType = Entities.Enam.PlayerType.Bot,
-                    Point = 100
-                });
-            playerRepository.AddOrUpdate(
-                new Player
-                {
-                    Name = "MarryB",
-                    PlayerType = Entities.Enam.PlayerType.Bot,
-                    Point = 100
-                });
-            playerRepository.AddOrUpdate(
-                new Player
-                {
-                    Name = "TonyB",
-                    PlayerType = Entities.Enam.PlayerType.Bot,
-                    Point = 100
-                });
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data.
         }
     }
 }
