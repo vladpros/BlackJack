@@ -22,16 +22,16 @@ namespace DataBaseControl.Repository
         {
             string cardBuff = _context.PlayerInTurns.Where(x => x.TurnId == turn.Id && x.PlayerId == player.Id).SingleOrDefault().Card;
 
-            string[] card = cardBuff.Split(';');
-            string[][] vs = new string[256][];
+            string[] buff = cardBuff.Split(';');
+            string[][] buff2 = new string[256][];
             int i = 0;
-            foreach (var p in card)
+            foreach (var p in buff)
             {
-                vs[i] = p.Split(',');
+                buff2[i] = p.Split(',');
                 i++;
             }
             List<Card> cards = new List<Card>();
-            foreach (var p in vs)
+            foreach (var p in buff2)
             {
                 cards.Add(new Card { LearCard = (LearCard)Convert.ToInt32(p[0]), NumberCard = (NumberCard)Convert.ToInt32(p[1]) });
             }

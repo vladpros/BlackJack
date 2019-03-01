@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BlackJackContext.cs" />
     <Compile Include="Entities\Card.cs" />
+    <Compile Include="Entities\Deck.cs" />
     <Compile Include="Entities\Enam\GameStatus.cs" />
     <Compile Include="Entities\Enam\LearCard.cs" />
     <Compile Include="Entities\Enam\NumberCard.cs" />
