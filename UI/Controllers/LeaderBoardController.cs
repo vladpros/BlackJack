@@ -21,7 +21,7 @@ namespace UI.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Player = _player.GetAllPlayer().OrderByDescending(x => x.Point); 
+            ViewBag.Player = _player.GetAllPlayer().OrderByDescending(x => x.Point);
             return View();
         }
     }

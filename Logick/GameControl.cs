@@ -27,7 +27,7 @@ namespace Logick
               
         }
 
-        public void StartGame (Player player, int botsNumber)
+        public Game StartGame (Player player, int botsNumber)
         {
             Game game = new Game
             {
