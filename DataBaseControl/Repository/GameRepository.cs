@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
-namespace DataBaseControl.GenericRepository
+namespace DataBaseControl.Repository
 {
     public class GameRepository : DefaultGenericRepository<Game>
     {
@@ -33,5 +33,12 @@ namespace DataBaseControl.GenericRepository
             return list;
         }
 
+        public bool CreatNewGame (Game game)
+        {
+            _context.Games.Add(game);
+            _context.SaveChanges();
+
+            return true;
+        }
     }
 }

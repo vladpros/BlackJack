@@ -54,6 +54,7 @@
     <Compile Include="Entities\Enam\GameStatus.cs" />
     <Compile Include="Entities\Enam\LearCard.cs" />
     <Compile Include="Entities\Enam\NumberCard.cs" />
+    <Compile Include="Entities\Enam\PlayerStatus.cs" />
     <Compile Include="Entities\Enam\PlayerType.cs" />
     <Compile Include="Entities\Game.cs" />
     <Compile Include="Entities\Player.cs" />
@@ -62,6 +63,10 @@
     <Compile Include="Migrations\201902281441104_q.cs" />
     <Compile Include="Migrations\201902281441104_q.Designer.cs">
       <DependentUpon>201902281441104_q.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903010749342_2.cs" />
+    <Compile Include="Migrations\201903010749342_2.Designer.cs">
+      <DependentUpon>201903010749342_2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\DefaultGenericReposytory.cs" />
@@ -78,6 +83,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201902281441104_q.resx">
       <DependentUpon>201902281441104_q.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903010749342_2.resx">
+      <DependentUpon>201903010749342_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

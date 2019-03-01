@@ -49,5 +49,15 @@ namespace DataBaseControl.Repository
 
             return false;
         }
+
+        public List<Player> GetAllBots()
+        {
+            return _context.Players.Where(x => x.PlayerType == (Entities.Enam.PlayerType)2).ToList();
+        }
+
+        public List<Player> GetAllDealer()
+        {
+            return _context.Players.Where(x => x.PlayerType == (Entities.Enam.PlayerType)3).ToList();
+        }
     }
 }

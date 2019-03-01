@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataBaseControl.GenericRepository
+namespace DataBaseControl.Repository
 {
     public interface IGenericRepository<T> where T : class
     {

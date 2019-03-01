@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
-namespace DataBaseControl.GenericRepository
+namespace DataBaseControl.Repository
 {
     public class DefaultGenericRepository<T> : IGenericRepository<T> where T : class
     {

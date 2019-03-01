@@ -12,6 +12,7 @@ namespace DataBaseControl.Entities
         public List<Turn> Turns { get; set; }
         public Game()
         {
+            TurnNumber = 0;
             Players = new List<Player>();
             Turns = new List<Turn>();
         }
