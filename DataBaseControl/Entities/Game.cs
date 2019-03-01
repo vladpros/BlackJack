@@ -5,16 +5,16 @@ namespace DataBaseControl.Entities
     public class Game
     {
         public long Id { get; set; }
-        public long TurnNumber { get; set; }
+        public long RoundNumber { get; set; }
         public Enam.GameStatus GameStatus { get; set; }
 
         public List<Player> Players { get; set; }
-        public List<Turn> Turns { get; set; }
+        public List<Round> Rounds { get; set; }
         public Game()
         {
-            TurnNumber = 0;
+            RoundNumber = 0;
             Players = new List<Player>();
-            Turns = new List<Turn>();
+            Rounds = new List<Round>();
         }
 
     }

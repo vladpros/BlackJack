@@ -1,5 +1,7 @@
-﻿using DataBaseControl.Entities;
+﻿using DataBaseControl;
+using DataBaseControl.Entities;
 using DataBaseControl.Repository;
+using DataBaseControl.Repository.Interface;
 using System;
 using System.Collections.Generic;
 
@@ -8,18 +10,18 @@ namespace Logick
     public class GameControl
     {
         Random _random;
-        PlayerRepository _player;
-        GameRepository _game;
-        DataBaseControl.BlackJackContext _db;
+        IPlayerRepository _player;
+        IGameRepository _game;
+        BlackJackContext _db;
 
         public GameControl()
         {
-            _db = new DataBaseControl.BlackJackContext();
+            _db = new BlackJackContext();
             _random = new Random();
             _player = new PlayerRepository(_db);
         }
 
-        public void TakeCard(PlayerInTurn player)
+        public void TakeCard(Turn player)
         {
               
         }

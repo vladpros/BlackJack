@@ -2,6 +2,7 @@
 using DataBaseControl.Repository;
 using System.Web.Mvc;
 using System.Linq;
+using DataBaseControl.Repository.Interface;
 
 namespace UI.Controllers
 {
@@ -9,7 +10,7 @@ namespace UI.Controllers
     {
 
         private BlackJackContext _db;
-        private PlayerRepository _player;
+        private IPlayerRepository _player;
 
         public LeaderBoardController()
         {
@@ -19,7 +20,7 @@ namespace UI.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Player = _player.GetAllPlayer().OrderByDescending(x => x.Point);
+            ViewBag.Player = _player.GetAllUser().OrderByDescending(x => x.Point);
             return View();
         }
     }

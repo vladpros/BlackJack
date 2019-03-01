@@ -1,6 +1,7 @@
 ﻿using DataBaseControl;
 using DataBaseControl.Entities;
 using DataBaseControl.Repository;
+using DataBaseControl.Repository.Interface;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -9,7 +10,7 @@ namespace UI.Controllers
     public class GameController : Controller
     {
         private BlackJackContext _db;
-        private PlayerRepository _player;
+        private IPlayerRepository _player;
 
         public GameController()
         {
@@ -19,7 +20,7 @@ namespace UI.Controllers
 
         public ActionResult Start()
         {
-            ViewBag.Player = _player.GetAllPlayer().OrderByDescending(x => x.Name);
+            ViewBag.Player = _player.GetAllUser().OrderByDescending(x => x.Name);
             return View();
         }
 

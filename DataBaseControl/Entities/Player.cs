@@ -14,11 +14,11 @@ namespace DataBaseControl.Entities
         public PlayerType PlayerType { get; set; }
 
         public List<Game> Games { get; set; }
-        public List<PlayerInTurn> PlayerInTurns { get; set; }
+        public List<Turn> Turns { get; set; }
         public Player()
         {
             Games = new List<Game>();
-            PlayerInTurns = new List<PlayerInTurn>();
+            Turns = new List<Turn>();
             Point = 0;
         }
     }

@@ -16,16 +16,6 @@ namespace DataBaseControl.Repository
             _dbSet = context.Set<T>();
         }
 
-        public IEnumerable<T> Get()
-        {
-            return _dbSet.AsNoTracking().ToList();
-        }
-
-        public IEnumerable<T> Get(Func<T, bool> predicate)
-        {
-            return _dbSet.AsNoTracking().Where(predicate).ToList();
-        }
-
         public T FindById(long id)
         {
             return _dbSet.Find(id);
@@ -48,5 +38,6 @@ namespace DataBaseControl.Repository
             _dbSet.Remove(item);
             _context.SaveChanges();
         }
+
     }
 }
