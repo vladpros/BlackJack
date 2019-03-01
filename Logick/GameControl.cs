@@ -2,9 +2,6 @@
 using DataBaseControl.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logick
 {
@@ -37,8 +34,7 @@ namespace Logick
 
             _game.Create(game);
 
-
-
+            return new Game();
         }
 
         public List<Player> GenPlayers (Player player, int botsNumber)

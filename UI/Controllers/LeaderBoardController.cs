@@ -1,7 +1,5 @@
 ﻿using DataBaseControl;
-using DataBaseControl.Entities;
 using DataBaseControl.Repository;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
 
