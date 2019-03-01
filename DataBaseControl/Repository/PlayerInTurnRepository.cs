@@ -13,9 +13,9 @@ namespace DataBaseControl.Repository
     {
         private BlackJackContext _context;
 
-        public PlayerInTurnRepository(DbContext context) : base(context)
+        public PlayerInTurnRepository(BlackJackContext context) : base(context)
         {
-
+            _context = context;
         }
 
         public List<Card> GetPlayerCard (Player player, Turn turn)

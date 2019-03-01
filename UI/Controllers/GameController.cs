@@ -24,7 +24,7 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult CheckUser(string player, int botsNumber)
+        public ActionResult Start(string player, int botsNumber)
         {
             if(!_player.IsAPlayer(new Player { Name = player }))
             {

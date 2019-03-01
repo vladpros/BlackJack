@@ -28,7 +28,7 @@ namespace DataBaseControl.Repository
 
         public List<Player> GetAllPlayer()
         {
-            return _context.Players.ToList();
+            return _context.Players.Where(x => x.PlayerType == (Entities.Enam.PlayerType)1).ToList();
         }
 
         public bool IsAPlayer (Player player)

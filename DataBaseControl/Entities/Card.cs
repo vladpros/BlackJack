@@ -1,5 +1,4 @@
 ﻿
-
 namespace DataBaseControl.Entities
 {
     public class Card
