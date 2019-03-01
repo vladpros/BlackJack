@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using DataBaseControl.Entities;
 using DataBaseControl.Entities.Enam;
-using DataBaseControl.GenericRepository;
 
 
 namespace DataBaseControl.Repository
@@ -23,7 +21,7 @@ namespace DataBaseControl.Repository
             string cardBuff = _context.PlayerInTurns.Where(x => x.TurnId == turn.Id && x.PlayerId == player.Id).SingleOrDefault().Card;
 
             string[] buff = cardBuff.Split(';');
-            string[][] buff2 = new string[256][];
+            string[][] buff2 = new string[buff.Length][];
             int i = 0;
             foreach (var p in buff)
             {
