@@ -1,5 +1,6 @@
 ﻿using DataBaseControl.Entities;
 using Logick;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using UI.Models;
 
@@ -31,10 +32,22 @@ namespace UI.Controllers
             return RedirectToAction("GameShow");
         }
 
-        public ActionResult GameShow(GameViewModel gameModel)
+        public ActionResult GameShow()
         {
-            Game game = (Game)TempData["game"];  
+            Game game = (Game)TempData["game"];
+       
             ViewBag.Turns = _gameControl.DoFirstRound(game);
+            TempData["game"] = game;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GameShow(int number)
+        {
+            Game game = (Game)TempData["game"];
+
+            ViewBag.Turns =_gameControl.ContinuePlay(game, number);
 
             return View();
         }

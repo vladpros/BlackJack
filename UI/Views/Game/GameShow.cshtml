@@ -13,16 +13,24 @@
     </tr>
     @foreach (var b in ViewBag.Turns)
     {
-    <tr>
-        <td><p>@b.PlayerName</p></td>
-        @foreach (var k in b.Cards)
-        {
-            <td><p>@k.NumberCard</p></td>
-            <td><p>@k.LearCard</p></td>
-        }
-        <td><p>@b.Point</p></td>
-        <td><p>@b.PlayerStatus</p></td>
-    </tr>
+        <tr>
+            <td><p>@b.PlayerName</p></td>
+            @foreach (var k in b.Cards)
+            {
+                <td><p>@k.NumberCard</p></td>
+                <td><p>@k.LearCard</p></td>
+            }
+            <td><p>@b.Point</p></td>
+            <td><p>@b.PlayerStatus</p></td>
 
+        </tr>
     }
-    </table>
+</table>
+
+@using (Html.BeginForm("GameShow", "Game", FormMethod.Post))
+{
+    <p>
+        <input type="submit" value="1" name="number">
+        <input type="submit" value="2" name="number">
+    </p>
+}

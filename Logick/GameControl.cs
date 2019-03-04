@@ -1,5 +1,6 @@
 ﻿using DataBaseControl;
 using DataBaseControl.Entities;
+using DataBaseControl.Entities.Enam;
 using DataBaseControl.Repository;
 using DataBaseControl.Repository.Interface;
 using System;
@@ -71,29 +72,38 @@ namespace Logick
         public List<GameStats> DoFirstRound(Game game)
         {
             Deck deck = new Deck();
-            foreach (var player in game.Players)
-            {
-                DoTurn(player, game, deck);
-                DoTurn(player, game, deck);
-            }
 
-            var gameStats = CreatGameStats(game);
+            DoRound(game, deck);
+            DoRound(game, deck);
+            List<GameStats> gameStats = CreatGameStats(game);
+            
+
             _game.Update(game);
+
 
             return gameStats;
         }
 
         private List<GameStats> CreatGameStats(Game game)
         {
-            var turns = _data.GetAllTurns(game);
-            turns = CountPoint(game, turns);
-            CheckPoint(game, turns);
-            return turns;
+            var gameStats = _data.GetAllTurns(game);
+            CheckPoint(game, gameStats);
+
+            return gameStats;
+        }
+
+        private void DoRound(Game game, Deck deck)
+        {
+            foreach (var player in game.Players)
+            {
+                DoTurn(player, game, deck);
+            }
         }
 
         private void DoTurn(Player player, Game game, Deck deck)
         {
             Card card = GiveCard(deck);
+
             game.TurnNumber+=1;
             _turn.Create(
                 new Turn
@@ -107,7 +117,7 @@ namespace Logick
 
         private List<GameStats> CountPoint(Game game, List<GameStats> gameStats)
         {
-            var c = new Card { NumberCard= DataBaseControl.Entities.Enam.NumberCard.Five, LearCard = DataBaseControl.Entities.Enam.LearCard.Diamond };
+
             foreach (var player in gameStats)
             {
                 foreach (var card in player.Cards)
@@ -121,7 +131,9 @@ namespace Logick
 
         private void CheckPoint(Game game, List<GameStats> gameStats)
         {
-            foreach(var player in gameStats)
+            gameStats = CountPoint(game, gameStats);
+
+            foreach (var player in gameStats)
             {
                 if (player.Point > 21)
                 {
@@ -144,6 +156,43 @@ namespace Logick
             return (int)card.NumberCard;
         }
 
+        public List<GameStats> ContinuePlay (Game game, int choose)
+        {
+            List<GameStats> gameStats = new List<GameStats>();
 
+            if(choose == 1)
+            {
+                gameStats = TakeCard(game);
+            }
+            if(choose == 2)
+            {
+
+            }
+
+            return gameStats;
+        }
+
+        private List<GameStats> TakeCard(Game game)
+        {
+            List<GameStats> gameStats = CreatGameStats(game);
+            Deck deck = _data.GetDeck(gameStats);
+            DoRoundToPlayerType(game, deck, PlayerType.Bot);
+            DoRoundToPlayerType(game, deck, PlayerType.User);
+            gameStats = CreatGameStats(game);
+
+
+            return gameStats;
+        }
+
+        private void DoRoundToPlayerType(Game game, Deck deck, PlayerType playerType)
+        {
+            foreach (var player in game.Players)
+            {
+                if (player.PlayerType == playerType)
+                {
+                    DoTurn(player, game, deck);
+                }
+            }
+        }
     }
 }

@@ -3,11 +3,9 @@ using DataBaseControl.Entities;
 using DataBaseControl.Entities.Enam;
 using DataBaseControl.Repository;
 using DataBaseControl.Repository.Interface;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Logick
 {
@@ -71,6 +69,21 @@ namespace Logick
         private List<Card> PlayerCard (long playerId, List<Turn> turns)
         {
             return turns.Where(p => p.PlayerId == playerId).Select(k => new Card { LearCard = k.LearCard, NumberCard = k.NumberCard }).ToList();
+        }
+
+        public Deck GetDeck (List<GameStats> gameStats)
+        {
+            Deck deck = new Deck();
+
+            foreach(var player in gameStats)
+            {
+                foreach(var card in player.Cards)
+                {
+                    deck.Cards.Remove(card);
+                }
+            }
+
+            return deck;
         }
     }
 }
