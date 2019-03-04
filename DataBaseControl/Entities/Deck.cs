@@ -15,6 +15,8 @@ namespace DataBaseControl.Entities
 
         public Deck ()
         {
+            Cards = new List<Card>();
+
             for (int i = 1; i < 5; i++)
             {
                 for (int j = 2; j < 15; j++)

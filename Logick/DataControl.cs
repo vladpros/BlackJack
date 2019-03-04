@@ -15,11 +15,13 @@ namespace Logick
     {
         private BlackJackContext _db;
         private IPlayerRepository _player;
+        private ITurnRepository _turn;
 
         public DataControl()
         {
             _db = new BlackJackContext();
             _player = new PlayerRepository(_db);
+            _turn = new TurnReposytory(_db);
         }
 
         public List<Player> GetUserOrdered()
@@ -53,5 +55,22 @@ namespace Logick
             }
         }
 
+        public List<GameStats> GetAllTurns (Game game)
+        {
+            var l = _turn.GetAllTurns(game);
+            List<GameStats> k = new List<GameStats>();
+
+            foreach(var p in game.Players)
+            {
+                k.Add(new GameStats { PlayerId = p.Id, PlayerName = _player.FindById(p.Id).Name, Cards = PlayerCard(p.Id, l)});
+            }
+
+            return k;
+        }
+
+        private List<Card> PlayerCard (long playerId, List<Turn> turns)
+        {
+            return turns.Where(p => p.PlayerId == playerId).Select(k => new Card { LearCard = k.LearCard, NumberCard = k.NumberCard }).ToList();
+        }
     }
 }

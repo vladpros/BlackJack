@@ -12,11 +12,10 @@ namespace DataBaseControl.Entities
 
         [ForeignKey("UserId")]
         public Player User { get; set; }
-
         [NotMapped]
         public List<Player> Players { get; set; }
-
         public List<Turn> Turns { get; set; }
+
         public Game()
         {
             TurnNumber = 0;

@@ -5,3 +5,24 @@
 
 <h2>GameShow</h2>
 
+<table>
+    <tr>
+        <td><p>Player name</p></td>
+        <td><p>Cards</p></td>
+        <td></td>
+    </tr>
+    @foreach (var b in ViewBag.Turns)
+    {
+    <tr>
+        <td><p>@b.PlayerName</p></td>
+        @foreach (var k in b.Cards)
+        {
+            <td><p>@k.NumberCard</p></td>
+            <td><p>@k.LearCard</p></td>
+        }
+        <td><p>@b.Point</p></td>
+        <td><p>@b.PlayerStatus</p></td>
+    </tr>
+
+    }
+    </table>

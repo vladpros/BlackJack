@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlackJackContext.cs" />
+    <Compile Include="Entities\GameStats.cs" />
     <Compile Include="Entities\Card.cs" />
     <Compile Include="Entities\Deck.cs" />
     <Compile Include="Entities\Enam\GameStatus.cs" />
@@ -59,9 +60,17 @@
     <Compile Include="Entities\Game.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Turn.cs" />
-    <Compile Include="Migrations\201903011550576_1.cs" />
-    <Compile Include="Migrations\201903011550576_1.Designer.cs">
-      <DependentUpon>201903011550576_1.cs</DependentUpon>
+    <Compile Include="Migrations\201903040726383_1.cs" />
+    <Compile Include="Migrations\201903040726383_1.Designer.cs">
+      <DependentUpon>201903040726383_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903041100084_2.cs" />
+    <Compile Include="Migrations\201903041100084_2.Designer.cs">
+      <DependentUpon>201903041100084_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903041320266_3.cs" />
+    <Compile Include="Migrations\201903041320266_3.Designer.cs">
+      <DependentUpon>201903041320266_3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\DefaultGenericReposytory.cs" />
@@ -79,8 +88,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903011550576_1.resx">
-      <DependentUpon>201903011550576_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903040726383_1.resx">
+      <DependentUpon>201903040726383_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903041100084_2.resx">
+      <DependentUpon>201903041100084_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903041320266_3.resx">
+      <DependentUpon>201903041320266_3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

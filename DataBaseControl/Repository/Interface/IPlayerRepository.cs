@@ -10,7 +10,6 @@ namespace DataBaseControl.Repository.Interface
         List<Player> GetAllBots();
         bool IsAPlayer(Player player);
         void AddOrUpdate(Player player);
-        List<Player> GetAllPlayerGames(Game game);
         Player SearchPlayerWithName(string name);
 
     }

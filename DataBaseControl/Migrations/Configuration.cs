@@ -1,5 +1,7 @@
 namespace DataBaseControl.Migrations
 {
+    using DataBaseControl.Repository;
+    using DataBaseControl.Repository.Interface;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,10 +16,50 @@ namespace DataBaseControl.Migrations
 
         protected override void Seed(DataBaseControl.BlackJackContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            IPlayerRepository player = new PlayerRepository(context);
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            player.AddOrUpdate(
+                new Entities.Player
+                {
+                    PlayerType = Entities.Enam.PlayerType.Bot,
+                    Name = "JohnBot",
+                });
+
+            player.AddOrUpdate(
+                new Entities.Player
+                {
+                    PlayerType = Entities.Enam.PlayerType.Bot,
+                    Name = "MaryBot",
+                });
+
+            player.AddOrUpdate(
+                new Entities.Player
+                {
+                    PlayerType = Entities.Enam.PlayerType.Bot,
+                    Name = "JonnyBot",
+                });
+
+            player.AddOrUpdate(
+                new Entities.Player
+                {
+                    PlayerType = Entities.Enam.PlayerType.Bot,
+                    Name = "BobBot",
+                });
+
+            player.AddOrUpdate(
+                new Entities.Player
+                {
+                    PlayerType = Entities.Enam.PlayerType.Bot,
+                    Name = "KennyBot",
+                });
+
+            player.AddOrUpdate(
+                new Entities.Player
+                {
+                    PlayerType = Entities.Enam.PlayerType.Dealer,
+                    Name = "DenisDealer",
+                });
         }
     }
 }
+          

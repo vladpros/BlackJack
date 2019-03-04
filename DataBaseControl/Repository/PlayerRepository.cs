@@ -17,11 +17,6 @@ namespace DataBaseControl.Repository
             _context = context;
         }
 
-        public List<Player> GetAllPlayerGames (Game game)
-        {
-            return _context.Players.Include(c => c.Games).Where(x => x.Games.FirstOrDefault(c => c.Id == game.Id).Id == game.Id).ToList();
-        }
-
         public bool IsAPlayer (Player player)
         {
             return _context.Players.Any(x => x.Name == player.Name);

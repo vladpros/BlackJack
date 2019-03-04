@@ -1,6 +1,7 @@
 ﻿using DataBaseControl.Entities.Enam;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataBaseControl.Entities
 {
@@ -15,6 +16,7 @@ namespace DataBaseControl.Entities
 
         public List<Game> Games { get; set; }
         public List<Turn> Turns { get; set; }
+
         public Player()
         {
             Games = new List<Game>();

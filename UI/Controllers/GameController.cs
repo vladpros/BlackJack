@@ -1,6 +1,7 @@
 ﻿using DataBaseControl.Entities;
 using Logick;
 using System.Web.Mvc;
+using UI.Models;
 
 namespace UI.Controllers
 {
@@ -25,12 +26,15 @@ namespace UI.Controllers
         public ActionResult Start(string player, int botsNumber)
         {
             _dataControl.PlayerChecked(player);
-            
-            return RedirectToAction("GameShow", _gameControl.StartGame(_dataControl.SearchPlayerWithName(player), botsNumber));
+            TempData["game"] = _gameControl.StartGame(_dataControl.SearchPlayerWithName(player), botsNumber);
+
+            return RedirectToAction("GameShow");
         }
 
-        public ActionResult GameShow(Game game)
+        public ActionResult GameShow(GameViewModel gameModel)
         {
+            Game game = (Game)TempData["game"];  
+            ViewBag.Turns = _gameControl.DoFirstRound(game);
 
             return View();
         }

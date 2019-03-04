@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DataBaseControl.Entities;
 using DataBaseControl.Repository.Interface;
 
@@ -13,5 +14,9 @@ namespace DataBaseControl.Repository
             _context = context;
         }
 
+        public List<Turn> GetAllTurns (Game game)
+        {
+            return _context.Turns.Where(c => c.GameId == game.Id).ToList();
+        }
     }
 }
