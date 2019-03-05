@@ -6,6 +6,7 @@ namespace DataBaseControl.Entities.Enam
         None = 0,
         Play = 1,
         Wait = 2,
-        Lose = 3
+        Lose = 3,
+        Won = 4
     }
 }

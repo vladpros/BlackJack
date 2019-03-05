@@ -3,6 +3,7 @@ using DataBaseControl.Entities;
 using DataBaseControl.Entities.Enam;
 using DataBaseControl.Repository;
 using DataBaseControl.Repository.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,9 +15,11 @@ namespace Logick
         private BlackJackContext _db;
         private IPlayerRepository _player;
         private ITurnRepository _turn;
+        private Random _random;
 
         public DataControl()
         {
+            _random = new Random();
             _db = new BlackJackContext();
             _player = new PlayerRepository(_db);
             _turn = new TurnReposytory(_db);
@@ -53,17 +56,26 @@ namespace Logick
             }
         }
 
-        public List<GameStats> GetAllTurns (Game game)
+        public List<GameStats> GetGameStats (Game game)
         {
-            var l = _turn.GetAllTurns(game);
-            List<GameStats> k = new List<GameStats>();
+            var turns = _turn.GetAllTurns(game);
+            List<long> players = turns.Select(p => p.PlayerId).Distinct().ToList();
+            List<GameStats> gameStats = new List<GameStats>();
 
-            foreach(var p in game.Players)
+            foreach (var playerId in players)
             {
-                k.Add(new GameStats { PlayerId = p.Id, PlayerName = _player.FindById(p.Id).Name, Cards = PlayerCard(p.Id, l)});
+                Player player = _player.FindById(playerId);
+                gameStats.Add(new GameStats
+                {
+                    PlayerId = player.Id,
+                    PlayerName = player.Name,
+                    GameId = game.Id,
+                    Cards = PlayerCard(player.Id, turns),
+                    PlayerType = player.PlayerType
+                });
             }
-
-            return k;
+           
+            return gameStats;
         }
 
         private List<Card> PlayerCard (long playerId, List<Turn> turns)
@@ -79,11 +91,89 @@ namespace Logick
             {
                 foreach(var card in player.Cards)
                 {
-                    deck.Cards.Remove(card);
+                    int index = SearchCardInDeck(deck, card);
+                    deck.Cards.RemoveAt(index);
                 }
             }
 
             return deck;
         }
+
+        public int SearchDealer (List<GameStats> gameStats)
+        {
+            for(int i = 0; i<gameStats.Count; i++)
+            {
+                if(_player.FindById(gameStats[i].PlayerId).PlayerType == PlayerType.Dealer)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        public int SearchUser(List<GameStats> gameStats)
+        {
+            for (int i = 0; i < gameStats.Count; i++)
+            {
+                if (_player.FindById(gameStats[i].PlayerId).PlayerType == PlayerType.User)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        public List<GameStats> GenPlayers(long player, int botsNumber)
+        {
+            int rand;
+
+            List<GameStats> players = new List<GameStats>();
+            players.Add(new GameStats
+            {
+                PlayerId = player,
+                PlayerName = _player.FindById(player).Name
+            });
+
+            List<Player> bots = _player.GetAllBots();
+
+            for (int i = 0; i < botsNumber; i++)
+            {
+                rand = _random.Next(0, bots.Count);
+                players.Add(new GameStats
+                {
+                    PlayerId = bots[rand].Id,
+                    PlayerName = bots[rand].Name
+                });
+                bots.RemoveAt(rand);
+            }
+
+            List<Player> dealer = _player.GetAllDealer();
+
+            rand = _random.Next(0, dealer.Count);
+            players.Add(new GameStats
+            {
+                PlayerId = dealer[rand].Id,
+                PlayerName = dealer[rand].Name,
+            });
+
+            return players;
+        }
+
+        private int SearchCardInDeck(Deck deck, Card card)
+        {
+            for(int i = 0; i<deck.NumberCard; i++)
+            {
+                if(deck.Cards[i].LearCard == card.LearCard && deck.Cards[i].NumberCard == card.NumberCard)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+
     }
 }

@@ -11,7 +11,7 @@
         <td><p>Cards</p></td>
         <td></td>
     </tr>
-    @foreach (var b in ViewBag.Turns)
+    @foreach (var b in ViewBag.Game)
     {
         <tr>
             <td><p>@b.PlayerName</p></td>
@@ -29,6 +29,7 @@
 
 @using (Html.BeginForm("GameShow", "Game", FormMethod.Post))
 {
+    <input type="hidden" name="gameId" value="@ViewBag.Game[0].GameId" />
     <p>
         <input type="submit" value="1" name="number">
         <input type="submit" value="2" name="number">

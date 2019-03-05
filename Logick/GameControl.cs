@@ -27,18 +27,18 @@ namespace Logick
             _data = new DataControl();
         }
 
-        public Game StartGame (Player player, int botsNumber)
+        public long StartGame (Player player, int botsNumber)
         {
             Game game = new Game
             {
-                GameStatus = (DataBaseControl.Entities.Enam.GameStatus)1,
-                Players = GenPlayers(player, botsNumber),
-                UserId = player.Id
+                GameStatus = GameStatus.InProgress,
+                PlayerId = player.Id,
+                BotsNumber = botsNumber
             };
 
             _game.Create(game);
 
-            return game;
+            return game.Id;
         }
 
         private Card GiveCard(Deck deck)
@@ -50,99 +50,109 @@ namespace Logick
             return card;
         }
 
-        private List<Player> GenPlayers(Player player, int botsNumber)
-        {
-            List<Player> players = new List<Player>();
-            players.Add(player);
-            List<Player> bots = _player.GetAllBots();
-
-            for (int i = 0; i < botsNumber; i++)
-            {
-                int rand = _random.Next(0, bots.Count);
-                players.Add(bots[rand]);
-                bots.RemoveAt(rand);
-            }
-
-            List<Player> dealer = _player.GetAllDealer();
-            players.Add(dealer[_random.Next(0, dealer.Count)]);
-
-            return players;
-        }
-
-        public List<GameStats> DoFirstRound(Game game)
-        {
-            Deck deck = new Deck();
-
-            DoRound(game, deck);
-            DoRound(game, deck);
-            List<GameStats> gameStats = CreatGameStats(game);
-            
-
-            _game.Update(game);
-
-
-            return gameStats;
-        }
-
         private List<GameStats> CreatGameStats(Game game)
         {
-            var gameStats = _data.GetAllTurns(game);
-            CheckPoint(game, gameStats);
+            List<GameStats> gameStats = new List<GameStats>();
+            gameStats = _data.GenPlayers(game.PlayerId, game.BotsNumber);
+            foreach(var g in gameStats)
+            {
+                g.GameId = game.Id;
+            }
 
             return gameStats;
         }
 
-        private void DoRound(Game game, Deck deck)
+        public List<GameStats> DoFirstTwoRound(long gameId)
         {
-            foreach (var player in game.Players)
-            {
-                DoTurn(player, game, deck);
-            }
+            Deck deck = new Deck();
+            Game game = _game.FindById(gameId);
+            List<GameStats> gameStats = CreatGameStats(game);
+            gameStats = DoRound(gameStats, deck);
+            CheckPoint(gameStats);
+            _game.Update(game);
+
+            return gameStats;
         }
 
-        private void DoTurn(Player player, Game game, Deck deck)
+        private List<GameStats> DoRound(List<GameStats> gameStats, Deck deck)
+        {
+            DoRoundToPlayerType(gameStats, deck, PlayerType.User);
+            DoRoundToPlayerType(gameStats, deck, PlayerType.User);
+            DoRoundToPlayerType(gameStats, deck, PlayerType.Bot);
+            DoRoundToPlayerType(gameStats, deck, PlayerType.Bot);
+            DoRoundToPlayerType(gameStats, deck, PlayerType.Dealer);
+            DoRoundToPlayerType(gameStats, deck, PlayerType.Dealer);
+
+            return gameStats;
+        }
+
+        private List<GameStats> DoRoundToPlayerType(List<GameStats> gameStats, Deck deck, PlayerType playerType)
+        {
+            foreach (var player in gameStats)
+            {
+                if (_player.FindById(player.PlayerId).PlayerType == playerType && player.PlayerStatus == PlayerStatus.Play)
+                {
+                    Card card = DoTurn(player.PlayerId, player.GameId, deck);
+                    player.Cards.Add(new Card
+                    {
+                        LearCard = card.LearCard,
+                        NumberCard = card.NumberCard,
+                    });
+                }
+            }
+
+            return gameStats;
+        }
+
+        private Card DoTurn(long playerId, long gameId, Deck deck)
         {
             Card card = GiveCard(deck);
+            Game game = _game.FindById(gameId);
 
             game.TurnNumber+=1;
             _turn.Create(
                 new Turn
                 {
                     GameId = game.Id,
-                    PlayerId = player.Id,
+                    PlayerId = playerId,
                     LearCard = card.LearCard,
                     NumberCard = card.NumberCard,
                 });
+
+            _game.Update(game);
+
+            return new Card { LearCard = card.LearCard, NumberCard = card.NumberCard };
         }
 
-        private List<GameStats> CountPoint(Game game, List<GameStats> gameStats)
+        private int CountPoint(GameStats player)
         {
-
-            foreach (var player in gameStats)
-            {
+                player.Point = 0;
                 foreach (var card in player.Cards)
                 {
                     player.Point += GetCardPoint(card);
                 }
-            }
 
-            return gameStats;
+            return player.Point;
         }
 
-        private void CheckPoint(Game game, List<GameStats> gameStats)
+        private void CheckPoint(List<GameStats> gameStats)
         {
-            gameStats = CountPoint(game, gameStats);
+            foreach(var player in gameStats)
+            {
+                player.Point = CountPoint(player);
+            }
 
             foreach (var player in gameStats)
             {
                 if (player.Point > 21)
                 {
-                    player.PlayerStatus = DataBaseControl.Entities.Enam.PlayerStatus.Lose;
+                    player.PlayerStatus = PlayerStatus.Lose;
                 }
             }
+            
         }
 
-        private int GetCardPoint (Card card)
+        private int GetCardPoint(Card card)
         {
             if ((int)card.NumberCard < 10)
             {
@@ -156,43 +166,103 @@ namespace Logick
             return (int)card.NumberCard;
         }
 
-        public List<GameStats> ContinuePlay (Game game, int choose)
+        private List<GameStats> InitializationGameStats(long gameId)
         {
-            List<GameStats> gameStats = new List<GameStats>();
+            Game game = _game.FindById(gameId);
+            var gameStats = _data.GetGameStats(game);
 
-            if(choose == 1)
+            CheckPoint(gameStats);
+
+            return gameStats;
+        }
+       
+        public List<GameStats> ContinuePlay (long gameId, int choose)
+        {
+            Game game = _game.FindById(gameId);
+            List<GameStats> gameStats = InitializationGameStats(gameId);
+
+            if (choose == 1)
             {
-                gameStats = TakeCard(game);
+                gameStats = TakeCard(gameStats);
             }
             if(choose == 2)
             {
+                gameStats[_data.SearchUser(gameStats)].PlayerStatus = PlayerStatus.Wait;
+                gameStats = DropCard(gameStats);
+            }
 
+            _game.Update(game);
+
+            return gameStats;
+        }
+
+        private List<GameStats> TakeCard(List<GameStats> gameStats)
+        {
+            Deck deck = _data.GetDeck(gameStats);
+            DoRoundToPlayerType(gameStats, deck, PlayerType.Bot);
+            DoRoundToPlayerType(gameStats, deck, PlayerType.User);
+            CheckPoint(gameStats);
+
+            return gameStats;
+        }
+
+        public List<GameStats> DropCard(List<GameStats> gameStats)
+        {
+            Deck deck = _data.GetDeck(gameStats);
+            int dealer = _data.SearchDealer(gameStats);
+            while (CountPoint(gameStats[dealer]) <= 17)
+            {
+                DoRoundToPlayerType(gameStats, deck, PlayerType.Dealer);                
+            }
+            if(CountPoint(gameStats[dealer]) > 21)
+            {
+                gameStats[dealer].PlayerStatus = PlayerStatus.Lose;
             }
 
             return gameStats;
         }
 
-        private List<GameStats> TakeCard(Game game)
+        public List<GameStats> GetGameResult(long gameId)
         {
-            List<GameStats> gameStats = CreatGameStats(game);
-            Deck deck = _data.GetDeck(gameStats);
-            DoRoundToPlayerType(game, deck, PlayerType.Bot);
-            DoRoundToPlayerType(game, deck, PlayerType.User);
-            gameStats = CreatGameStats(game);
-
-
-            return gameStats;
-        }
-
-        private void DoRoundToPlayerType(Game game, Deck deck, PlayerType playerType)
-        {
-            foreach (var player in game.Players)
+            List<GameStats> gameStats = InitializationGameStats(gameId);
+            foreach(var player in gameStats)
             {
-                if (player.PlayerType == playerType)
+                if(player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose)
                 {
-                    DoTurn(player, game, deck);
+                    gameStats = DealerLose(gameStats);
+                    return gameStats;
                 }
             }
+
+            int dealerIndex = _data.SearchDealer(gameStats);
+            gameStats[dealerIndex].PlayerStatus = PlayerStatus.Won;
+            foreach (var player in gameStats)
+            {
+                if(player.PlayerStatus != PlayerStatus.Lose && player.Point > gameStats[dealerIndex].Point)
+                {
+                    player.PlayerStatus = PlayerStatus.Won;
+                    gameStats[dealerIndex].PlayerStatus = PlayerStatus.Lose;
+                }
+                if (player.PlayerStatus != PlayerStatus.Lose && player.Point <= gameStats[dealerIndex].Point && player.PlayerType != PlayerType.Dealer)
+                {
+                    player.PlayerStatus = PlayerStatus.Lose;
+                }
+            }
+
+            return gameStats;
+        }
+
+        public List<GameStats> DealerLose(List<GameStats> gameStats)
+        {
+            foreach(var player in gameStats)
+            {
+                if(player.PlayerStatus != PlayerStatus.Lose)
+                {
+                    player.PlayerStatus = PlayerStatus.Won;
+                }
+            }
+
+            return gameStats;
         }
     }
 }

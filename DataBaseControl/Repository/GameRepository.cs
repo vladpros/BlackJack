@@ -1,7 +1,6 @@
 ﻿using DataBaseControl.Entities;
 using DataBaseControl.Repository.Interface;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 namespace DataBaseControl.Repository
@@ -17,9 +16,7 @@ namespace DataBaseControl.Repository
 
         public List<Game>  GetAllGameWithPlayer(Player player)
         {
-            var list = _context.Games.Where(c=> c.UserId == player.Id).ToList();
-
-            return list;
+            return _context.Turns.Where(c => c.PlayerId == player.Id).Select(p => p.Game).Distinct().ToList(); ;
         }
 
         public bool CreatNewGame (Game game)

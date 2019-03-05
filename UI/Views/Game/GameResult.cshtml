@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "GameResult";
+}
+
+<h2>GameResult</h2>
+
+<table>
+    <tr>
+        <td><p>Player name</p></td>
+        <td><p>Cards</p></td>
+        <td></td>
+    </tr>
+    @foreach (var b in ViewBag.Game)
+    {
+        <tr>
+            <td><p>@b.PlayerName</p></td>
+            <td><p>@b.Point</p></td>
+            <td><p>@b.PlayerStatus</p></td>          
+        </tr>
+    }
+</table>

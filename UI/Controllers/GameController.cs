@@ -1,8 +1,6 @@
 ﻿using DataBaseControl.Entities;
 using Logick;
-using System.Collections.Generic;
 using System.Web.Mvc;
-using UI.Models;
 
 namespace UI.Controllers
 {
@@ -20,6 +18,7 @@ namespace UI.Controllers
         public ActionResult Start()
         {
             ViewBag.Player = _dataControl.GetUserOrdered();
+
             return View();
         }
 
@@ -27,29 +26,46 @@ namespace UI.Controllers
         public ActionResult Start(string player, int botsNumber)
         {
             _dataControl.PlayerChecked(player);
-            TempData["game"] = _gameControl.StartGame(_dataControl.SearchPlayerWithName(player), botsNumber);
 
-            return RedirectToAction("GameShow");
+            return RedirectToAction("GameShow", new { gameId = _gameControl.StartGame(_dataControl.SearchPlayerWithName(player), botsNumber) });
         }
 
-        public ActionResult GameShow()
-        {
-            Game game = (Game)TempData["game"];
-       
-            ViewBag.Turns = _gameControl.DoFirstRound(game);
-            TempData["game"] = game;
+        [HttpGet]
+        public ActionResult GameShow(long gameId)
+        {      
+
+            ViewBag.Game = _gameControl.DoFirstTwoRound(gameId);
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult GameShow(int number)
+        public ActionResult GameShow(long gameId, int number)
         {
-            Game game = (Game)TempData["game"];
+            var v = _gameControl.ContinuePlay(gameId, number);
+            ViewBag.Game = v;
+            foreach(var player in v)
+            {
+                if(IsEndGame(player))
+                {
+                    _gameControl.DropCard(v);
+                    return RedirectToAction("GameResult", new { gameId = player.GameId});
+                }
+            }
+            return View();
+        }
 
-            ViewBag.Turns =_gameControl.ContinuePlay(game, number);
+        public ActionResult GameResult(long gameId)
+        {
+
+            ViewBag.Game = _gameControl.GetGameResult(gameId);
 
             return View();
+        }
+
+        private bool IsEndGame (GameStats player)
+        {
+            return player.PlayerType == DataBaseControl.Entities.Enam.PlayerType.User && player.PlayerStatus != DataBaseControl.Entities.Enam.PlayerStatus.Play || player.PlayerType == DataBaseControl.Entities.Enam.PlayerType.Dealer && player.PlayerStatus == DataBaseControl.Entities.Enam.PlayerStatus.Lose;
         }
     }
 }

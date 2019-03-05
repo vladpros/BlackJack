@@ -10,6 +10,8 @@ namespace DataBaseControl.Entities
         public List<Card> Cards { get; set; }
         public int Point { get; set; }
         public Enam.PlayerStatus PlayerStatus { get; set; }
+        public long GameId { get; set; }
+        public Enam.PlayerType PlayerType { get; set; }
 
         public GameStats()
         {

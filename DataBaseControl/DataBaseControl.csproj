@@ -72,6 +72,18 @@
     <Compile Include="Migrations\201903041320266_3.Designer.cs">
       <DependentUpon>201903041320266_3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903050931058_4.cs" />
+    <Compile Include="Migrations\201903050931058_4.Designer.cs">
+      <DependentUpon>201903050931058_4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050945003_5.cs" />
+    <Compile Include="Migrations\201903050945003_5.Designer.cs">
+      <DependentUpon>201903050945003_5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050955163_6.cs" />
+    <Compile Include="Migrations\201903050955163_6.Designer.cs">
+      <DependentUpon>201903050955163_6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\DefaultGenericReposytory.cs" />
     <Compile Include="Repository\GameRepository.cs" />
@@ -96,6 +108,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903041320266_3.resx">
       <DependentUpon>201903041320266_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050931058_4.resx">
+      <DependentUpon>201903050931058_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050945003_5.resx">
+      <DependentUpon>201903050945003_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050955163_6.resx">
+      <DependentUpon>201903050955163_6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

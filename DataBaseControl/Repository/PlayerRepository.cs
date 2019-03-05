@@ -1,7 +1,6 @@
 ﻿using DataBaseControl.Entities;
 using DataBaseControl.Repository.Interface;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 
@@ -56,7 +55,7 @@ namespace DataBaseControl.Repository
 
         public Player SearchPlayerWithName(string name)
         {
-            return _context.Players.Include(c => c.Games).Where(x => x.Name == name).FirstOrDefault();
+            return _context.Players.Where(x => x.Name == name).FirstOrDefault();
         }
     }
 }

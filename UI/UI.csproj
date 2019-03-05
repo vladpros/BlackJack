@@ -138,7 +138,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\GameViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -180,9 +179,11 @@
     <Content Include="Views\Game\Start.cshtml" />
     <Content Include="Views\LeaderBoard\Index.cshtml" />
     <Content Include="Views\Game\GameShow.cshtml" />
+    <Content Include="Views\Game\GameResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\Data\" />
   </ItemGroup>
   <ItemGroup>
