@@ -248,6 +248,7 @@ namespace Logick
                     player.PlayerStatus = PlayerStatus.Lose;
                 }
             }
+            _data.SaveWinner(gameStats);
 
             return gameStats;
         }

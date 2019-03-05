@@ -16,6 +16,7 @@ namespace Logick
         private IPlayerRepository _player;
         private ITurnRepository _turn;
         private Random _random;
+        private IGameWinnersRepository _winner;
 
         public DataControl()
         {
@@ -23,6 +24,7 @@ namespace Logick
             _db = new BlackJackContext();
             _player = new PlayerRepository(_db);
             _turn = new TurnReposytory(_db);
+            _winner = new GameWinersRepository(_db);
         }
 
         public List<Player> GetUserOrdered()
@@ -174,6 +176,19 @@ namespace Logick
             return -1;
         }
 
-
+        public void SaveWinner(List<GameStats> gameStats)
+        {
+            foreach (var player in gameStats)
+            {
+                if (player.PlayerStatus == PlayerStatus.Won)
+                {
+                    _winner.Create(new GameWinner
+                    {
+                        PlayerId = player.PlayerId,
+                        GameId = player.GameId
+                    });
+                }
+            }
+        }
     }
 }
