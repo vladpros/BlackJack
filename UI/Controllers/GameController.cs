@@ -30,7 +30,6 @@ namespace UI.Controllers
             return RedirectToAction("GameShow", new { gameId = _gameControl.StartGame(_dataControl.SearchPlayerWithName(player), botsNumber) });
         }
 
-        [HttpGet]
         public ActionResult GameShow(long gameId)
         {      
 
