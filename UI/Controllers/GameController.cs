@@ -30,18 +30,27 @@ namespace UI.Controllers
             return RedirectToAction("GameShow", new { gameId = _gameControl.StartGame(_dataControl.SearchPlayerWithName(player), botsNumber) });
         }
 
-        public ActionResult GameShow(long gameId)
-        {      
+        public ActionResult GameShow(long? gameId)
+        {
+            if (IsNull(gameId))
+            {
+                return RedirectToAction("Start");
+            }
 
-            ViewBag.Game = _gameControl.DoFirstTwoRound(gameId);
+            ViewBag.Game = _gameControl.DoFirstTwoRound((long)gameId);
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult GameShow(long gameId, int number)
+        public ActionResult GameShow(long? gameId, long? number)
         {
-            var v = _gameControl.ContinuePlay(gameId, number);
+            if (IsNull(gameId) || IsNull(gameId))
+            {
+                return RedirectToAction("Start");
+            }
+
+            var v = _gameControl.ContinuePlay((long)gameId, (long)number);
             ViewBag.Game = v;
             foreach(var player in v)
             {
@@ -54,10 +63,14 @@ namespace UI.Controllers
             return View();
         }
 
-        public ActionResult GameResult(long gameId)
+        public ActionResult GameResult(long? gameId)
         {
+            if (IsNull(gameId))
+            {
+                return RedirectToAction("Start");
+            }
 
-            ViewBag.Game = _gameControl.GetGameResult(gameId);
+            ViewBag.Game = _gameControl.GetGameResult((long)gameId);
 
             return View();
         }
@@ -65,6 +78,17 @@ namespace UI.Controllers
         private bool IsEndGame (GameStats player)
         {
             return player.PlayerType == DataBaseControl.Entities.Enam.PlayerType.User && player.PlayerStatus != DataBaseControl.Entities.Enam.PlayerStatus.Play || player.PlayerType == DataBaseControl.Entities.Enam.PlayerType.Dealer && player.PlayerStatus == DataBaseControl.Entities.Enam.PlayerStatus.Lose;
+        }
+
+        private bool IsNull(long? number)
+        {
+            if (number == null)
+            {
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

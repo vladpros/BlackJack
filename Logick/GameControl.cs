@@ -176,7 +176,7 @@ namespace Logick
             return gameStats;
         }
        
-        public List<GameStats> ContinuePlay (long gameId, int choose)
+        public List<GameStats> ContinuePlay (long gameId, long choose)
         {
             Game game = _game.FindById(gameId);
             List<GameStats> gameStats = InitializationGameStats(gameId);
