@@ -1,9 +1,8 @@
-﻿
-namespace DataBaseControl.Entities
+﻿namespace DataBaseControl.Entities
 {
     public class Card
     {
-        public Enam.LearCard LearCard { get; set; }
-        public Enam.NumberCard NumberCard { get; set; }
+        public Enum.CardLear LearCard { get; set; }
+        public Enum.CardNumber NumberCard { get; set; }
     }
 }

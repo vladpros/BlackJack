@@ -1,6 +1,6 @@
 ﻿using DataBaseControl;
 using DataBaseControl.Entities;
-using DataBaseControl.Entities.Enam;
+using DataBaseControl.Entities.Enum;
 using DataBaseControl.Repository;
 using DataBaseControl.Repository.Interface;
 using System;

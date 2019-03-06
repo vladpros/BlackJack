@@ -1,7 +1,6 @@
-﻿
-namespace DataBaseControl.Entities.Enam
+﻿namespace DataBaseControl.Entities.Enum
 {
-    public enum NumberCard
+    public enum CardNumber
     {
         None = 0,
         Two = 2,

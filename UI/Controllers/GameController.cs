@@ -77,7 +77,7 @@ namespace UI.Controllers
 
         private bool IsEndGame (GameStats player)
         {
-            return player.PlayerType == DataBaseControl.Entities.Enam.PlayerType.User && player.PlayerStatus != DataBaseControl.Entities.Enam.PlayerStatus.Play || player.PlayerType == DataBaseControl.Entities.Enam.PlayerType.Dealer && player.PlayerStatus == DataBaseControl.Entities.Enam.PlayerStatus.Lose;
+            return player.PlayerType == DataBaseControl.Entities.Enum.PlayerType.User && player.PlayerStatus != DataBaseControl.Entities.Enum.PlayerStatus.Play || player.PlayerType == DataBaseControl.Entities.Enum.PlayerType.Dealer && player.PlayerStatus == DataBaseControl.Entities.Enum.PlayerStatus.Lose;
         }
 
         private bool IsNull(long? number)

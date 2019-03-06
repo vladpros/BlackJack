@@ -21,42 +21,42 @@ namespace DataBaseControl.Migrations
             player.AddOrUpdate(
                 new Entities.Player
                 {
-                    PlayerType = Entities.Enam.PlayerType.Bot,
+                    PlayerType = Entities.Enum.PlayerType.Bot,
                     Name = "JohnBot",
                 });
 
             player.AddOrUpdate(
                 new Entities.Player
                 {
-                    PlayerType = Entities.Enam.PlayerType.Bot,
+                    PlayerType = Entities.Enum.PlayerType.Bot,
                     Name = "MaryBot",
                 });
 
             player.AddOrUpdate(
                 new Entities.Player
                 {
-                    PlayerType = Entities.Enam.PlayerType.Bot,
+                    PlayerType = Entities.Enum.PlayerType.Bot,
                     Name = "JonnyBot",
                 });
 
             player.AddOrUpdate(
                 new Entities.Player
                 {
-                    PlayerType = Entities.Enam.PlayerType.Bot,
+                    PlayerType = Entities.Enum.PlayerType.Bot,
                     Name = "BobBot",
                 });
 
             player.AddOrUpdate(
                 new Entities.Player
                 {
-                    PlayerType = Entities.Enam.PlayerType.Bot,
+                    PlayerType = Entities.Enum.PlayerType.Bot,
                     Name = "KennyBot",
                 });
 
             player.AddOrUpdate(
                 new Entities.Player
                 {
-                    PlayerType = Entities.Enam.PlayerType.Dealer,
+                    PlayerType = Entities.Enum.PlayerType.Dealer,
                     Name = "DenisDealer",
                 });
         }

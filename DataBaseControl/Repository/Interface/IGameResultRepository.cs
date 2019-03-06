@@ -2,7 +2,7 @@
 
 namespace DataBaseControl.Repository.Interface
 {
-    public interface IGameWinnersRepository : IGenericRepository<GameWinner>
+    public interface IGameResultRepository : IGenericRepository<GameResult>
     {
 
     }

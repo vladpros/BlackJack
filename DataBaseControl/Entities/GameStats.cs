@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DataBaseControl.Entities.Enum;
+using System.Collections.Generic;
 
 
 namespace DataBaseControl.Entities
@@ -9,13 +10,13 @@ namespace DataBaseControl.Entities
         public string PlayerName { get; set; }
         public List<Card> Cards { get; set; }
         public int Point { get; set; }
-        public Enam.PlayerStatus PlayerStatus { get; set; }
+        public PlayerStatus PlayerStatus { get; set; }
         public long GameId { get; set; }
-        public Enam.PlayerType PlayerType { get; set; }
+        public PlayerType PlayerType { get; set; }
 
         public GameStats()
         {
-            PlayerStatus = Enam.PlayerStatus.Play;
+            PlayerStatus = PlayerStatus.Play;
             Cards = new List<Card>();
             Point = 0;
         }

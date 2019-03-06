@@ -24,8 +24,8 @@ namespace DataBaseControl.Entities
                     Cards.Add(
                         new Card
                         {
-                            LearCard = (Enam.LearCard)i,
-                            NumberCard = (Enam.NumberCard)j
+                            LearCard = (Enum.CardLear)i,
+                            NumberCard = (Enum.CardNumber)j
                         });
                 }
             }

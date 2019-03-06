@@ -1,5 +1,4 @@
-﻿
-namespace DataBaseControl.Entities.Enam
+﻿namespace DataBaseControl.Entities.Enum
 {
     public enum PlayerType
     {

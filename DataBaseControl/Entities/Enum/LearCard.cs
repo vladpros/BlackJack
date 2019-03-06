@@ -1,7 +1,6 @@
-﻿
-namespace DataBaseControl.Entities.Enam
+﻿namespace DataBaseControl.Entities.Enum
 {
-    public enum LearCard
+    public enum CardLear
     {
         None = 0,
         Heart = 1,

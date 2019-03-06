@@ -23,20 +23,20 @@ namespace DataBaseControl.Repository
 
         public List<Player> GetAllUser()
         {
-            return GetAllType(Entities.Enam.PlayerType.User);
+            return GetAllType(Entities.Enum.PlayerType.User);
         }
 
         public List<Player> GetAllBots()
         {
-            return GetAllType(Entities.Enam.PlayerType.Bot);
+            return GetAllType(Entities.Enum.PlayerType.Bot);
         }
 
         public List<Player> GetAllDealer()
         {
-            return GetAllType(Entities.Enam.PlayerType.Dealer);
+            return GetAllType(Entities.Enum.PlayerType.Dealer);
         }
 
-        private List<Player> GetAllType(Entities.Enam.PlayerType p)
+        private List<Player> GetAllType(Entities.Enum.PlayerType p)
         {
             return _context.Players.Where(x => x.PlayerType == p).ToList();
         }

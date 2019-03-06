@@ -1,7 +1,8 @@
-﻿
+﻿using DataBaseControl.Entities;
+
 namespace DataBaseControl.Repository
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> where T : BasicEntities
     {
         void Create(T item);
         T FindById(long id);

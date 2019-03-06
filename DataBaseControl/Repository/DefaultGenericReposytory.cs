@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DataBaseControl.Entities;
 using System.Data.Entity;
-using System.Linq;
 
 namespace DataBaseControl.Repository
 {
-    public class DefaultGenericRepository<T> : IGenericRepository<T> where T : class
+    public class DefaultGenericRepository<T> : IGenericRepository<T> where T : BasicEntities
     {
         private DbContext _context;
         private DbSet<T> _dbSet;

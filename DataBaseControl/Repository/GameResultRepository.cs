@@ -4,12 +4,12 @@ using DataBaseControl.Repository.Interface;
 
 namespace DataBaseControl.Repository
 {
-    public class GameWinersRepository : DefaultGenericRepository<GameWinner>, IGameWinnersRepository
+    public class GameResultRepository : DefaultGenericRepository<GameResult>, IGameResultRepository
     {
 
         private BlackJackContext _context;
 
-        public GameWinersRepository(BlackJackContext context) : base(context)
+        public GameResultRepository(BlackJackContext context) : base(context)
         {
             _context = context;
         }

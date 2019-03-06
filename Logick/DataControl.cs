@@ -1,6 +1,6 @@
 ﻿using DataBaseControl;
 using DataBaseControl.Entities;
-using DataBaseControl.Entities.Enam;
+using DataBaseControl.Entities.Enum;
 using DataBaseControl.Repository;
 using DataBaseControl.Repository.Interface;
 using System;
@@ -16,7 +16,7 @@ namespace Logick
         private IPlayerRepository _player;
         private ITurnRepository _turn;
         private Random _random;
-        private IGameWinnersRepository _winner;
+        private IGameResultRepository _winner;
 
         public DataControl()
         {
@@ -24,7 +24,7 @@ namespace Logick
             _db = new BlackJackContext();
             _player = new PlayerRepository(_db);
             _turn = new TurnReposytory(_db);
-            _winner = new GameWinersRepository(_db);
+            _winner = new GameResultRepository(_db);
         }
 
         public List<Player> GetUserOrdered()

@@ -1,15 +1,10 @@
-﻿using DataBaseControl.Entities.Enam;
+﻿using DataBaseControl.Entities.Enum;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataBaseControl.Entities
 {
-    public class Player
+    public class Player : BasicEntities
     {
-        public long Id { get; set; }
-
-        [Required]
         public string Name { get; set; }
         public PlayerType PlayerType { get; set; }
 

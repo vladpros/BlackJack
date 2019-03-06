@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using DataBaseControl.Entities.Enum;
+using System.Collections.Generic;
 
 namespace DataBaseControl.Entities
 {
-    public class Game
+    public class Game : BasicEntities
     {
-        public long Id { get; set; }
         public long TurnNumber { get; set; }
-        public Enam.GameStatus GameStatus { get; set; }
+        public GameStatus GameStatus { get; set; }
         public int BotsNumber { get; set; }
         public long PlayerId { get; set; }
 
