@@ -1,7 +1,7 @@
-﻿using BlackJackDataBaseAccess.Entities;
+﻿using BlackJack.DataBaseAccess.Entities;
 using System.Collections.Generic;
 
-namespace BlackJackDataBaseAccess.Repository.Interface
+namespace BlackJack.DataBaseAccess.Repository.Interface
 {
     public interface IPlayerRepository : IGenericRepository<Player>
     {

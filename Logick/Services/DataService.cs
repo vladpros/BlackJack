@@ -1,9 +1,9 @@
-﻿using BlackJackDataBaseAccess;
-using BlackJackDataBaseAccess.Entities;
-using BlackJackDataBaseAccess.Entities.Enum;
-using BlackJackDataBaseAccess.Repository;
-using BlackJackDataBaseAccess.Repository.Interface;
+﻿using BlackJack.DataBaseAccess;
+using BlackJack.DataBaseAccess.Entities;
+using BlackJack.DataBaseAccess.Entities.Enum;
+using BlackJack.DataBaseAccess.Repository.Interface;
 using DataBaseControl.Repository.Dapper;
+using Logick.Interfases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +11,19 @@ using System.Linq;
 
 namespace BlackJack.BusinessLogic
 {
-    public class DataControl
+    public class DataService : IDataService
     {
-        private BlackJackContext _db;
         private IPlayerRepository _playerRepository;
         private ITurnRepository _turnRepository;
         private Random _random;
-        private IGameResultRepository _winnerRepository;
+        private IGameResultRepository _gameResultRepository;
 
-        public DataControl()
+        public DataService(IGameResultRepository gameResultRepository, ITurnRepository turnRepository, IPlayerRepository playerRepository)
         {
             _random = new Random();
-            _db = new BlackJackContext();
-            _playerRepository = new DapPlayerRepository();
-            _turnRepository = new DapTurnRepository();
-            _winnerRepository = new DapGameResultRepository();
+            _playerRepository = playerRepository;
+            _turnRepository = turnRepository;
+            _gameResultRepository = gameResultRepository;
         }
 
         public List<Player> GetUserOrdered()
@@ -183,7 +181,7 @@ namespace BlackJack.BusinessLogic
             {
                 if (player.PlayerStatus == PlayerStatus.Won)
                 {
-                    _winnerRepository.Create(new GameResult
+                    _gameResultRepository.Create(new GameResult
                     {
                         PlayerId = player.PlayerId,
                         GameId = player.GameId

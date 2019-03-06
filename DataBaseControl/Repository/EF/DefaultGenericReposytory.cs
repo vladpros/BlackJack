@@ -1,15 +1,15 @@
-﻿using BlackJackDataBaseAccess.Entities;
-using BlackJackDataBaseAccess.Repository.Interface;
+﻿using BlackJack.DataBaseAccess.Entities;
+using BlackJack.DataBaseAccess.Repository.Interface;
 using System.Data.Entity;
 
-namespace BlackJackDataBaseAccess.Repository
+namespace BlackJack.DataBaseAccess.Repository
 {
     public class DefaultGenericRepository<T> : IGenericRepository<T> where T : BasicEntities
     {
-        private DbContext _context;
+        private BlackJackContext _context;
         private DbSet<T> _dbSet;
 
-        public DefaultGenericRepository(DbContext context)
+        public DefaultGenericRepository(BlackJackContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();

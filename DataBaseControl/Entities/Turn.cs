@@ -1,8 +1,8 @@
-﻿using BlackJackDataBaseAccess.Entities.Enum;
+﻿using BlackJack.DataBaseAccess.Entities.Enum;
 using Dapper.Contrib.Extensions;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BlackJackDataBaseAccess.Entities
+namespace BlackJack.DataBaseAccess.Entities
 {
     public class Turn : BasicEntities
     {

@@ -1,18 +1,19 @@
-﻿using BlackJackDataBaseAccess.Entities;
+﻿using BlackJack.DataBaseAccess.Entities;
 using BlackJack.BusinessLogic;
 using System.Web.Mvc;
+using Logick.Interfases;
 
 namespace BlackJack.UI.Controllers
 {
     public class GameController : Controller
     {
-        private DataControl _dataControl;
-        private GameControl _gameControl;
+        private IDataService _dataControl;
+        private IGameService _gameControl;
 
-        public GameController()
+        public GameController(IDataService dataService, IGameService gameService)
         {
-            _dataControl = new DataControl();
-            _gameControl = new GameControl();
+            _dataControl = dataService;
+            _gameControl = gameService;
         }
 
         public ActionResult Start()
@@ -77,7 +78,7 @@ namespace BlackJack.UI.Controllers
 
         private bool IsEndGame (GameStats player)
         {
-            return player.PlayerType == BlackJackDataBaseAccess.Entities.Enum.PlayerType.User && player.PlayerStatus != BlackJackDataBaseAccess.Entities.Enum.PlayerStatus.Play || player.PlayerType == BlackJackDataBaseAccess.Entities.Enum.PlayerType.Dealer && player.PlayerStatus == BlackJackDataBaseAccess.Entities.Enum.PlayerStatus.Lose;
+            return player.PlayerType == BlackJack.DataBaseAccess.Entities.Enum.PlayerType.User && player.PlayerStatus != BlackJack.DataBaseAccess.Entities.Enum.PlayerStatus.Play || player.PlayerType == BlackJack.DataBaseAccess.Entities.Enum.PlayerType.Dealer && player.PlayerStatus == BlackJack.DataBaseAccess.Entities.Enum.PlayerStatus.Lose;
         }
 
         private bool IsNull(long? number)

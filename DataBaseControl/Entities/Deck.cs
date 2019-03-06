@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BlackJackDataBaseAccess.Entities
+namespace BlackJack.DataBaseAccess.Entities
 {
     public class Deck
     {

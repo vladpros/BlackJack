@@ -1,7 +1,8 @@
-namespace BlackJackDataBaseAccess.Migrations
+namespace BlackJack.DataBaseAccess.Migrations
 {
-    using BlackJackDataBaseAccess.Repository;
-    using BlackJackDataBaseAccess.Repository.Interface;
+    using BlackJack.DataBaseAccess;
+    using BlackJack.DataBaseAccess.Repository;
+    using BlackJack.DataBaseAccess.Repository.Interface;
     using System.Data.Entity.Migrations;
 
 

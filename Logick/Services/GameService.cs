@@ -1,31 +1,29 @@
-﻿using BlackJackDataBaseAccess;
-using BlackJackDataBaseAccess.Entities;
-using BlackJackDataBaseAccess.Entities.Enum;
-using BlackJackDataBaseAccess.Repository;
-using BlackJackDataBaseAccess.Repository.Interface;
+﻿using BlackJack.DataBaseAccess;
+using BlackJack.DataBaseAccess.Entities;
+using BlackJack.DataBaseAccess.Entities.Enum;
+using BlackJack.DataBaseAccess.Repository.Interface;
 using DataBaseControl.Repository.Dapper;
+using Logick.Interfases;
 using System;
 using System.Collections.Generic;
 
 namespace BlackJack.BusinessLogic
 {
-    public class GameControl
+    public class GameService : IGameService
     {
         private Random _random;
         private IPlayerRepository _playerRepository;
         private IGameRepository _gameRepository;
-        private BlackJackContext _db;
         private ITurnRepository _turnRepository;
-        private DataControl _data;
+        private IDataService _data;
 
-        public GameControl()
+        public GameService(IGameRepository gameRepository, ITurnRepository turnRepository, IPlayerRepository playerRepository, IDataService dataService)
         {
-            _db = new BlackJackContext();
             _random = new Random();
-            _playerRepository = new DapPlayerRepository();
-            _gameRepository = new DapGameRepository();
-            _turnRepository = new DapTurnRepository();
-            _data = new DataControl();
+            _playerRepository = playerRepository;
+            _gameRepository = gameRepository;
+            _turnRepository = turnRepository;
+            _data = dataService;
         }
 
         public long StartGame (Player player, int botsNumber)

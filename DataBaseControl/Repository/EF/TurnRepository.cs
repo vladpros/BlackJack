@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BlackJackDataBaseAccess.Entities;
-using BlackJackDataBaseAccess.Repository.Interface;
+using BlackJack.DataBaseAccess.Entities;
+using BlackJack.DataBaseAccess.Repository.Interface;
 
-namespace BlackJackDataBaseAccess.Repository
+namespace BlackJack.DataBaseAccess.Repository
 {
-    public class TurnReposytory : DefaultGenericRepository<Turn>, ITurnRepository
+    public class TurnRepository : DefaultGenericRepository<Turn>, ITurnRepository
     {
         private BlackJackContext _context;
 
-        public TurnReposytory(BlackJackContext context) : base(context)
+        public TurnRepository(BlackJackContext context) : base(context)
         {
             _context = context;
         }
