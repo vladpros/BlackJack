@@ -1,8 +1,8 @@
-﻿using DataBaseControl.Entities;
-using Logick;
+﻿using BlackJackDataBaseAccess.Entities;
+using BlackJack.BusinessLogic;
 using System.Web.Mvc;
 
-namespace UI.Controllers
+namespace BlackJack.UI.Controllers
 {
     public class GameController : Controller
     {
@@ -77,7 +77,7 @@ namespace UI.Controllers
 
         private bool IsEndGame (GameStats player)
         {
-            return player.PlayerType == DataBaseControl.Entities.Enum.PlayerType.User && player.PlayerStatus != DataBaseControl.Entities.Enum.PlayerStatus.Play || player.PlayerType == DataBaseControl.Entities.Enum.PlayerType.Dealer && player.PlayerStatus == DataBaseControl.Entities.Enum.PlayerStatus.Lose;
+            return player.PlayerType == BlackJackDataBaseAccess.Entities.Enum.PlayerType.User && player.PlayerStatus != BlackJackDataBaseAccess.Entities.Enum.PlayerStatus.Play || player.PlayerType == BlackJackDataBaseAccess.Entities.Enum.PlayerType.Dealer && player.PlayerStatus == BlackJackDataBaseAccess.Entities.Enum.PlayerStatus.Lose;
         }
 
         private bool IsNull(long? number)

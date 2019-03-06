@@ -1,10 +1,10 @@
-﻿using DataBaseControl.Entities;
-using DataBaseControl.Repository.Interface;
+﻿using BlackJackDataBaseAccess.Entities;
+using BlackJackDataBaseAccess.Repository.Interface;
 using System.Collections.Generic;
 using System.Linq;
 
 
-namespace DataBaseControl.Repository
+namespace BlackJackDataBaseAccess.Repository
 {
     public class PlayerRepository : DefaultGenericRepository<Player>, IPlayerRepository
     {
@@ -47,10 +47,8 @@ namespace DataBaseControl.Repository
             {
                 return;
             }
-            if (!IsAPlayer(player))
-            {
-                Create(player);
-            }
+
+            Create(player);
         }
 
         public Player SearchPlayerWithName(string name)

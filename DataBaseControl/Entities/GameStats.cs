@@ -1,8 +1,8 @@
-﻿using DataBaseControl.Entities.Enum;
+﻿using BlackJackDataBaseAccess.Entities.Enum;
 using System.Collections.Generic;
 
 
-namespace DataBaseControl.Entities
+namespace BlackJackDataBaseAccess.Entities
 {
     public class GameStats
     {

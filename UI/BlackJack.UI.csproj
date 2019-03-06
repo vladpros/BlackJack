@@ -12,8 +12,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UI</RootNamespace>
-    <AssemblyName>UI</AssemblyName>
+    <RootNamespace>BlackJack.UI</RootNamespace>
+    <AssemblyName>BlackJack.UI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -194,13 +194,13 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataBaseControl\DataBaseControl.csproj">
+    <ProjectReference Include="..\DataBaseControl\BlackJack.DataBaseAccess.csproj">
       <Project>{eab3856d-a30a-49d5-a02a-69d423fca973}</Project>
-      <Name>DataBaseControl</Name>
+      <Name>BlackJack.DataBaseAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Logick\Logick.csproj">
+    <ProjectReference Include="..\Logick\BlackJack.BusinessLogic.csproj">
       <Project>{55261EA1-E7E6-41A2-97BE-38EA43629FED}</Project>
-      <Name>Logick</Name>
+      <Name>BlackJack.BusinessLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,7 +1,7 @@
-﻿using DataBaseControl.Entities;
+﻿using BlackJackDataBaseAccess.Entities;
 using System.Data.Entity;
 
-namespace DataBaseControl
+namespace BlackJackDataBaseAccess
 {
     public class BlackJackContext : DbContext
     {
@@ -12,7 +12,7 @@ namespace DataBaseControl
         public DbSet<Player> Players { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Turn> Turns { get; set; }
-        public DbSet<GameResult> GameResult { get; set; }
+        public DbSet<GameResult> GameResults { get; set; }
 
     }
 }

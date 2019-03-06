@@ -1,10 +1,10 @@
-﻿using DataBaseControl.Entities;
+﻿using BlackJackDataBaseAccess.Entities;
 
-namespace DataBaseControl.Repository
+namespace BlackJackDataBaseAccess.Repository.Interface
 {
     public interface IGenericRepository<T> where T : BasicEntities
     {
-        void Create(T item);
+        long Create(T item);
         T FindById(long id);
         void Remove(T item);
         void Update(T item);

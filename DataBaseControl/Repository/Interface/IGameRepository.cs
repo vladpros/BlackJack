@@ -1,11 +1,9 @@
-﻿using DataBaseControl.Entities;
+﻿using BlackJackDataBaseAccess.Entities;
 using System.Collections.Generic;
 
-namespace DataBaseControl.Repository.Interface
+namespace BlackJackDataBaseAccess.Repository.Interface
 {
     public interface IGameRepository : IGenericRepository<Game>
     {
-        List<Game> GetAllGameWithPlayer(Player player);
-        bool CreatNewGame(Game game);
     }
 }

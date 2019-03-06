@@ -1,4 +1,4 @@
-﻿namespace DataBaseControl.Entities.Enum
+﻿namespace BlackJackDataBaseAccess.Entities.Enum
 {
     public enum CardLear
     {

@@ -1,7 +1,8 @@
-﻿using DataBaseControl.Entities;
+﻿using BlackJackDataBaseAccess.Entities;
+using BlackJackDataBaseAccess.Repository.Interface;
 using System.Data.Entity;
 
-namespace DataBaseControl.Repository
+namespace BlackJackDataBaseAccess.Repository
 {
     public class DefaultGenericRepository<T> : IGenericRepository<T> where T : BasicEntities
     {
@@ -19,10 +20,12 @@ namespace DataBaseControl.Repository
             return _dbSet.Find(id);
         }
 
-        public void Create(T item)
+        public long Create(T item)
         {
-            _dbSet.Add(item);
+            long id = _dbSet.Add(item).Id;
             _context.SaveChanges();
+
+            return id;
         }
 
         public void Update(T item)

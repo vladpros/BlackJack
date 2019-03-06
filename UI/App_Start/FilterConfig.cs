@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace UI
+namespace BlackJack.UI
 {
     public class FilterConfig
     {

@@ -1,29 +1,30 @@
-﻿using DataBaseControl;
-using DataBaseControl.Entities;
-using DataBaseControl.Entities.Enum;
-using DataBaseControl.Repository;
-using DataBaseControl.Repository.Interface;
+﻿using BlackJackDataBaseAccess;
+using BlackJackDataBaseAccess.Entities;
+using BlackJackDataBaseAccess.Entities.Enum;
+using BlackJackDataBaseAccess.Repository;
+using BlackJackDataBaseAccess.Repository.Interface;
+using DataBaseControl.Repository.Dapper;
 using System;
 using System.Collections.Generic;
 
-namespace Logick
+namespace BlackJack.BusinessLogic
 {
     public class GameControl
     {
         private Random _random;
-        private IPlayerRepository _player;
-        private IGameRepository _game;
+        private IPlayerRepository _playerRepository;
+        private IGameRepository _gameRepository;
         private BlackJackContext _db;
-        private ITurnRepository _turn;
+        private ITurnRepository _turnRepository;
         private DataControl _data;
 
         public GameControl()
         {
             _db = new BlackJackContext();
             _random = new Random();
-            _player = new PlayerRepository(_db);
-            _game = new GameRepository(_db);
-            _turn = new TurnReposytory(_db);
+            _playerRepository = new DapPlayerRepository();
+            _gameRepository = new DapGameRepository();
+            _turnRepository = new DapTurnRepository();
             _data = new DataControl();
         }
 
@@ -36,9 +37,9 @@ namespace Logick
                 BotsNumber = botsNumber
             };
 
-            _game.Create(game);
+            long gameId = _gameRepository.Create(game);
 
-            return game.Id;
+            return gameId;
         }
 
         private Card GiveCard(Deck deck)
@@ -65,11 +66,11 @@ namespace Logick
         public List<GameStats> DoFirstTwoRound(long gameId)
         {
             Deck deck = new Deck();
-            Game game = _game.FindById(gameId);
+            Game game = _gameRepository.FindById(gameId);
             List<GameStats> gameStats = CreatGameStats(game);
             gameStats = DoRound(gameStats, deck);
             CheckPoint(gameStats);
-            _game.Update(game);
+            _gameRepository.Update(game);
 
             return gameStats;
         }
@@ -90,7 +91,7 @@ namespace Logick
         {
             foreach (var player in gameStats)
             {
-                if (_player.FindById(player.PlayerId).PlayerType == playerType && player.PlayerStatus == PlayerStatus.Play)
+                if (_playerRepository.FindById(player.PlayerId).PlayerType == playerType && player.PlayerStatus == PlayerStatus.Play)
                 {
                     Card card = DoTurn(player.PlayerId, player.GameId, deck);
                     player.Cards.Add(new Card
@@ -107,10 +108,10 @@ namespace Logick
         private Card DoTurn(long playerId, long gameId, Deck deck)
         {
             Card card = GiveCard(deck);
-            Game game = _game.FindById(gameId);
+            Game game = _gameRepository.FindById(gameId);
 
             game.TurnNumber+=1;
-            _turn.Create(
+            _turnRepository.Create(
                 new Turn
                 {
                     GameId = game.Id,
@@ -119,7 +120,7 @@ namespace Logick
                     NumberCard = card.NumberCard,
                 });
 
-            _game.Update(game);
+            _gameRepository.Update(game);
 
             return new Card { LearCard = card.LearCard, NumberCard = card.NumberCard };
         }
@@ -168,7 +169,7 @@ namespace Logick
 
         private List<GameStats> InitializationGameStats(long gameId)
         {
-            Game game = _game.FindById(gameId);
+            Game game = _gameRepository.FindById(gameId);
             var gameStats = _data.GetGameStats(game);
 
             CheckPoint(gameStats);
@@ -178,7 +179,7 @@ namespace Logick
        
         public List<GameStats> ContinuePlay (long gameId, long choose)
         {
-            Game game = _game.FindById(gameId);
+            Game game = _gameRepository.FindById(gameId);
             List<GameStats> gameStats = InitializationGameStats(gameId);
 
             if (choose == 1)
@@ -191,7 +192,7 @@ namespace Logick
                 gameStats = DropCard(gameStats);
             }
 
-            _game.Update(game);
+            _gameRepository.Update(game);
 
             return gameStats;
         }

@@ -1,6 +1,6 @@
-﻿using DataBaseControl.Entities;
+﻿using BlackJackDataBaseAccess.Entities;
 
-namespace DataBaseControl.Repository.Interface
+namespace BlackJackDataBaseAccess.Repository.Interface
 {
     public interface IGameResultRepository : IGenericRepository<GameResult>
     {

@@ -1,7 +1,8 @@
-﻿using DataBaseControl.Entities.Enum;
+﻿using BlackJackDataBaseAccess.Entities.Enum;
+using Dapper.Contrib.Extensions;
 using System.Collections.Generic;
 
-namespace DataBaseControl.Entities
+namespace BlackJackDataBaseAccess.Entities
 {
     public class Game : BasicEntities
     {
@@ -10,6 +11,7 @@ namespace DataBaseControl.Entities
         public int BotsNumber { get; set; }
         public long PlayerId { get; set; }
 
+        [Computed]
         public List<Turn> Turns { get; set; }
 
         public Game()

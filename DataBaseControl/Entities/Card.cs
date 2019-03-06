@@ -1,4 +1,4 @@
-﻿namespace DataBaseControl.Entities
+﻿namespace BlackJackDataBaseAccess.Entities
 {
     public class Card
     {

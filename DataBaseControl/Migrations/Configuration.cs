@@ -1,20 +1,18 @@
-namespace DataBaseControl.Migrations
+namespace BlackJackDataBaseAccess.Migrations
 {
-    using DataBaseControl.Repository;
-    using DataBaseControl.Repository.Interface;
-    using System;
-    using System.Data.Entity;
+    using BlackJackDataBaseAccess.Repository;
+    using BlackJackDataBaseAccess.Repository.Interface;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DataBaseControl.BlackJackContext>
+
+    internal sealed class Configuration : DbMigrationsConfiguration<BlackJackContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(DataBaseControl.BlackJackContext context)
+        protected override void Seed(BlackJackContext context)
         {
             IPlayerRepository player = new PlayerRepository(context);
 

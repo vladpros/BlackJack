@@ -1,7 +1,8 @@
-﻿using DataBaseControl.Entities.Enum;
+﻿using BlackJackDataBaseAccess.Entities.Enum;
+using Dapper.Contrib.Extensions;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataBaseControl.Entities
+namespace BlackJackDataBaseAccess.Entities
 {
     public class Turn : BasicEntities
     {
@@ -11,8 +12,10 @@ namespace DataBaseControl.Entities
         public CardNumber NumberCard { get; set; }
 
         [ForeignKey("GameId")]
+        [Computed]
         public Game Game { get; set; }
         [ForeignKey("PlayerId")]
+        [Computed]
         public Player Player { get; set; }
     }
 }

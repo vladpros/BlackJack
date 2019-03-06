@@ -31,6 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.60.1\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.Contrib, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.Contrib.1.60.1\lib\net451\Dapper.Contrib.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.Extension, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.Extension.1.0.0.1\lib\net45\Dapper.Extension.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -39,7 +48,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -90,18 +101,31 @@
     <Compile Include="Migrations\201903051536077_7.Designer.cs">
       <DependentUpon>201903051536077_7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903060841266_qwe.cs" />
+    <Compile Include="Migrations\201903060841266_qwe.Designer.cs">
+      <DependentUpon>201903060841266_qwe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903061222118_9.cs" />
+    <Compile Include="Migrations\201903061222118_9.Designer.cs">
+      <DependentUpon>201903061222118_9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Repository\DefaultGenericReposytory.cs" />
-    <Compile Include="Repository\GameRepository.cs" />
-    <Compile Include="Repository\GameResultRepository.cs" />
+    <Compile Include="Repository\Dapper\DapDefaultGenericRepository.cs" />
+    <Compile Include="Repository\Dapper\DapGameRepository.cs" />
+    <Compile Include="Repository\Dapper\DapPlayerRepository.cs" />
+    <Compile Include="Repository\Dapper\DapTurnRepository.cs" />
+    <Compile Include="Repository\Dapper\DapGameResultRepository.cs" />
+    <Compile Include="Repository\EF\DefaultGenericReposytory.cs" />
+    <Compile Include="Repository\EF\GameRepository.cs" />
+    <Compile Include="Repository\EF\GameResultRepository.cs" />
     <Compile Include="Repository\Interface\IGameRepository.cs" />
     <Compile Include="Repository\Interface\IGameResultRepository.cs" />
     <Compile Include="Repository\Interface\IGenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Interface\IPlayerRepository.cs" />
     <Compile Include="Repository\Interface\ITurnRepository.cs" />
-    <Compile Include="Repository\TurnReposytory.cs" />
-    <Compile Include="Repository\PlayerRepository.cs" />
+    <Compile Include="Repository\EF\TurnRepository.cs" />
+    <Compile Include="Repository\EF\PlayerRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -129,6 +153,13 @@
     <EmbeddedResource Include="Migrations\201903051536077_7.resx">
       <DependentUpon>201903051536077_7.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903060841266_qwe.resx">
+      <DependentUpon>201903060841266_qwe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903061222118_9.resx">
+      <DependentUpon>201903061222118_9.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

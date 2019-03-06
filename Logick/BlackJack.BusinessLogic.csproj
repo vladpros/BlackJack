@@ -46,9 +46,9 @@
     <Compile Include="DataControl.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataBaseControl\DataBaseControl.csproj">
+    <ProjectReference Include="..\DataBaseControl\BlackJack.DataBaseAccess.csproj">
       <Project>{EAB3856D-A30A-49D5-A02A-69D423FCA973}</Project>
-      <Name>DataBaseControl</Name>
+      <Name>BlackJack.DataBaseAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
