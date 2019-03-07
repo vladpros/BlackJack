@@ -1,15 +1,21 @@
-﻿using BlackJack.DataBaseAccess;
+﻿using BlackJack.BusinessLogic;
+using BlackJack.DataBaseAccess;
 using BlackJack.DataBaseAccess.Repository;
 using BlackJack.DataBaseAccess.Repository.Interface;
 using DataBaseControl.Repository.Dapper;
+using Logick.Interfases;
 using Ninject.Modules;
 
-namespace BlackJack.DataBaseAccess.Utils
+
+namespace Logick.Utils
 {
-    public class NinjectRegistrationRepository : NinjectModule
+    public class NinjectRegistration : NinjectModule
     {
         public override void Load()
         {
+            Bind<IDataService>().To<DataService>();
+            Bind<IGameService>().To<GameService>();
+
             bool useDapper = true;
             if (useDapper)
             {
