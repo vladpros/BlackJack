@@ -1,15 +1,16 @@
 ﻿using BlackJack.DataBaseAccess.Entities;
+using Logick.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Logick.Interfases
 {
     public interface IGameService
     {
-        long StartGame(Player player, int botsNumber);
-        List<GameStats> DoFirstTwoRound(long gameId);
-        List<GameStats> ContinuePlay(long gameId, long choose);
-        List<GameStats> DropCard(List<GameStats> gameStats);
-        List<GameStats> GetGameResult(long gameId);
-        List<GameStats> DealerLose(List<GameStats> gameStats);
+        Task<long> StartGame(Player player, int botsNumber);
+        Task<GameStat> DoFirstTwoRound(long gameId);
+        Task<GameStat> ContinuePlay(long gameId, long choose);
+        Task<GameStat> DropCard(GameStat gameStat);
+        Task<GameStat> GetGameResult(long gameId);
     }
 }

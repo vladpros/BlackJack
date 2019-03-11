@@ -1,12 +1,13 @@
 ﻿using BlackJack.DataBaseAccess.Entities;
+using System.Threading.Tasks;
 
 namespace BlackJack.DataBaseAccess.Repository.Interface
 {
     public interface IGenericRepository<T> where T : BasicEntities
     {
-        long Create(T item);
-        T FindById(long id);
-        void Remove(T item);
-        void Update(T item);
+        Task<long> Create(T item);
+        Task<T> FindById(long id);
+        Task Remove(T item);
+        Task Update(T item);
     }
 }

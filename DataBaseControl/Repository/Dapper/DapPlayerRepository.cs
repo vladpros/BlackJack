@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataBaseControl.Repository.Dapper
 {
@@ -20,37 +21,37 @@ namespace DataBaseControl.Repository.Dapper
             _conString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
         }
 
-        public void AddOrUpdate(Player player)
+        public async void AddOrUpdate(Player player)
         {
             if (FindById(player.Id) == null)
             {
                 return;
             }
 
-            Create(player);
+            await Create(player);
         }
 
-        public List<Player> GetAllBots()
+        public async Task<List<Player>> GetAllBots()
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                return cn.Query<Player>("SELECT * FROM Players WHERE PlayerType=@playertype", new { playertype = PlayerType.Bot }).ToList();
+                return await Task.Run(() => cn.Query<Player>("SELECT * FROM Players WHERE PlayerType=@playertype", new { playertype = PlayerType.Bot }).ToList());
             }
         }
 
-        public List<Player> GetAllDealer()
+        public async Task<List<Player>> GetAllDealer()
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                return cn.Query<Player>("SELECT * FROM Players WHERE PlayerType=@playertype", new { playertype = PlayerType.Dealer }).ToList();
+                return await Task.Run(() =>  cn.Query<Player>("SELECT * FROM Players WHERE PlayerType=@playertype", new { playertype = PlayerType.Dealer }).ToList());
             }
         }
 
-        public List<Player> GetAllUser()
+        public async Task<List<Player>> GetAllUser()
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                return cn.Query<Player>("SELECT * FROM Players WHERE PlayerType=@playertype", new { playertype = PlayerType.User }).ToList();
+                return await Task.Run(() => cn.Query<Player>("SELECT * FROM Players WHERE PlayerType=@playertype", new { playertype = PlayerType.User }).ToList());
             }
         }
 
@@ -64,11 +65,11 @@ namespace DataBaseControl.Repository.Dapper
             return true;
         }
 
-        public Player SearchPlayerWithName(string name)
+        public async Task<Player> SearchPlayerWithName(string name)
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                return cn.Query<Player>("SELECT * FROM Players WHERE Name=@Name", new { Name = name }).SingleOrDefault();
+                return await Task.Run(() => cn.Query<Player>("SELECT * FROM Players WHERE Name=@Name", new { Name = name }).SingleOrDefault());
             }
         }
 

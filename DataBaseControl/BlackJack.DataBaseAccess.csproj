@@ -95,9 +95,6 @@
   <ItemGroup>
     <Compile Include="BlackJackContext.cs" />
     <Compile Include="Entities\BasicEntities.cs" />
-    <Compile Include="Entities\GameStats.cs" />
-    <Compile Include="Entities\Card.cs" />
-    <Compile Include="Entities\Deck.cs" />
     <Compile Include="Entities\Enum\GameStatus.cs" />
     <Compile Include="Entities\Enum\LearCard.cs" />
     <Compile Include="Entities\Enum\NumberCard.cs" />

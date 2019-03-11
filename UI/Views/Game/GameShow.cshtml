@@ -1,35 +1,43 @@
-﻿
+﻿@using BlackJack.UI.Models
+@model IEnumerable<PlayerViewModel>
+
 @{
     ViewBag.Title = "GameShow";
 }
 
 <h2>GameShow</h2>
 
-<table>
-    <tr>
-        <td><p>Player name</p></td>
-        <td><p>Cards</p></td>
-        <td></td>
-    </tr>
-    @foreach (var b in ViewBag.Game)
-    {
+@helper BuildMenu(IEnumerable<PlayerViewModel> data)
+{
+    <table>
         <tr>
-            <td><p>@b.PlayerName</p></td>
-            @foreach (var k in b.Cards)
-            {
-                <td><p>@k.NumberCard</p></td>
-                <td><p>@k.LearCard</p></td>
-            }
-            <td><p>@b.Point</p></td>
-            <td><p>@b.PlayerStatus</p></td>
-
+            <td><p>Player name</p></td>
+            <td><p>Cards</p></td>
+            <td></td>
         </tr>
-    }
-</table>
+        @foreach (var b in data)
+        {
+            <tr>
+                <td><p>@b.PlayerName</p></td>
+                @foreach (var k in b.Cards)
+                {
+                    <td><p>@k.NumberCard</p></td>
+                    <td><p>@k.LearCard</p></td>
+                }
+                <td><p>@b.Point</p></td>
+                <td><p>@b.PlayerStatus</p></td>
+
+            </tr>
+        }
+    </table>
+
+}
+
+@BuildMenu(Model);
 
 @using (Html.BeginForm("GameShow", "Game", FormMethod.Post))
 {
-    <input type="hidden" name="gameId" value="@ViewBag.Game[0].GameId" />
+    <input type="hidden" name="gameId" value="@Model.First().GameId" />
     <p>
         <input type="submit" value="1" name="number">
         <input type="submit" value="2" name="number">

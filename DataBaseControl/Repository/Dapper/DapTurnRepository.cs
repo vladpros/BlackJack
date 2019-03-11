@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataBaseControl.Repository.Dapper
 {
@@ -19,11 +20,11 @@ namespace DataBaseControl.Repository.Dapper
             _conString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
         }
 
-        public List<Turn> GetAllTurns(Game game)
+        public async Task<List<Turn>> GetAllTurns(Game game)
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                return cn.Query<Turn>("SELECT * FROM Turns WHERE GameId=@gameId", new { gameId = game.Id }).ToList();
+                return await Task.Run(() => cn.Query<Turn>("SELECT * FROM Turns WHERE GameId=@gameId", new { gameId = game.Id }).ToList());
             }
         }
     }

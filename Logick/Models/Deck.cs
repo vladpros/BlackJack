@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using BlackJack.DataBaseAccess.Entities.Enum;
+using System.Collections.Generic;
 
-namespace BlackJack.DataBaseAccess.Entities
+namespace Logick.Models
 {
     public class Deck
     {
@@ -15,7 +16,7 @@ namespace BlackJack.DataBaseAccess.Entities
             }
         }
 
-        public Deck ()
+        public Deck()
         {
             Cards = new List<Card>();
 
@@ -26,8 +27,8 @@ namespace BlackJack.DataBaseAccess.Entities
                     Cards.Add(
                               new Card
                               {
-                              LearCard = (Enum.CardLear)i,
-                              NumberCard = (Enum.CardNumber)j
+                                  LearCard = (CardLear)i,
+                                  NumberCard = (CardNumber)j
                               });
                 }
 

@@ -148,7 +148,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\PlayersViewModel.cs" />
+    <Compile Include="Models\PlayerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -185,8 +185,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Game\Start.cshtml" />
-    <Content Include="Views\Game\GameShow.cshtml" />
     <Content Include="Views\Game\GameResult.cshtml" />
+    <Content Include="Views\Game\GameShow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

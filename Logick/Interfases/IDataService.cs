@@ -1,18 +1,20 @@
 ﻿using BlackJack.DataBaseAccess.Entities;
+using Logick.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Logick.Interfases
 {
     public interface IDataService
     {
-        List<Player> GetUserOrdered();
-        Player SearchPlayerWithName(string name);
+        Task<List<Player>> GetUserOrdered();
+        Task<Player> SearchPlayerWithName(string name);
         void PlayerChecked(string name);
-        List<GameStats> GetGameStats(Game game);
-        Deck GetDeck(List<GameStats> gameStats);
-        int SearchDealer(List<GameStats> gameStats);
-        int SearchUser(List<GameStats> gameStats);
-        List<GameStats> GenPlayers(long player, int botsNumber);
-        void SaveWinner(List<GameStats> gameStats);
+        Task<List<PlayerInGame>> PlayersInGame(Game game);
+        Deck GetDeck(List<PlayerInGame> gameStats);
+        Task<int> SearchDealer(List<PlayerInGame> players);
+        Task<int> SearchUser(List<PlayerInGame> players);
+        Task<List<PlayerInGame>> GenPlayers(long player, int botsNumber);
+        void SaveWinner(GameStat gameStat);
     }
 }

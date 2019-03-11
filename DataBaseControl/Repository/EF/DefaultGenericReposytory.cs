@@ -16,29 +16,31 @@ namespace BlackJack.DataBaseAccess.Repository
             _dbSet = context.Set<T>();
         }
 
-        public T FindById(long id)
+        public async Task<T> FindById(long id)
         {
-            return _dbSet.FindAsync(id); ;
+            return await _dbSet.FindAsync(id);
         }
 
-        public long Create(T item)
+        public async Task<long> Create(T item)
         {
-            long id =  _dbSet.Add(item).Id;
-            _context.SaveChanges();
+            var iten = await Task.Run( () => _dbSet.Add(item));
+            await Task.Run(() => _context.SaveChanges());
 
-            return  id;
+            return  iten.Id;
         }
 
-        public void Update(T item)
+        public async Task Update(T item)
         {
-            _context.Entry(item).State = EntityState.Modified;
-            _context.SaveChanges();
+            await Task.Run(() => _context.Entry(item).State = EntityState.Modified);
+            await Task.Run(() => _context.SaveChanges());
+
+            return;
         }
 
-        public void Remove(T item)
+        public async Task Remove(T item)
         {
-            _dbSet.Remove(item);
-            _context.SaveChanges();
+            await Task.Run(() => _dbSet.Remove(item));
+            await Task.Run(() => _context.SaveChanges());
         }
 
     }

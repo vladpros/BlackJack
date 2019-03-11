@@ -2,6 +2,7 @@
 using BlackJack.DataBaseAccess.Repository.Interface;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlackJack.DataBaseAccess.Repository
 {
@@ -14,9 +15,9 @@ namespace BlackJack.DataBaseAccess.Repository
             _context = context;
         }
 
-        public List<Game>  GetAllGameWithPlayer(Player player)
+        public async Task<List<Game>>  GetAllGameWithPlayer(Player player)
         {
-            return _context.Turns.Where(c => c.PlayerId == player.Id).Select(p => p.Game).Distinct().ToList(); ;
+            return await Task.Run(() => _context.Turns.Where(c => c.PlayerId == player.Id).Select(p => p.Game).Distinct().ToList());
         }
     }
 }

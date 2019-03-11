@@ -2,11 +2,11 @@
 using BlackJack.DataBaseAccess.Repository.Interface;
 using Dapper;
 using Dapper.Contrib.Extensions;
-using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataBaseControl.Repository.Dapper
 {
@@ -22,38 +22,40 @@ namespace DataBaseControl.Repository.Dapper
             _tableName = tableName;
         }
 
-        public virtual void Remove(T item)
+        public async virtual Task Remove(T item)
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
                 cn.Open();
-                cn.Execute($"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = item.Id });
+                await Task.Run(() => cn.Execute($"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = item.Id }));
             }
         }
 
-        public virtual T FindById(long id)
+        public async virtual Task<T> FindById(long id)
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                return cn.Query<T>($"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id }).SingleOrDefault();
+                return await Task.Run(()=> cn.Query<T>($"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id }).SingleOrDefault());
             }         
         }
 
-        public virtual long Create(T item)
+        public async virtual Task<long> Create(T item)
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                item.Id = cn.Insert(item);
+                item.Id = await cn.InsertAsync(item);
                 return item.Id;
             }
         }
 
-        public virtual void Update(T item)
+        public async virtual Task Update(T item)
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                cn.Update(item);
+                await Task.Run(() => cn.Update(item));
             }
+
+            return;
         }
     }
 }

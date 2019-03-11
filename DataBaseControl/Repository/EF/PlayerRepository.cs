@@ -2,7 +2,7 @@
 using BlackJack.DataBaseAccess.Repository.Interface;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace BlackJack.DataBaseAccess.Repository
 {
@@ -21,39 +21,40 @@ namespace BlackJack.DataBaseAccess.Repository
             return _context.Players.Any(x => x.Name == player.Name);
         }
 
-        public List<Player> GetAllUser()
+        public async Task<List<Player>> GetAllUser()
         {
-            return GetAllType(Entities.Enum.PlayerType.User);
+            return await GetAllType(Entities.Enum.PlayerType.User);
         }
 
-        public List<Player> GetAllBots()
+        public async Task<List<Player>> GetAllBots()
         {
-            return GetAllType(Entities.Enum.PlayerType.Bot);
+            return await GetAllType(Entities.Enum.PlayerType.Bot);
         }
 
-        public List<Player> GetAllDealer()
+        public async Task<List<Player>> GetAllDealer()
         {
-            return GetAllType(Entities.Enum.PlayerType.Dealer);
+            return await GetAllType(Entities.Enum.PlayerType.Dealer);
         }
 
-        private List<Player> GetAllType(Entities.Enum.PlayerType p)
+        private async Task<List<Player>> GetAllType(Entities.Enum.PlayerType p)
         {
-            return _context.Players.Where(x => x.PlayerType == p).ToList();
+            return await Task.Run(() => _context.Players.Where(x => x.PlayerType == p).ToList());
         }
 
-        public void AddOrUpdate (Player player)
+        public async void AddOrUpdate (Player player)
         {
             if (IsAPlayer(player))
             {
                 return;
             }
 
-            Create(player);
+            await Create(player);
         }
 
-        public Player SearchPlayerWithName(string name)
+        public async Task<Player> SearchPlayerWithName(string name)
         {
-            return _context.Players.Where(x => x.Name == name).FirstOrDefault();
+            var b = await Task.Run(() => _context.Players.Where(x => x.Name == name).SingleOrDefault());
+            return b;
         }
     }
 }
