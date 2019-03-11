@@ -26,7 +26,7 @@ namespace BlackJack.BusinessLogic
             _data = dataService;
         }
 
-        public async Task<long> StartGame (Player player, int botsNumber)
+        public async Task<long> StartGame(Player player, int botsNumber)
         {
             Game game = new Game
             {
@@ -110,7 +110,7 @@ namespace BlackJack.BusinessLogic
             Card card = await Task.Run(() => GiveCard(deck));
             Game game = await _gameRepository.FindById(gameId);
 
-            game.TurnNumber+=1;
+            game.TurnNumber += 1;
             await _turnRepository.Create(
                 new Turn
                 {
@@ -127,18 +127,18 @@ namespace BlackJack.BusinessLogic
 
         private async Task<int> CountPoint(PlayerInGame player)
         {
-                player.Point = 0;
-                foreach (var card in player.Cards)
-                {
-                    player.Point += await Task.Run(() => GetCardPoint(card));
-                }
+            player.Point = 0;
+            foreach (var card in player.Cards)
+            {
+                player.Point += await Task.Run(() => GetCardPoint(card));
+            }
 
             return player.Point;
         }
 
         private async Task CheckPoint(List<PlayerInGame> playersInGame)
         {
-            foreach(var player in playersInGame)
+            foreach (var player in playersInGame)
             {
                 player.Point = await CountPoint(player);
                 if (player.Point > 21)
@@ -175,8 +175,8 @@ namespace BlackJack.BusinessLogic
 
             return gameStat;
         }
-       
-        public async Task<GameStat> ContinuePlay (long gameId, long choose)
+
+        public async Task<GameStat> ContinuePlay(long gameId, long choose)
         {
             Game game = await _gameRepository.FindById(gameId);
             GameStat gameStat = await InitializationGameStat(gameId);
@@ -187,7 +187,7 @@ namespace BlackJack.BusinessLogic
             {
                 gameStat = await TakeCard(gameStat);
             }
-            if(choose == stopGame)
+            if (choose == stopGame)
             {
                 gameStat.Players[await _data.SearchUser(gameStat.Players)].PlayerStatus = PlayerStatus.Wait;
                 gameStat = await DropCard(gameStat);
@@ -214,9 +214,9 @@ namespace BlackJack.BusinessLogic
 
             while (await CountPoint(gameStat.Players[dealer]) <= 17)
             {
-                await DoRoundWithoutPlayerType(gameStat, deck, PlayerType.Bot, PlayerType.User);                
+                await DoRoundWithoutPlayerType(gameStat, deck, PlayerType.Bot, PlayerType.User);
             }
-            if(await CountPoint(gameStat.Players[dealer]) > 21)
+            if (await CountPoint(gameStat.Players[dealer]) > 21)
             {
                 gameStat.Players[dealer].PlayerStatus = PlayerStatus.Lose;
             }
@@ -227,9 +227,9 @@ namespace BlackJack.BusinessLogic
         public async Task<GameStat> GetGameResult(long gameId)
         {
             GameStat gameStat = await InitializationGameStat(gameId);
-            foreach(var player in gameStat.Players)
+            foreach (var player in gameStat.Players)
             {
-                if(player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose)
+                if (player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose)
                 {
                     gameStat = DealerLose(gameStat);
                     return gameStat;
@@ -240,7 +240,7 @@ namespace BlackJack.BusinessLogic
             gameStat.Players[dealerIndex].PlayerStatus = PlayerStatus.Won;
             foreach (var player in gameStat.Players)
             {
-                if(player.PlayerStatus != PlayerStatus.Lose && player.Point > gameStat.Players[dealerIndex].Point)
+                if (player.PlayerStatus != PlayerStatus.Lose && player.Point > gameStat.Players[dealerIndex].Point)
                 {
                     player.PlayerStatus = PlayerStatus.Won;
                     gameStat.Players[dealerIndex].PlayerStatus = PlayerStatus.Lose;
@@ -257,9 +257,9 @@ namespace BlackJack.BusinessLogic
 
         private GameStat DealerLose(GameStat gameStat)
         {
-            foreach(var player in gameStat.Players)
+            foreach (var player in gameStat.Players)
             {
-                if(player.PlayerStatus != PlayerStatus.Lose)
+                if (player.PlayerStatus != PlayerStatus.Lose)
                 {
                     player.PlayerStatus = PlayerStatus.Won;
                 }

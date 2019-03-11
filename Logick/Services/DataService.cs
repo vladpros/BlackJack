@@ -48,7 +48,7 @@ namespace BlackJack.BusinessLogic
             return await _playerRepository.SearchPlayerWithName(name);
         }
 
-        public async void PlayerChecked (string name)
+        public async void PlayerChecked(string name)
         {
             if ((await _playerRepository.SearchPlayerWithName(name)) == null)
             {
@@ -56,7 +56,7 @@ namespace BlackJack.BusinessLogic
             }
         }
 
-        public async Task<List<PlayerInGame>> PlayersInGame (Game game)
+        public async Task<List<PlayerInGame>> PlayersInGame(Game game)
         {
             var turns = await _turnRepository.GetAllTurns(game);
             List<long> players = turns.Select(p => p.PlayerId).Distinct().ToList();
@@ -72,22 +72,22 @@ namespace BlackJack.BusinessLogic
                 playerInGame.PlayerType = player.PlayerType;
                 playersInGame.Add(playerInGame);
             }
-           
+
             return playersInGame;
         }
 
-        private List<Card> PlayerCard (long playerId, List<Turn> turns)
+        private List<Card> PlayerCard(long playerId, List<Turn> turns)
         {
             return turns.Where(p => p.PlayerId == playerId).Select(k => new Card { LearCard = k.LearCard, NumberCard = k.NumberCard }).ToList();
         }
 
-        public Deck GetDeck (List<PlayerInGame> Players)
+        public Deck GetDeck(List<PlayerInGame> Players)
         {
             Deck deck = new Deck();
 
-            foreach(var player in Players)
+            foreach (var player in Players)
             {
-                foreach(var card in player.Cards)
+                foreach (var card in player.Cards)
                 {
                     int index = SearchCardInDeck(deck, card);
                     deck.Cards.RemoveAt(index);
@@ -97,11 +97,11 @@ namespace BlackJack.BusinessLogic
             return deck;
         }
 
-        public async Task<int> SearchDealer (List<PlayerInGame> players)
+        public async Task<int> SearchDealer(List<PlayerInGame> players)
         {
-            for(int i = 0; i< players.Count; i++)
+            for (int i = 0; i < players.Count; i++)
             {
-                if((await _playerRepository.FindById(players[i].PlayerId)).PlayerType == PlayerType.Dealer)
+                if ((await _playerRepository.FindById(players[i].PlayerId)).PlayerType == PlayerType.Dealer)
                 {
                     return i;
                 }
@@ -131,7 +131,7 @@ namespace BlackJack.BusinessLogic
             playerTemp.PlayerId = player;
             playerTemp.PlayerName = (await _playerRepository.FindById(player)).Name;
             playerTemp.PlayerType = PlayerType.User;
-            players.Add(playerTemp); 
+            players.Add(playerTemp);
 
             List<Player> bots = await _playerRepository.GetAllBots();
 
@@ -160,9 +160,9 @@ namespace BlackJack.BusinessLogic
 
         private int SearchCardInDeck(Deck deck, Card card)
         {
-            for(int i = 0; i<deck.NumberCard; i++)
+            for (int i = 0; i < deck.NumberCard; i++)
             {
-                if(deck.Cards[i].LearCard == card.LearCard && deck.Cards[i].NumberCard == card.NumberCard)
+                if (deck.Cards[i].LearCard == card.LearCard && deck.Cards[i].NumberCard == card.NumberCard)
                 {
                     return i;
                 }
@@ -186,3 +186,4 @@ namespace BlackJack.BusinessLogic
         }
     }
 }
+
