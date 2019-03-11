@@ -1,6 +1,7 @@
 ﻿using BlackJack.DataBaseAccess.Entities;
 using BlackJack.DataBaseAccess.Repository.Interface;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace BlackJack.DataBaseAccess.Repository
 {
@@ -17,15 +18,15 @@ namespace BlackJack.DataBaseAccess.Repository
 
         public T FindById(long id)
         {
-            return _dbSet.Find(id);
+            return _dbSet.FindAsync(id); ;
         }
 
         public long Create(T item)
         {
-            long id = _dbSet.Add(item).Id;
+            long id =  _dbSet.Add(item).Id;
             _context.SaveChanges();
 
-            return id;
+            return  id;
         }
 
         public void Update(T item)

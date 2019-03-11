@@ -1,8 +1,6 @@
-﻿using BlackJack.DataBaseAccess;
-using BlackJack.DataBaseAccess.Entities;
+﻿using BlackJack.DataBaseAccess.Entities;
 using BlackJack.DataBaseAccess.Entities.Enum;
 using BlackJack.DataBaseAccess.Repository.Interface;
-using DataBaseControl.Repository.Dapper;
 using Logick.Interfases;
 using System;
 using System.Collections.Generic;

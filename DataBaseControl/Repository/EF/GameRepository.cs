@@ -18,13 +18,5 @@ namespace BlackJack.DataBaseAccess.Repository
         {
             return _context.Turns.Where(c => c.PlayerId == player.Id).Select(p => p.Game).Distinct().ToList(); ;
         }
-
-        public bool CreatNewGame (Game game)
-        {
-            _context.Games.Add(game);
-            _context.SaveChanges();
-
-            return true;
-        }
     }
 }
