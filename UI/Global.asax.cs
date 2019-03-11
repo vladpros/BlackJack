@@ -1,4 +1,4 @@
-﻿using BlackJack.UI.Utils;
+﻿using Logick.Utils;
 using Ninject;
 using Ninject.Modules;
 using Ninject.Web.Mvc;
@@ -17,7 +17,7 @@ namespace BlackJack.UI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            NinjectModule registrations = new NinjectRegistrations();
+            NinjectModule registrations = new NinjectRegistration();
             var kernel = new StandardKernel(registrations);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
