@@ -245,6 +245,11 @@ namespace BlackJack.BusinessLogic
                     player.PlayerStatus = PlayerStatus.Won;
                     gameStat.Players[dealerIndex].PlayerStatus = PlayerStatus.Lose;
                 }
+                if (player.PlayerStatus != PlayerStatus.Lose && player.Point > gameStat.Players[dealerIndex].Point)
+                {
+                    player.PlayerStatus = PlayerStatus.Won;
+                    gameStat.Players[dealerIndex].PlayerStatus = PlayerStatus.Lose;
+                }
                 if (player.PlayerStatus != PlayerStatus.Lose && player.Point <= gameStat.Players[dealerIndex].Point && player.PlayerType != PlayerType.Dealer)
                 {
                     player.PlayerStatus = PlayerStatus.Lose;

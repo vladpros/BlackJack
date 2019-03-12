@@ -6,6 +6,6 @@
         Play = 1,
         Wait = 2,
         Lose = 3,
-        Won = 4
+        Won = 4,
     }
 }
