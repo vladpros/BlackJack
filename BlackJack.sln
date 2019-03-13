@@ -9,6 +9,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.UI", "UI\BlackJac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.BusinessLogic", "Logick\BlackJack.BusinessLogic.csproj", "{55261EA1-E7E6-41A2-97BE-38EA43629FED}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Angular", "Angular", "{79136554-35C4-4BE0-8D80-10F5EE46147A}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BlackJack", "..\..\..\Documents\BlackJack\", "{FEF3D3A0-9EF8-48FA-B05D-033013181868}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_58113"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\Documents\BlackJack\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58113\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_58113"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\Documents\BlackJack\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58113\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "58113"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +49,16 @@ Global
 		{55261EA1-E7E6-41A2-97BE-38EA43629FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55261EA1-E7E6-41A2-97BE-38EA43629FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55261EA1-E7E6-41A2-97BE-38EA43629FED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEF3D3A0-9EF8-48FA-B05D-033013181868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEF3D3A0-9EF8-48FA-B05D-033013181868}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEF3D3A0-9EF8-48FA-B05D-033013181868}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEF3D3A0-9EF8-48FA-B05D-033013181868}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FEF3D3A0-9EF8-48FA-B05D-033013181868} = {79136554-35C4-4BE0-8D80-10F5EE46147A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2702230E-722C-457F-ACD7-21E4C8C6AEA1}
