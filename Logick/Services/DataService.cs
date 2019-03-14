@@ -25,9 +25,9 @@ namespace BlackJack.BusinessLogic
             _gameResultRepository = gameResultRepository;
         }
 
-        public async Task<List<Player>> GetUserOrdered()
+        public async Task<List<string>> GetUserOrdered()
         {
-            return (await _playerRepository.GetAllUser()).OrderByDescending(x => x.Name).ToList();
+            return (await _playerRepository.GetAllUser()).OrderByDescending(x => x.Name).Select(s => s.Name ).ToList();
         }
 
         private bool RegisterNewPlayer(Player player)

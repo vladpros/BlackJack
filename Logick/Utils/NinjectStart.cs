@@ -1,7 +1,7 @@
 ﻿using Ninject;
 using Ninject.Modules;
-
 using Ninject.Web.Mvc;
+using System.Web.Mvc;
 
 namespace Logick.Utils
 {
@@ -11,7 +11,7 @@ namespace Logick.Utils
         {
             NinjectModule registrations = new NinjectRegistration();
             var kernel = new StandardKernel(registrations);
-            System.Web.Mvc.DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
     }
 }

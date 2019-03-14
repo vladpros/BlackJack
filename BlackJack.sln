@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.UI", "UI\BlackJac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.BusinessLogic", "Logick\BlackJack.BusinessLogic.csproj", "{55261EA1-E7E6-41A2-97BE-38EA43629FED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Angular", "Angular\Angular.csproj", "{A23A7B5E-9711-4917-8453-63AD06B2EC31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.Api", "BlackJack.Api\BlackJack.Api.csproj", "{E7768C93-5664-42F3-BAC9-A8E9C64E06C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{55261EA1-E7E6-41A2-97BE-38EA43629FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55261EA1-E7E6-41A2-97BE-38EA43629FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55261EA1-E7E6-41A2-97BE-38EA43629FED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A23A7B5E-9711-4917-8453-63AD06B2EC31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A23A7B5E-9711-4917-8453-63AD06B2EC31}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A23A7B5E-9711-4917-8453-63AD06B2EC31}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A23A7B5E-9711-4917-8453-63AD06B2EC31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7768C93-5664-42F3-BAC9-A8E9C64E06C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7768C93-5664-42F3-BAC9-A8E9C64E06C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7768C93-5664-42F3-BAC9-A8E9C64E06C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7768C93-5664-42F3-BAC9-A8E9C64E06C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

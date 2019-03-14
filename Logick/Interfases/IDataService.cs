@@ -7,7 +7,7 @@ namespace Logick.Interfases
 {
     public interface IDataService
     {
-        Task<List<Player>> GetUserOrdered();
+        Task<List<string>> GetUserOrdered();
         Task<Player> SearchPlayerWithName(string name);
         void PlayerChecked(string name);
         Task<List<PlayerInGame>> PlayersInGame(Game game);
