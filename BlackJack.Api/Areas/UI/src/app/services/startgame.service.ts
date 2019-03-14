@@ -14,7 +14,9 @@ export class StartgameService {
     return this.httpClient.get<string[]>('http://localhost:49784/api/Game/GetName');
   }
 
-  sendStartGame(input): Observable<number> {
+  StartGame(input): Observable<number> {
     return this.httpClient.get<number>('http://localhost:49784/api/Game/StartGame?name=' + input.name + '&botsNumber=' + input.botsNumber);
   }
+
+
 }

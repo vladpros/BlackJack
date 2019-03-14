@@ -37,7 +37,7 @@ export class StartGameComponent implements OnInit {
 
   onSubmit() {
     console.log(this.myForm.value);
-    this.startgameService.sendStartGame(this.myForm.value).subscribe(result => {
+    this.startgameService.StartGame(this.myForm.value).subscribe(result => {
       console.log(result);
     },
     error => {
