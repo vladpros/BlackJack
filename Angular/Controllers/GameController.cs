@@ -20,5 +20,11 @@ namespace Angular.Controllers
         }
 
 
+        [HttpGet("[action]")]
+        public async Task<List<Player>> GetName()
+        {
+            string[] k = { "ergerg", "ergergerg", " ergerg" };
+            return await _dataService.GetUserOrdered();
+        }
     }
 }

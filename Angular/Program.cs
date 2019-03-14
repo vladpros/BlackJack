@@ -1,3 +1,4 @@
+using Logick.Utils;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 

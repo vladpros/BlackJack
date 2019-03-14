@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Angular.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
         private static string[] Summaries = new[]
@@ -23,7 +23,7 @@ namespace Angular.Controllers
         //    _dataService = dataService;
         //}
 
-        [HttpGet("WeatherForecasts")]
+        [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
             var rng = new Random();
@@ -50,11 +50,11 @@ namespace Angular.Controllers
             }
         }
 
-        //[HttpGet("[action]")]
-        //public async Task<string> GetName()
-        //{
-        //    string[] k = { "ergerg", "ergergerg", " ergerg" };
-        //    return (await _dataService.GetUserOrdered()).ToString();
-        //}
+        [HttpGet("[action]")]
+        public string[] GetName()
+        {
+            string[] k = { "ergerg", "ergergerg", " ergerg" };
+            return k;
+        }
     }
 }

@@ -85,6 +85,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Utils\NinjectRegistration.cs" />
+    <Compile Include="Utils\NinjectStart.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataBaseControl\BlackJack.DataBaseAccess.csproj">

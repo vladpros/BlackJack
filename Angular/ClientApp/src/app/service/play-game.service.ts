@@ -1,18 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PlayGameService {
 
-  name: string[];
+  name;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<string[]>(baseUrl + 'api/SampleData/GetName').subscribe(result => {
-      this.name = result;
-    }, error => console.error(error));
-   }
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) { }
 
-  getName(): string[] {
-    return this.name;
+  getNames(): Observable<string> {
+    return this.http.get<string>('http://localhost:55848/api/Game/GetName');
   }
 }
