@@ -7,11 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartGameComponent } from './start-game/start-game.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GameShowComponent } from './game-show/game-show.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StartGameComponent
+    StartGameComponent,
+    GameShowComponent
   ],
   imports: [
     BrowserModule,
