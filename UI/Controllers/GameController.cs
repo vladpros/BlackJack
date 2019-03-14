@@ -10,18 +10,18 @@ namespace BlackJack.UI.Controllers
 {
     public class GameController : Controller
     {
-        private IDataService _dataControl;
-        private IGameService _gameControl;
+        private IDataService _dataService;
+        private IGameService _gameService;
 
         public GameController(IDataService dataService, IGameService gameService)
         {
-            _dataControl = dataService;
-            _gameControl = gameService;
+            _dataService = dataService;
+            _gameService = gameService;
         }
 
         public async Task<ActionResult> Start()
         {
-            ViewBag.Player = await _dataControl.GetUserOrdered();
+            ViewBag.Player = await _dataService.GetUserOrdered();
 
             return View();
         }
@@ -29,9 +29,9 @@ namespace BlackJack.UI.Controllers
         [HttpPost]
         public async Task<ActionResult> Start(string player, int botsNumber)
         {
-            _dataControl.PlayerChecked(player);
+            await _dataService.PlayerChecked(player);
 
-            return RedirectToAction("GameShow", new { gameId = await _gameControl.StartGame(await _dataControl.SearchPlayerWithName(player), botsNumber) });
+            return RedirectToAction("GameShow", new { gameId = await _gameService.StartGame(await _dataService.SearchPlayerWithName(player), botsNumber) });
         }
 
         public async Task<ActionResult> GameShow(long? gameId)
@@ -41,7 +41,7 @@ namespace BlackJack.UI.Controllers
                 return RedirectToAction("Start");
             }
          
-            return View(CreatPlayerViewModel(await _gameControl.DoFirstTwoRound((long)gameId)));
+            return View(CreatPlayerViewModel(await _gameService.DoFirstTwoRound((long)gameId)));
         }
 
         [HttpPost]
@@ -52,12 +52,12 @@ namespace BlackJack.UI.Controllers
                 return RedirectToAction("Start");
             }
 
-            var v = await _gameControl.ContinuePlay((long)gameId, (long)number);           
+            var v = await _gameService.ContinuePlay((long)gameId, (long)number);           
             foreach(var player in v.Players)
             {
                 if(IsEndGame(player))
                 {
-                    await _gameControl.DropCard(v);
+                    await _gameService.DropCard(v);
                     return RedirectToAction("GameResult", new { gameId = v.GameId});
                 }
             }
@@ -72,7 +72,7 @@ namespace BlackJack.UI.Controllers
                 return RedirectToAction("Start");
             }
 
-            return View(CreatPlayerViewModel(await _gameControl.GetGameResult((long)gameId)));
+            return View(CreatPlayerViewModel(await _gameService.GetGameResult((long)gameId)));
         }
 
         private bool IsEndGame (PlayerInGame player)

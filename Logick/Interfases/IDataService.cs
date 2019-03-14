@@ -9,7 +9,7 @@ namespace Logick.Interfases
     {
         Task<List<string>> GetUserOrdered();
         Task<Player> SearchPlayerWithName(string name);
-        void PlayerChecked(string name);
+        Task PlayerChecked(string name);
         Task<List<PlayerInGame>> PlayersInGame(Game game);
         Deck GetDeck(List<PlayerInGame> gameStats);
         Task<int> SearchDealer(List<PlayerInGame> players);

@@ -1,0 +1,19 @@
+<h2>Start</h2>
+
+<div>
+  <form [formGroup]="myForm" (submit)="onSubmit()">
+    <input name="Player" list="player" class="dropdawn" required formControlName="name"/>
+    <select name="botsNumber" formControlName="botsNumber">
+      <option selected value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <button type="submit" class="btn">Send</button>
+
+    <datalist id="player">
+      <option *ngFor="let name of names" value="{{ name }}"></option>
+    </datalist>
+  </form>
+</div>

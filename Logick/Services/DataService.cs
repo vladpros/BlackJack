@@ -48,7 +48,7 @@ namespace BlackJack.BusinessLogic
             return await _playerRepository.SearchPlayerWithName(name);
         }
 
-        public async void PlayerChecked(string name)
+        public async Task PlayerChecked(string name)
         {
             if ((await _playerRepository.SearchPlayerWithName(name)) == null)
             {
