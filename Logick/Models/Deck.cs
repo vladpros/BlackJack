@@ -27,8 +27,8 @@ namespace Logick.Models
                     Cards.Add(
                               new Card
                               {
-                                  LearCard = (CardLear)i,
-                                  NumberCard = (CardNumber)j
+                                  CardLear = (CardLear)i,
+                                  CardNumber = (CardNumber)j
                               });
                 }
 

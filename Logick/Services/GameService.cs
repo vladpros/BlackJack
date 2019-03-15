@@ -117,13 +117,13 @@ namespace BlackJack.BusinessLogic
                 {
                     GameId = game.Id,
                     PlayerId = playerId,
-                    LearCard = card.LearCard,
-                    NumberCard = card.NumberCard,
+                    LearCard = card.CardLear,
+                    NumberCard = card.CardNumber,
                 });
 
             await _gameRepository.Update(game);
 
-            return new Card { LearCard = card.LearCard, NumberCard = card.NumberCard };
+            return new Card { CardLear = card.CardLear, CardNumber = card.CardNumber };
         }
 
         private async Task<int> CountPoint(PlayerInGame player)
@@ -153,16 +153,16 @@ namespace BlackJack.BusinessLogic
 
         private int GetCardPoint(Card card)
         {
-            if ((int)card.NumberCard < 10)
+            if ((int)card.CardNumber < 10)
             {
-                return (int)card.NumberCard;
+                return (int)card.CardNumber;
             }
-            if ((int)card.NumberCard >= 10)
+            if ((int)card.CardNumber >= 10)
             {
                 return 10;
             }
 
-            return (int)card.NumberCard;
+            return (int)card.CardNumber;
         }
 
         public async Task<GameStat> InitializationGameStat(long gameId)

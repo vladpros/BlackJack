@@ -80,7 +80,7 @@ namespace BlackJack.BusinessLogic
 
         private List<Card> PlayerCard(long playerId, List<Turn> turns)
         {
-            return turns.Where(p => p.PlayerId == playerId).Select(k => new Card { LearCard = k.LearCard, NumberCard = k.NumberCard }).ToList();
+            return turns.Where(p => p.PlayerId == playerId).Select(k => new Card { CardLear = k.LearCard, CardNumber = k.NumberCard }).ToList();
         }
 
         public Deck GetDeck(List<PlayerInGame> Players)
@@ -164,7 +164,7 @@ namespace BlackJack.BusinessLogic
         {
             for (int i = 0; i < deck.NumberCard; i++)
             {
-                if (deck.Cards[i].LearCard == card.LearCard && deck.Cards[i].NumberCard == card.NumberCard)
+                if (deck.Cards[i].CardLear == card.CardLear && deck.Cards[i].CardNumber == card.CardNumber)
                 {
                     return i;
                 }

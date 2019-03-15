@@ -1,6 +1,5 @@
 ﻿using BlackJack.DataBaseAccess.Entities.Enum;
 using Logick.Models;
-using System;
 using System.Collections.Generic;
 
 namespace BlackJack.Api.Models

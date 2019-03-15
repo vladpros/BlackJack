@@ -4,7 +4,7 @@ namespace Logick.Models
 {
     public class Card
     {
-        public CardLear LearCard { get; set; }
-        public CardNumber NumberCard { get; set; }
+        public CardLear CardLear { get; set; }
+        public CardNumber CardNumber { get; set; }
     }
 }
