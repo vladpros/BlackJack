@@ -16,7 +16,7 @@ namespace BlackJack.BusinessLogic
         private IGameRepository _gameRepository;
         private ITurnRepository _turnRepository;
         private IDataService _data;
-
+        private int _maxPoint;
         public GameService(IGameRepository gameRepository, ITurnRepository turnRepository, IPlayerRepository playerRepository, IDataService dataService)
         {
             _random = new Random();
@@ -24,6 +24,7 @@ namespace BlackJack.BusinessLogic
             _gameRepository = gameRepository;
             _turnRepository = turnRepository;
             _data = dataService;
+            _maxPoint = 21;
         }
 
         public async Task<long> StartGame(Player player, int botsNumber)
@@ -141,7 +142,7 @@ namespace BlackJack.BusinessLogic
             foreach (var player in playersInGame)
             {
                 player.Point = await CountPoint(player);
-                if (player.Point > 21)
+                if (player.Point > _maxPoint)
                 {
                     player.PlayerStatus = PlayerStatus.Lose;
                 }
@@ -216,7 +217,7 @@ namespace BlackJack.BusinessLogic
             {
                 await DoRoundWithoutPlayerType(gameStat, deck, PlayerType.Bot, PlayerType.User);
             }
-            if (await CountPoint(gameStat.Players[dealer]) > 21)
+            if (await CountPoint(gameStat.Players[dealer]) > _maxPoint)
             {
                 gameStat.Players[dealer].PlayerStatus = PlayerStatus.Lose;
             }
@@ -227,6 +228,9 @@ namespace BlackJack.BusinessLogic
         public async Task<GameStat> GetGameResult(long gameId)
         {
             GameStat gameStat = await InitializationGameStat(gameId);
+            Game game = (await _gameRepository.FindById(gameId));
+            game.GameStatus = GameStatus.Done;
+            await _gameRepository.Update(game);
             foreach (var player in gameStat.Players)
             {
                 if (player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose)

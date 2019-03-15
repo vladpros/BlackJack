@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StartgameService } from '../services/startgame.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-start-game',
@@ -13,7 +14,11 @@ export class StartGameComponent implements OnInit {
   myForm: FormGroup;
   names: string[];
 
-  constructor(private startgameService: StartgameService, private formBuilder: FormBuilder) {
+  constructor(
+    private startgameService: StartgameService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    ) {
     console.log(this.names);
   }
 
@@ -39,6 +44,7 @@ export class StartGameComponent implements OnInit {
     console.log(this.myForm.value);
     this.startgameService.StartGame(this.myForm.value).subscribe(result => {
       console.log(result);
+      this.router.navigate(['/playGame', result]);
     },
     error => {
       console.error(error);

@@ -1,4 +1,5 @@
 ﻿using BlackJack.Api.Models;
+using BlackJack.DataBaseAccess.Entities.Enum;
 using Logick.Interfases;
 using Logick.Models;
 using Logick.Utils;
@@ -48,8 +49,24 @@ namespace BlackJack.Api.Controllers
             {
                return CreatPlayerViewModel(await _gameService.DoFirstTwoRound((long)gameId));
             }
+            if ((await _dataService.GetGame((long)gameId)).GameStatus == GameStatus.Done)
+            {
+                return new List<PlayerViewModel>();
+            }
 
-            return CreatPlayerViewModel(await _gameService.ContinuePlay((long)gameId, (long)choos));
+            var gameResult = await _gameService.ContinuePlay((long)gameId, (long)choos);
+
+            foreach (var player in gameResult.Players)
+            {
+                if (IsEndGame(player))
+                {
+                    await _gameService.DropCard(gameResult);
+
+                    return CreatPlayerViewModel(await _gameService.GetGameResult((long)gameId));
+                }
+            }
+
+            return CreatPlayerViewModel(gameResult);
         }
 
         private IEnumerable<PlayerViewModel> CreatPlayerViewModel(GameStat gameStat)
@@ -67,6 +84,11 @@ namespace BlackJack.Api.Controllers
             }
 
             return playerViewModels;
+        }
+
+        private bool IsEndGame(PlayerInGame player)
+        {
+            return player.PlayerType == PlayerType.User && player.PlayerStatus != PlayerStatus.Play || player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose;
         }
     }
 }

@@ -16,14 +16,16 @@ namespace BlackJack.BusinessLogic
         private ITurnRepository _turnRepository;
         private Random _random;
         private IGameResultRepository _gameResultRepository;
-
-        public DataService(IGameResultRepository gameResultRepository, ITurnRepository turnRepository, IPlayerRepository playerRepository)
+        private IGameRepository _gameRepository;
+        public DataService(IGameResultRepository gameResultRepository, ITurnRepository turnRepository, IPlayerRepository playerRepository, IGameRepository gameRepository)
         {
             _random = new Random();
             _playerRepository = playerRepository;
             _turnRepository = turnRepository;
             _gameResultRepository = gameResultRepository;
+            _gameRepository = gameRepository;
         }
+
 
         public async Task<List<string>> GetUserOrdered()
         {
@@ -183,6 +185,11 @@ namespace BlackJack.BusinessLogic
                     });
                 }
             }
+        }
+
+        public async Task<Game> GetGame(long id)
+        {
+            return await _gameRepository.FindById(id);
         }
     }
 }

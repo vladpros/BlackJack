@@ -7,7 +7,6 @@ import { HttpClient } from '@angular/common/http';
 export class StartgameService {
 
   constructor(private httpClient: HttpClient) {
-    console.log('this.names');
    }
 
   getNames(): Observable<string[]> {

@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { StartGameComponent } from './start-game/start-game.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GameShowComponent } from './game-show/game-show.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartGameComponent,
-    GameShowComponent
+    GameShowComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

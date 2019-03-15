@@ -16,5 +16,6 @@ namespace Logick.Interfases
         Task<int> SearchUser(List<PlayerInGame> players);
         Task<List<PlayerInGame>> GenPlayers(long player, int botsNumber);
         void SaveWinner(GameStat gameStat);
+        Task<Game> GetGame(long id);
     }
 }

@@ -1,3 +1,19 @@
-<p>
-  game-show works!
-</p>
+<h2>GameShow</h2>
+
+<table>
+  <tr>
+    <td><p>Player name</p></td>
+    <td><p>Cards</p></td>
+    <td></td>
+  </tr>
+  <tr *ngFor="let player of gameInfo">
+    <td><p>{{ player.PlayerName }}</p></td>
+    <td><app-card *ngFor="let card of player.Cards">No cart</app-card></td>
+    <td><p>{{player.Point}}</p></td>
+    <td><p>{{player.PlayerStatus}}</p></td>
+  </tr>
+</table>
+<div [hidden] = "isEnd">
+  <input type="submit" value="1" name="number" (click)="resumePlay()"/>
+  <input type="submit" value="2" name="number" (click)="stopPlay()"/>
+</div>
