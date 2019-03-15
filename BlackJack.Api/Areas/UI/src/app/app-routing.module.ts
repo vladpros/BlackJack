@@ -7,6 +7,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'startGame', pathMatch: 'full'},
   {path: 'startGame', component: StartGameComponent},
   {path: 'playGame/:id', component: GameShowComponent},
+  {path: 'playGame', redirectTo: 'startGame'},
 ];
 
 @NgModule({

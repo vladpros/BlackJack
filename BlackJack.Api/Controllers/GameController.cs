@@ -45,14 +45,15 @@ namespace BlackJack.Api.Controllers
             {
                 return new List<PlayerViewModel>();
             }
-            if (choos == null)
-            {
-               return CreatPlayerViewModel(await _gameService.DoFirstTwoRound((long)gameId));
-            }
             if ((await _dataService.GetGame((long)gameId)).GameStatus == GameStatus.Done)
             {
                 return new List<PlayerViewModel>();
             }
+            if (choos == null)
+            {
+               return CreatPlayerViewModel(await _gameService.DoFirstTwoRound((long)gameId));
+            }
+
 
             var gameResult = await _gameService.ContinuePlay((long)gameId, (long)choos);
 
@@ -89,6 +90,17 @@ namespace BlackJack.Api.Controllers
         private bool IsEndGame(PlayerInGame player)
         {
             return player.PlayerType == PlayerType.User && player.PlayerStatus != PlayerStatus.Play || player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose;
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<PlayerViewModel>> GameResult(long? gameId)
+        {
+            if (gameId == null)
+            {
+                return new List<PlayerViewModel>();
+            }
+
+            return CreatPlayerViewModel(await _gameService.InitializationGameStat((long)gameId));
         }
     }
 }

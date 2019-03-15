@@ -9,13 +9,15 @@ import { StartGameComponent } from './start-game/start-game.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GameShowComponent } from './game-show/game-show.component';
 import { CardComponent } from './card/card.component';
+import { CardsComponent } from './cards/cards.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartGameComponent,
     GameShowComponent,
-    CardComponent
+    CardComponent,
+    CardsComponent,
   ],
   imports: [
     BrowserModule,

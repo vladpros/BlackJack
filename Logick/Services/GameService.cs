@@ -165,7 +165,7 @@ namespace BlackJack.BusinessLogic
             return (int)card.NumberCard;
         }
 
-        private async Task<GameStat> InitializationGameStat(long gameId)
+        public async Task<GameStat> InitializationGameStat(long gameId)
         {
             Game game = await _gameRepository.FindById(gameId);
             GameStat gameStat = new GameStat();

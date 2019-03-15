@@ -12,5 +12,6 @@ namespace Logick.Interfases
         Task<GameStat> ContinuePlay(long gameId, long choose);
         Task<GameStat> DropCard(GameStat gameStat);
         Task<GameStat> GetGameResult(long gameId);
+        Task<GameStat> InitializationGameStat(long gameId);
     }
 }

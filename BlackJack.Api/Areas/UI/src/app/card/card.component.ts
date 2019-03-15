@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { CardNumber } from './../enams/card-number.enum';
+import { CardLear } from './../enams/card-lear.enum';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -7,12 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-  cardLear = 0;
-  cardNumber = 0;
+  cardLearS;
+  cardNumberS;
 
-  constructor() { }
+  @Input() cardLear: CardLear;
+  @Input() cardNumber: CardNumber;
+
+  constructor() {
+   }
 
   ngOnInit() {
+    console.log(this.cardLear + '  ' + this.cardNumber);
+    this.cardLearS = CardLear[this.cardLear];
+    this.cardNumberS = CardNumber[this.cardNumber];
   }
 
 }

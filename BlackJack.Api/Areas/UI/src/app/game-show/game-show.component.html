@@ -1,19 +1,41 @@
-<h2>GameShow</h2>
-
-<table>
-  <tr>
-    <td><p>Player name</p></td>
-    <td><p>Cards</p></td>
-    <td></td>
-  </tr>
-  <tr *ngFor="let player of gameInfo">
-    <td><p>{{ player.PlayerName }}</p></td>
-    <td><app-card *ngFor="let card of player.Cards">No cart</app-card></td>
-    <td><p>{{player.Point}}</p></td>
-    <td><p>{{player.PlayerStatus}}</p></td>
-  </tr>
-</table>
-<div [hidden] = "isEnd">
-  <input type="submit" value="1" name="number" (click)="resumePlay()"/>
-  <input type="submit" value="2" name="number" (click)="stopPlay()"/>
+<h2 [hidden]="isEnd">GameShow</h2>
+<h2 [hidden]="!isEnd">GameResult</h2>
+<div [hidden]="isEnd">
+  <input class="btn btn-primary" value="Take Card" (click)="resumePlay()" />
+  <input class="btn btn-primary" value="Wait Other" (click)="stopPlay()" />
 </div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>
+        Player name
+      </th>
+      <th>
+        Cards
+      </th>
+      <th>
+        Piont
+      </th>
+      <th>
+        Player Status
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let player of gameInfo">
+      <td>
+        {{ player.PlayerName }}
+      </td>
+      <td>
+        <app-cards [cards]=player.Cards>No cart</app-cards>
+      </td>
+      <td>
+        {{ player.Point }}
+      </td>
+      <td>
+        <p>{{ player.PlayerStatus }}</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
