@@ -46,15 +46,6 @@ namespace BlackJack.BusinessLogic.Service
             return await _gameRepository.Create(game); ;
         }
 
-        private Card GiveCard(DeckHelper deck)
-        {
-            int rand = _random.Next(0, deck.NumberCard);
-            Card card = deck.Cards[rand];
-            deck.Cards.RemoveAt(rand);
-
-            return card;
-        }
-
         private async Task<IEnumerable<PlayerInGame>> CreatGameStat(Game game)
         {
             IEnumerable<PlayerInGame> gameStat = new List<PlayerInGame>();
@@ -114,7 +105,7 @@ namespace BlackJack.BusinessLogic.Service
 
         private async Task<Card> DoTurn(long playerId, long gameId, DeckHelper deck)
         {
-            Card card = await Task.Run(() => GiveCard(deck));
+            Card card = await Task.Run(() => _deckHelper.GiveCard(deck));
             Game game = await _gameRepository.FindById(gameId);
 
             await _turnRepository.Create(
@@ -134,7 +125,7 @@ namespace BlackJack.BusinessLogic.Service
             player.Point = 0;
             foreach (var card in player.Cards)
             {
-                player.Point += GetCardPoint(card);
+                player.Point += _deckHelper.GetCardPoint(card);
             }
 
             return player.Point;
@@ -152,20 +143,6 @@ namespace BlackJack.BusinessLogic.Service
             }
 
             return;
-        }
-
-        private int GetCardPoint(Card card)
-        {
-            if ((int)card.CardNumber < 10)
-            {
-                return (int)card.CardNumber;
-            }
-            if ((int)card.CardNumber >= 10)
-            {
-                return 10;
-            }
-
-            return (int)card.CardNumber;
         }
 
         public async Task<IEnumerable<PlayerInGame>> InitializationGameStat(long gameId)
@@ -203,7 +180,8 @@ namespace BlackJack.BusinessLogic.Service
 
         private async Task<IEnumerable<PlayerInGame>> TakeCard(IEnumerable<PlayerInGame> gameStat)
         {
-            DeckHelper deck = GetDeck(gameStat);
+            DeckHelper deck = new DeckHelper();
+            deck.GetDeck(gameStat);
             await DoRoundWithoutPlayerType(gameStat, deck, PlayerType.Dealer);
             CheckPoint(gameStat);
 
@@ -212,7 +190,8 @@ namespace BlackJack.BusinessLogic.Service
 
         public async Task<IEnumerable<PlayerInGame>> DropCard(IEnumerable<PlayerInGame> gameStat)
         {
-            DeckHelper deck = GetDeck(gameStat);
+            DeckHelper deck = new DeckHelper();
+            deck.GetDeck(gameStat);
             int dealerIndex = await SearchDealer(gameStat);
 
             while (CountPoint(gameStat.ElementAtOrDefault(dealerIndex)) <= _minPoint)
@@ -337,22 +316,6 @@ namespace BlackJack.BusinessLogic.Service
             return turns.Where(p => p.PlayerId == playerId).Select(k => new Card { CardLear = k.LearCard, CardNumber = k.NumberCard }).ToList();
         }
 
-        private DeckHelper GetDeck(IEnumerable<PlayerInGame> Players)
-        {
-            DeckHelper deck = new DeckHelper();
-
-            foreach (var player in Players)
-            {
-                foreach (var card in player.Cards)
-                {
-                    int index = SearchCardInDeck(deck, card);
-                    deck.Cards.RemoveAt(index);
-                }
-            }
-
-            return deck;
-        }
-
         private async Task<int> SearchDealer(IEnumerable<PlayerInGame> players)
         {
             for (int i = 0; i < players.Count(); i++)
@@ -415,19 +378,6 @@ namespace BlackJack.BusinessLogic.Service
             players.Add(playerTemp3);
 
             return players;
-        }
-
-        private int SearchCardInDeck(DeckHelper deck, Card card)
-        {
-            for (int i = 0; i < deck.NumberCard; i++)
-            {
-                if (deck.Cards[i].CardLear == card.CardLear && deck.Cards[i].CardNumber == card.CardNumber)
-                {
-                    return i;
-                }
-            }
-
-            return -1;
         }
 
         private async Task SaveWinner(IEnumerable<PlayerInGame> gameStat)
