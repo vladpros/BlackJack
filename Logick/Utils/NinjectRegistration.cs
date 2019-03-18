@@ -1,11 +1,10 @@
-﻿using BlackJack.BusinessLogic;
-using BlackJack.DataAccess;
+﻿using BlackJack.DataAccess;
 using BlackJack.DataAccess.Repositories.EF;
 using BlackJack.DataAccess.Repositories.Interfaces;
 using BlackJack.DataAccess.Repositories.Dapper;
-using BlackJack.BusinessLogic.Interfaces;
+using BlackJack.BusinessLogic..Service.Interface;
 using Ninject.Modules;
-
+using BlackJack.BusinessLogic.Service;
 
 namespace BlackJack.BusinessLogic.Utils
 {
@@ -13,7 +12,6 @@ namespace BlackJack.BusinessLogic.Utils
     {
         public override void Load()
         {
-            Bind<IDataService>().To<DataService>();
             Bind<IGameService>().To<GameService>();
 
             bool useDapper = true;

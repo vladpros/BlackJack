@@ -1,6 +1,6 @@
 ﻿using BlackJack.DataAccess.Entities.Enums;
 
-namespace BlackJack.BusinessLogic.Models
+namespace BlackJack.BusinessLogic.Helpers
 {
     public class Card
     {

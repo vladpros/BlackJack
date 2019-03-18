@@ -30,5 +30,14 @@ namespace BlackJack.DataAccess.Repositories.Dapper
             }
         }
 
+        public async Task<Player> SearchPlayerWithName(string name)
+        {
+            using (IDbConnection cn = new SqlConnection(_conString))
+            {
+                var result = (await cn.QueryAsync<Player>("SELECT * FROM Players WHERE Name=@name", new { name })).SingleOrDefault();
+
+                return result;
+            }
+        }
     }
 }

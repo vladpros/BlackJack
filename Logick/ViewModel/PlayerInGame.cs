@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace BlackJack.BusinessLogic.Models
+namespace BlackJack.BusinessLogic.ViewModel
 {
 
     public class PlayerInGame
@@ -13,6 +13,7 @@ namespace BlackJack.BusinessLogic.Models
         public List<Card> Cards { get; set; }
         public int Point { get; set; }
         public PlayerStatus PlayerStatus { get; set; }
+        public long GameId { get; set; }
 
         public PlayerInGame()
         {

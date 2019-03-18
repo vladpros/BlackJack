@@ -8,5 +8,6 @@ namespace BlackJack.DataAccess.Repositories.Interfaces
     public interface IPlayerRepository : IGenericRepository<Player>
     {
         Task<List<Player>> GetByType(PlayerType p);
+        Task<Player> SearchPlayerWithName(string name);
     }
 }
