@@ -1,8 +1,8 @@
-﻿using BlackJack.DataBaseAccess.Entities.Enum;
+﻿using BlackJack.DataAccess.Entities.Enums;
 using Dapper.Contrib.Extensions;
 using System.Collections.Generic;
 
-namespace BlackJack.DataBaseAccess.Entities
+namespace BlackJack.DataAccess.Entities
 {
     public class Game : BasicEntities
     {

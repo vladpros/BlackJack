@@ -1,5 +1,5 @@
-﻿using BlackJack.DataBaseAccess.Entities;
-using BlackJack.DataBaseAccess.Repository.Interface;
+﻿using BlackJack.DataAccess.Entities;
+using BlackJack.DataAccess.Repository.Interface;
 using Dapper;
 using Dapper.Contrib.Extensions;
 using System.Configuration;

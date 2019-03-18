@@ -56,7 +56,6 @@ export class GameShowComponent implements OnInit {
 
   findEndGame(): boolean {
     this.gameInfo.forEach(element => {
-      console.log(element.Cards);
       if (element.PlayerStatus === 4) {
         const id = this.id;
         this.isEnd = true;

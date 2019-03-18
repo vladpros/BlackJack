@@ -88,9 +88,9 @@
     <Compile Include="Utils\NinjectStart.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataBaseControl\BlackJack.DataBaseAccess.csproj">
+    <ProjectReference Include="..\DataBaseControl\BlackJack.DataAccess.csproj">
       <Project>{EAB3856D-A30A-49D5-A02A-69D423FCA973}</Project>
-      <Name>BlackJack.DataBaseAccess</Name>
+      <Name>BlackJack.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

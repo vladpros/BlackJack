@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using Logick.Interfases;
-using BlackJack.DataBaseAccess.Entities.Enum;
+using BlackJack.DataAccess.Entities.Enums;
 using Logick.Models;
 using BlackJack.UI.Models;
 using System.Collections.Generic;

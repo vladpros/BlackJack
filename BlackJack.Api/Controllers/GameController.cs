@@ -1,5 +1,5 @@
 ﻿using BlackJack.Api.Models;
-using BlackJack.DataBaseAccess.Entities.Enum;
+using BlackJack.DataAccess.Entities.Enums;
 using Logick.Interfases;
 using Logick.Models;
 using Logick.Utils;

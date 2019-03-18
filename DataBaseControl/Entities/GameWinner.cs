@@ -1,4 +1,4 @@
-﻿namespace BlackJack.DataBaseAccess.Entities
+﻿namespace BlackJack.DataAccess.Entities
 {
     public class GameResult : BasicEntities
     {

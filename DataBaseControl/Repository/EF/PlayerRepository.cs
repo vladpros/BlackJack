@@ -1,10 +1,10 @@
-﻿using BlackJack.DataBaseAccess.Entities;
-using BlackJack.DataBaseAccess.Repository.Interface;
+﻿using BlackJack.DataAccess.Entities;
+using BlackJack.DataAccess.Repository.Interface;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlackJack.DataBaseAccess.Repository
+namespace BlackJack.DataAccess.Repository
 {
     public class PlayerRepository : DefaultGenericRepository<Player>, IPlayerRepository
     {
@@ -23,20 +23,20 @@ namespace BlackJack.DataBaseAccess.Repository
 
         public async Task<List<Player>> GetAllUser()
         {
-            return await GetAllType(Entities.Enum.PlayerType.User);
+            return await GetAllType(Entities.Enums.PlayerType.User);
         }
 
         public async Task<List<Player>> GetAllBots()
         {
-            return await GetAllType(Entities.Enum.PlayerType.Bot);
+            return await GetAllType(Entities.Enums.PlayerType.Bot);
         }
 
         public async Task<List<Player>> GetAllDealer()
         {
-            return await GetAllType(Entities.Enum.PlayerType.Dealer);
+            return await GetAllType(Entities.Enums.PlayerType.Dealer);
         }
 
-        private async Task<List<Player>> GetAllType(Entities.Enum.PlayerType p)
+        private async Task<List<Player>> GetAllType(Entities.Enums.PlayerType p)
         {
             return await Task.Run(() => _context.Players.Where(x => x.PlayerType == p).ToList());
         }

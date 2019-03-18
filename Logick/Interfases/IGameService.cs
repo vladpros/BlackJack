@@ -1,4 +1,4 @@
-﻿using BlackJack.DataBaseAccess.Entities;
+﻿using BlackJack.DataAccess.Entities;
 using Logick.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;

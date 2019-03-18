@@ -1,7 +1,7 @@
-﻿using BlackJack.DataBaseAccess.Entities;
+﻿using BlackJack.DataAccess.Entities;
 using System.Threading.Tasks;
 
-namespace BlackJack.DataBaseAccess.Repository.Interface
+namespace BlackJack.DataAccess.Repository.Interface
 {
     public interface IGenericRepository<T> where T : BasicEntities
     {

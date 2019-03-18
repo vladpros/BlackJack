@@ -1,7 +1,7 @@
 ﻿using BlackJack.BusinessLogic;
-using BlackJack.DataBaseAccess;
-using BlackJack.DataBaseAccess.Repository;
-using BlackJack.DataBaseAccess.Repository.Interface;
+using BlackJack.DataAccess;
+using BlackJack.DataAccess.Repository;
+using BlackJack.DataAccess.Repository.Interface;
 using DataBaseControl.Repository.Dapper;
 using Logick.Interfases;
 using Ninject.Modules;

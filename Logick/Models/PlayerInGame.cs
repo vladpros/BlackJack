@@ -1,4 +1,4 @@
-﻿using BlackJack.DataBaseAccess.Entities.Enum;
+﻿using BlackJack.DataAccess.Entities.Enums;
 using System.Collections.Generic;
 
 

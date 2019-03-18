@@ -1,8 +1,8 @@
-namespace BlackJack.DataBaseAccess.Migrations
+namespace BlackJack.DataAccess.Migrations
 {
-    using BlackJack.DataBaseAccess;
-    using BlackJack.DataBaseAccess.Repository;
-    using BlackJack.DataBaseAccess.Repository.Interface;
+    using BlackJack.DataAccess;
+    using BlackJack.DataAccess.Repository;
+    using BlackJack.DataAccess.Repository.Interface;
     using System.Data.Entity.Migrations;
 
 
@@ -20,42 +20,42 @@ namespace BlackJack.DataBaseAccess.Migrations
             player.AddOrUpdate(
                 new Entities.Player
                 {
-                    PlayerType = Entities.Enum.PlayerType.Bot,
+                    PlayerType = Entities.Enums.PlayerType.Bot,
                     Name = "JohnBot",
                 });
 
             player.AddOrUpdate(
                 new Entities.Player
                 {
-                    PlayerType = Entities.Enum.PlayerType.Bot,
+                    PlayerType = Entities.Enums.PlayerType.Bot,
                     Name = "MaryBot",
                 });
 
             player.AddOrUpdate(
                 new Entities.Player
                 {
-                    PlayerType = Entities.Enum.PlayerType.Bot,
+                    PlayerType = Entities.Enums.PlayerType.Bot,
                     Name = "JonnyBot",
                 });
 
             player.AddOrUpdate(
                 new Entities.Player
                 {
-                    PlayerType = Entities.Enum.PlayerType.Bot,
+                    PlayerType = Entities.Enums.PlayerType.Bot,
                     Name = "BobBot",
                 });
 
             player.AddOrUpdate(
                 new Entities.Player
                 {
-                    PlayerType = Entities.Enum.PlayerType.Bot,
+                    PlayerType = Entities.Enums.PlayerType.Bot,
                     Name = "KennyBot",
                 });
 
             player.AddOrUpdate(
                 new Entities.Player
                 {
-                    PlayerType = Entities.Enum.PlayerType.Dealer,
+                    PlayerType = Entities.Enums.PlayerType.Dealer,
                     Name = "DenisDealer",
                 });
         }

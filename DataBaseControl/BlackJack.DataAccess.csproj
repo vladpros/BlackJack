@@ -95,11 +95,11 @@
   <ItemGroup>
     <Compile Include="BlackJackContext.cs" />
     <Compile Include="Entities\BasicEntities.cs" />
-    <Compile Include="Entities\Enum\GameStatus.cs" />
-    <Compile Include="Entities\Enum\CardLear.cs" />
-    <Compile Include="Entities\Enum\CardNumber.cs" />
-    <Compile Include="Entities\Enum\PlayerStatus.cs" />
-    <Compile Include="Entities\Enum\PlayerType.cs" />
+    <Compile Include="Entities\Enums\GameStatus.cs" />
+    <Compile Include="Entities\Enums\CardLear.cs" />
+    <Compile Include="Entities\Enums\CardNumber.cs" />
+    <Compile Include="Entities\Enums\PlayerStatus.cs" />
+    <Compile Include="Entities\Enums\PlayerType.cs" />
     <Compile Include="Entities\Game.cs" />
     <Compile Include="Entities\GameWinner.cs" />
     <Compile Include="Entities\Player.cs" />

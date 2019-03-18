@@ -1,10 +1,10 @@
-﻿using BlackJack.DataBaseAccess.Entities;
-using BlackJack.DataBaseAccess.Repository.Interface;
+﻿using BlackJack.DataAccess.Entities;
+using BlackJack.DataAccess.Repository.Interface;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlackJack.DataBaseAccess.Repository
+namespace BlackJack.DataAccess.Repository
 {
     public class GameRepository : DefaultGenericRepository<Game>, IGameRepository
     {

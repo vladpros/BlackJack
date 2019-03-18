@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BlackJack.DataBaseAccess.Entities;
-using BlackJack.DataBaseAccess.Repository.Interface;
+using BlackJack.DataAccess.Entities;
+using BlackJack.DataAccess.Repository.Interface;
 
-namespace BlackJack.DataBaseAccess.Repository
+namespace BlackJack.DataAccess.Repository
 {
     public class TurnRepository : DefaultGenericRepository<Turn>, ITurnRepository
     {

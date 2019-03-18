@@ -1,7 +1,7 @@
-﻿using BlackJack.DataBaseAccess.Entities;
+﻿using BlackJack.DataAccess.Entities;
 using System.Data.Entity;
 
-namespace BlackJack.DataBaseAccess
+namespace BlackJack.DataAccess
 {
     public class BlackJackContext : DbContext
     {

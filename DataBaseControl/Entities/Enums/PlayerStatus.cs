@@ -1,4 +1,4 @@
-﻿namespace BlackJack.DataBaseAccess.Entities.Enum
+﻿namespace BlackJack.DataAccess.Entities.Enums
 {
     public enum PlayerStatus
     {

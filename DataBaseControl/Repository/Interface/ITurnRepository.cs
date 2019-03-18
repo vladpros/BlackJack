@@ -1,8 +1,8 @@
-﻿using BlackJack.DataBaseAccess.Entities;
+﻿using BlackJack.DataAccess.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BlackJack.DataBaseAccess.Repository.Interface
+namespace BlackJack.DataAccess.Repository.Interface
 {
     public interface ITurnRepository : IGenericRepository<Turn>
     {

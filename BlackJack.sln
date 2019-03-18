@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.DataBaseAccess", "DataBaseControl\BlackJack.DataBaseAccess.csproj", "{EAB3856D-A30A-49D5-A02A-69D423FCA973}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.DataAccess", "DataBaseControl\BlackJack.DataAccess.csproj", "{EAB3856D-A30A-49D5-A02A-69D423FCA973}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.UI", "UI\BlackJack.UI.csproj", "{76854E35-9F9D-41BC-93AE-74CF761957EF}"
 EndProject
