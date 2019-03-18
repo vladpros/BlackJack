@@ -1,64 +1,23 @@
 namespace BlackJack.DataAccess.Migrations
 {
-    using BlackJack.DataAccess;
-    using BlackJack.DataAccess.Repository;
-    using BlackJack.DataAccess.Repository.Interface;
+    using System;
+    using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Linq;
 
-
-    internal sealed class Configuration : DbMigrationsConfiguration<BlackJackContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<BlackJack.DataAccess.BlackJackContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(BlackJackContext context)
+        protected override void Seed(BlackJack.DataAccess.BlackJackContext context)
         {
-            IPlayerRepository player = new PlayerRepository(context);
+            //  This method will be called after migrating to the latest version.
 
-            player.AddOrUpdate(
-                new Entities.Player
-                {
-                    PlayerType = Entities.Enums.PlayerType.Bot,
-                    Name = "JohnBot",
-                });
-
-            player.AddOrUpdate(
-                new Entities.Player
-                {
-                    PlayerType = Entities.Enums.PlayerType.Bot,
-                    Name = "MaryBot",
-                });
-
-            player.AddOrUpdate(
-                new Entities.Player
-                {
-                    PlayerType = Entities.Enums.PlayerType.Bot,
-                    Name = "JonnyBot",
-                });
-
-            player.AddOrUpdate(
-                new Entities.Player
-                {
-                    PlayerType = Entities.Enums.PlayerType.Bot,
-                    Name = "BobBot",
-                });
-
-            player.AddOrUpdate(
-                new Entities.Player
-                {
-                    PlayerType = Entities.Enums.PlayerType.Bot,
-                    Name = "KennyBot",
-                });
-
-            player.AddOrUpdate(
-                new Entities.Player
-                {
-                    PlayerType = Entities.Enums.PlayerType.Dealer,
-                    Name = "DenisDealer",
-                });
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data.
         }
     }
 }
-          

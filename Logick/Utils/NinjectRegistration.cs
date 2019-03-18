@@ -1,8 +1,8 @@
 ﻿using BlackJack.BusinessLogic;
 using BlackJack.DataAccess;
-using BlackJack.DataAccess.Repository;
-using BlackJack.DataAccess.Repository.Interface;
-using DataBaseControl.Repository.Dapper;
+using BlackJack.DataAccess.Repositories.EF;
+using BlackJack.DataAccess.Repositories.Interfaces;
+using BlackJack.DataAccess.Repositories.Dapper;
 using Logick.Interfases;
 using Ninject.Modules;
 
@@ -19,10 +19,10 @@ namespace Logick.Utils
             bool useDapper = true;
             if (useDapper)
             {
-                Bind<IGameRepository>().To<DapGameRepository>();
-                Bind<IGameResultRepository>().To<DapGameResultRepository>();
-                Bind<IPlayerRepository>().To<DapPlayerRepository>();
-                Bind<ITurnRepository>().To<DapTurnRepository>();
+                Bind<IGameRepository>().To<DapperGameRepository>();
+                Bind<IGameResultRepository>().To<DapperGameResultRepository>();
+                Bind<IPlayerRepository>().To<DapperPlayerRepository>();
+                Bind<ITurnRepository>().To<DapperTurnRepository>();
 
                 return;
             }

@@ -1,6 +1,6 @@
 ﻿using BlackJack.DataAccess.Entities;
 using BlackJack.DataAccess.Entities.Enums;
-using BlackJack.DataAccess.Repository.Interface;
+using BlackJack.DataAccess.Repositories.Interfaces;
 using Logick.Interfases;
 using Logick.Models;
 using System;
@@ -111,7 +111,6 @@ namespace BlackJack.BusinessLogic
             Card card = await Task.Run(() => GiveCard(deck));
             Game game = await _gameRepository.FindById(gameId);
 
-            game.TurnNumber += 1;
             await _turnRepository.Create(
                 new Turn
                 {
@@ -120,8 +119,6 @@ namespace BlackJack.BusinessLogic
                     LearCard = card.CardLear,
                     NumberCard = card.CardNumber,
                 });
-
-            await _gameRepository.Update(game);
 
             return new Card { CardLear = card.CardLear, CardNumber = card.CardNumber };
         }

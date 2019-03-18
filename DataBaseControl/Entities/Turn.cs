@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BlackJack.DataAccess.Entities
 {
-    public class Turn : BasicEntities
+    public class Turn : BasicEntitie
     {
         public long PlayerId { get; set; }
         public long GameId { get; set; }
@@ -14,6 +14,7 @@ namespace BlackJack.DataAccess.Entities
         [ForeignKey("GameId")]
         [Computed]
         public Game Game { get; set; }
+
         [ForeignKey("PlayerId")]
         [Computed]
         public Player Player { get; set; }

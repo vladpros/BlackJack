@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BlackJack.DataAccess.Entities
 {
-    public class Player : BasicEntities
+    public class Player : BasicEntitie
     {
         public string Name { get; set; }
         public PlayerType PlayerType { get; set; }

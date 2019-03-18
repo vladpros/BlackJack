@@ -1,6 +1,6 @@
 ﻿using BlackJack.DataAccess.Entities;
 using BlackJack.DataAccess.Entities.Enums;
-using BlackJack.DataAccess.Repository.Interface;
+using BlackJack.DataAccess.Repositories.Interfaces;
 using Logick.Interfases;
 using Logick.Models;
 using System;
