@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GameShowComponent } from './game-show/game-show.component';
 import { CardComponent } from './card/card.component';
 import { CardsComponent } from './cards/cards.component';
+import { PlayerStatusComponent } from './player-status/player-status.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CardsComponent } from './cards/cards.component';
     GameShowComponent,
     CardComponent,
     CardsComponent,
+    PlayerStatusComponent,
   ],
   imports: [
     BrowserModule,

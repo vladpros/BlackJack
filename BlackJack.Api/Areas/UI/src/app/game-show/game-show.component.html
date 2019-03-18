@@ -34,7 +34,7 @@
         {{ player.Point }}
       </td>
       <td>
-        <p>{{ player.PlayerStatus }}</p>
+        <app-player-status [playerStatus]=player.PlayerStatus></app-player-status>
       </td>
     </tr>
   </tbody>
