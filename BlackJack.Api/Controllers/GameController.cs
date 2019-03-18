@@ -1,8 +1,8 @@
 ﻿using BlackJack.Api.Models;
 using BlackJack.DataAccess.Entities.Enums;
-using Logick.Interfases;
-using Logick.Models;
-using Logick.Utils;
+using BlackJack.BusinessLogic.Interfaces;
+using BlackJack.BusinessLogic.Models;
+using BlackJack.BusinessLogic.Utils;
 using Ninject;
 using Ninject.Modules;
 using System.Collections.Generic;

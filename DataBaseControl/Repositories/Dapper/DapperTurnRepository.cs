@@ -24,7 +24,8 @@ namespace BlackJack.DataAccess.Repositories.Dapper
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                return await Task.Run(() => cn.Query<Turn>("SELECT * FROM Turns WHERE GameId=@gameId", new { gameId = game.Id }).ToList());
+                var result = (await cn.QueryAsync<Turn>("SELECT * FROM Turns WHERE GameId=@gameId", new { gameId = game.Id })).ToList();
+                return result;
             }
         }
     }

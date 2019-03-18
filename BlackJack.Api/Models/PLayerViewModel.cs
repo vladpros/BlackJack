@@ -1,5 +1,5 @@
 ﻿using BlackJack.DataAccess.Entities.Enums;
-using Logick.Models;
+using BlackJack.BusinessLogic.Models;
 using System.Collections.Generic;
 
 namespace BlackJack.Api.Models

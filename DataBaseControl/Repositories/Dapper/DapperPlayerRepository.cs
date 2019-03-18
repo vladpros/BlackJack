@@ -25,25 +25,8 @@ namespace BlackJack.DataAccess.Repositories.Dapper
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                return await Task.Run(() => cn.Query<Player>("SELECT * FROM Players WHERE PlayerType=@playerType", new { playerType }).ToList());
-            }
-        }
-
-        public bool IsAPlayer(Player player)
-        {
-            if (FindById(player.Id) == null)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        public async Task<Player> SearchPlayerWithName(string name)
-        {
-            using (IDbConnection cn = new SqlConnection(_conString))
-            {
-                return await Task.Run(() => cn.Query<Player>("SELECT * FROM Players WHERE Name=@Name", new { Name = name }).SingleOrDefault());
+                var result = (await cn.QueryAsync<Player>("SELECT * FROM Players WHERE PlayerType=@playerType", new { playerType })).ToList();
+                return result;
             }
         }
 

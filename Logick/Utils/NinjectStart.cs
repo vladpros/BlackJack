@@ -3,7 +3,7 @@ using Ninject.Modules;
 using Ninject.Web.Mvc;
 using System.Web.Mvc;
 
-namespace Logick.Utils
+namespace BlackJack.BusinessLogic.Utils
 {
     public class NinjectStart
     {

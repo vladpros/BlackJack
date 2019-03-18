@@ -3,11 +3,11 @@ using BlackJack.DataAccess;
 using BlackJack.DataAccess.Repositories.EF;
 using BlackJack.DataAccess.Repositories.Interfaces;
 using BlackJack.DataAccess.Repositories.Dapper;
-using Logick.Interfases;
+using BlackJack.BusinessLogic.Interfaces;
 using Ninject.Modules;
 
 
-namespace Logick.Utils
+namespace BlackJack.BusinessLogic.Utils
 {
     public class NinjectRegistration : NinjectModule
     {

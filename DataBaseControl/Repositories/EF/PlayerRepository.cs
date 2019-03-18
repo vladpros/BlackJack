@@ -17,20 +17,10 @@ namespace BlackJack.DataAccess.Repositories.EF
             _context = context;
         }
 
-        public bool IsAPlayer (Player player)
+        public async Task<List<Player>> GetByType(PlayerType p)
         {
-            return _context.Players.Any(x => x.Name == player.Name);
-        }
-
-       public async Task<List<Player>> GetByType(PlayerType p)
-        {
-            return await Task.Run(() => _context.Players.Where(x => x.PlayerType == p).ToList());
-        }
-
-        public async Task<Player> SearchPlayerWithName(string name)
-        {
-            var b = await Task.Run(() => _context.Players.Where(x => x.Name == name).SingleOrDefault());
-            return b;
+            var result = await Task.Run(() => _context.Players.Where(x => x.PlayerType == p).ToList());
+            return result;
         }
     }
 }

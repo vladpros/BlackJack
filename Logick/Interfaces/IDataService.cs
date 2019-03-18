@@ -1,9 +1,9 @@
 ﻿using BlackJack.DataAccess.Entities;
-using Logick.Models;
+using BlackJack.BusinessLogic.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Logick.Interfases
+namespace BlackJack.BusinessLogic.Interfaces
 {
     public interface IDataService
     {

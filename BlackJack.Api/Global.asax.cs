@@ -1,4 +1,4 @@
-﻿using Logick.Utils;
+﻿using BlackJack.BusinessLogic.Utils;
 using Ninject;
 using Ninject.Modules;
 using Ninject.Web.Mvc;

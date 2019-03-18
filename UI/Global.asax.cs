@@ -1,4 +1,4 @@
-﻿using Logick.Utils;
+﻿using BlackJack.BusinessLogic.Utils;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;

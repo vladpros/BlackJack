@@ -27,7 +27,7 @@ namespace BlackJack.DataAccess.Repositories.Dapper
             using (IDbConnection cn = new SqlConnection(_conString))
             {
                 cn.Open();
-                await Task.Run(() => cn.Execute($"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = item.Id }));
+                await cn.ExecuteAsync($"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = item.Id });
             }
         }
 
@@ -35,7 +35,8 @@ namespace BlackJack.DataAccess.Repositories.Dapper
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                return await Task.Run(()=> cn.Query<T>($"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id }).SingleOrDefault());
+                var result = (await cn.QueryAsync<T>($"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id })).SingleOrDefault();
+                return result;
             }         
         }
 
@@ -52,10 +53,8 @@ namespace BlackJack.DataAccess.Repositories.Dapper
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                await Task.Run(() => cn.Update(item));
+                await cn.UpdateAsync(item);
             }
-
-            return;
         }
     }
 }

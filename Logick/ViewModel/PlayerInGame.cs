@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace Logick.Models
+namespace BlackJack.BusinessLogic.Models
 {
 
     public class PlayerInGame

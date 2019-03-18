@@ -1,13 +1,13 @@
 ﻿using BlackJack.DataAccess.Entities;
 using BlackJack.DataAccess.Entities.Enums;
 using BlackJack.DataAccess.Repositories.Interfaces;
-using Logick.Interfases;
-using Logick.Models;
+using BlackJack.BusinessLogic.Interfaces;
+using BlackJack.BusinessLogic.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BlackJack.BusinessLogic
+namespace BlackJack.BusinessLogic.Service
 {
     public class GameService : IGameService
     {
