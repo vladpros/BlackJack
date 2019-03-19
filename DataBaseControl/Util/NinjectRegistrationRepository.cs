@@ -11,7 +11,7 @@ namespace DataBaseControl.Util
     {
         public override void Load()
         {
-            bool useDapper = true;
+            bool useDapper = false;
             if (useDapper)
             {
                 string conString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
@@ -24,11 +24,12 @@ namespace DataBaseControl.Util
                 return;
             }
 
-            Bind<IGameRepository>().To<GameRepository>();
-            Bind<IGameResultRepository>().To<GameResultRepository>();
-            Bind<IPlayerRepository>().To<PlayerRepository>();
-            Bind<ITurnRepository>().To<TurnRepository>();
-            Bind<BlackJackContext>().To<BlackJackContext>();
+            BlackJackContext blackJackContext = new BlackJackContext();
+
+            Bind<IGameRepository>().To<GameRepository>().WithConstructorArgument("BlackJackContext", blackJackContext);
+            Bind<IGameResultRepository>().To<GameResultRepository>().WithConstructorArgument("BlackJackContext", blackJackContext);
+            Bind<IPlayerRepository>().To<PlayerRepository>().WithConstructorArgument("BlackJackContext", blackJackContext);
+            Bind<ITurnRepository>().To<TurnRepository>().WithConstructorArgument("BlackJackContext", blackJackContext);
         }
     }
 }
