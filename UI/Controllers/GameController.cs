@@ -59,7 +59,7 @@ namespace BlackJack.UI.Controllers
             }
 
 
-            return View(await _gameService.GetGameResult((long)gameId));
+            return View(await _gameService.ContinuePlay((long)gameId, 2));
         }
 
 
