@@ -10,6 +10,7 @@ namespace BlackJack.BusinessLogic.Helpers
         private Random _random;
         private int _numberLeaf = 4;
         private int _nuberCardNumber = 14;
+        private int _pointCard = 10;
         public List<Card> Cards { get; set; }
         public int NumberCard
         {
@@ -61,13 +62,13 @@ namespace BlackJack.BusinessLogic.Helpers
 
         public int GetCardPoint(Card card)
         {
-            if ((int)card.CardNumber < 10)
+            if ((int)card.CardNumber < _pointCard)
             {
                 return (int)card.CardNumber;
             }
-            if ((int)card.CardNumber >= 10)
+            if ((int)card.CardNumber >= _pointCard)
             {
-                return 10;
+                return _pointCard;
             }
 
             return (int)card.CardNumber;

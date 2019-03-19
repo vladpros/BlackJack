@@ -32,7 +32,7 @@ namespace BlackJack.Api.Controllers
         [HttpGet]
         public async Task<long> StartGame(string name, int botsNumber)
         {
-            await _gameService.PlayerChecked(name);
+            await _gameService.ChekPlayer(name);
 
             return await _gameService.StartGame(await _gameService.SearchPlayerWithName(name), botsNumber);
         }

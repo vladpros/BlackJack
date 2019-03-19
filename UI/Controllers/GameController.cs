@@ -25,7 +25,7 @@ namespace BlackJack.UI.Controllers
         [HttpPost]
         public async Task<ActionResult> Start(string player, int botsNumber)
         {
-            await _gameService.PlayerChecked(player);
+            await _gameService.ChekPlayer(player);
 
             return RedirectToAction("GameShow", new { gameId = await _gameService.StartGame(await _gameService.SearchPlayerWithName(player), botsNumber) });
         }

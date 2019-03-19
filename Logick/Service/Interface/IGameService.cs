@@ -13,7 +13,7 @@ namespace BlackJack.BusinessLogic.Service.Interface
         Task<IEnumerable<PlayerInGameViewModel>> DropCard(IEnumerable<PlayerInGameViewModel> gameStat);
         Task<IEnumerable<PlayerInGameViewModel>> GetGameResult(long gameId);
         Task<IEnumerable<PlayerInGameViewModel>> InitializationGameStat(long gameId);
-        Task PlayerChecked(string name);
+        Task ChekPlayer(string name);
         Task<List<string>> GetUserOrdered();
         Task<Player> SearchPlayerWithName(string name);
         Task<Game> GetGame(long gameId);

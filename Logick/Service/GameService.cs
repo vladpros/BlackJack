@@ -1,13 +1,13 @@
-﻿using BlackJack.DataAccess.Entities;
-using BlackJack.DataAccess.Entities.Enums;
-using BlackJack.DataAccess.Repositories.Interfaces;
+﻿using BlackJack.BusinessLogic.Helpers;
 using BlackJack.BusinessLogic.Service.Interface;
 using BlackJack.BusinessLogic.ViewModel;
+using BlackJack.DataAccess.Entities;
+using BlackJack.DataAccess.Entities.Enums;
+using BlackJack.DataAccess.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
-using BlackJack.BusinessLogic.Helpers;
+using System.Threading.Tasks;
 
 namespace BlackJack.BusinessLogic.Service
 {
@@ -50,7 +50,7 @@ namespace BlackJack.BusinessLogic.Service
         {
             IEnumerable<PlayerInGameViewModel> gameStat = new List<PlayerInGameViewModel>();
             Player player = await _playerRepository.FindById(game.PlayerId);
-            gameStat = await GenPlayers(player, game.BotsNumber, game.Id);
+            gameStat = await GeneratePlayers(player, game.BotsNumber, game.Id);
 
             return gameStat;
         }
@@ -149,7 +149,7 @@ namespace BlackJack.BusinessLogic.Service
         {
             Game game = await _gameRepository.FindById(gameId);
             IEnumerable<PlayerInGameViewModel> gameStat = new List<PlayerInGameViewModel>();
-            gameStat = await PlayersInGame(game);
+            gameStat = await CreatPlayersInGame(game);
 
             CheckPoint(gameStat);
 
@@ -214,7 +214,7 @@ namespace BlackJack.BusinessLogic.Service
             {
                 if (player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose)
                 {
-                    gameStat = DealerLose(gameStat);
+                    gameStat = LoseDealer(gameStat);
                     return gameStat;
                 }
             }
@@ -244,7 +244,7 @@ namespace BlackJack.BusinessLogic.Service
             return gameStat;
         }
 
-        private IEnumerable<PlayerInGameViewModel> DealerLose(IEnumerable<PlayerInGameViewModel> gameStat)
+        private IEnumerable<PlayerInGameViewModel> LoseDealer(IEnumerable<PlayerInGameViewModel> gameStat)
         {
             foreach (var player in gameStat)
             {
@@ -279,7 +279,7 @@ namespace BlackJack.BusinessLogic.Service
             return await _playerRepository.SearchPlayerWithName(name);
         }
 
-        public async Task PlayerChecked(string name)
+        public async Task ChekPlayer(string name)
         {
             if ((await SearchPlayerWithName(name)) == null)
             {
@@ -287,7 +287,7 @@ namespace BlackJack.BusinessLogic.Service
             }
         }
 
-        private async Task<IEnumerable<PlayerInGameViewModel>> PlayersInGame(Game game)
+        private async Task<IEnumerable<PlayerInGameViewModel>> CreatPlayersInGame(Game game)
         {
             var turns = await _turnRepository.GetAllTurns(game);
             List<long> players = turns.Select(p => p.PlayerId).Distinct().ToList();
@@ -300,7 +300,7 @@ namespace BlackJack.BusinessLogic.Service
                 playerInGame.PlayerId = player.Id;
                 playerInGame.PlayerName = player.Name;
                 playerInGame.GameId = game.Id;
-                playerInGame.Cards = PlayerCard(player.Id, turns);
+                playerInGame.Cards = GetPlayerCard(player.Id, turns);
                 playerInGame.PlayerType = player.PlayerType;
                 playersInGame.Add(playerInGame);
             }
@@ -308,14 +308,14 @@ namespace BlackJack.BusinessLogic.Service
             return playersInGame;
         }
 
-        private List<Card> PlayerCard(long playerId, List<Turn> turns)
+        private List<Card> GetPlayerCard(long playerId, List<Turn> turns)
         {
             var result = turns.Where(p => p.PlayerId == playerId);
             var result1 = result.Select(k => new Card { CardLear = k.LearCard, CardNumber = k.NumberCard }).ToList();
             return result1;
         }
 
-        private async Task<List<PlayerInGameViewModel>> GenPlayers(Player player, int botsNumber, long gameId)
+        private async Task<List<PlayerInGameViewModel>> GeneratePlayers(Player player, int botsNumber, long gameId)
         {
             int rand;
             List<PlayerInGameViewModel> players = new List<PlayerInGameViewModel>();

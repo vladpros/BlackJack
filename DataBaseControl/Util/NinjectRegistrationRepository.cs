@@ -11,7 +11,7 @@ namespace DataBaseControl.Util
     {
         public override void Load()
         {
-            bool useDapper = false;
+            bool useDapper = true;
             if (useDapper)
             {
                 string conString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
