@@ -49,14 +49,6 @@ namespace BlackJack.UI.Controllers
             }
 
             var v = await _gameService.ContinuePlay((long)gameId, (long)number);           
-            foreach(var player in v)
-            {
-                if(IsEndGame(player))
-                {
-                    await _gameService.DropCard(v);
-                    return RedirectToAction("GameResult", new { gameId = player.GameId});
-                }
-            }
 
             return View(v);
         }
@@ -69,11 +61,6 @@ namespace BlackJack.UI.Controllers
             }
 
             return View(await _gameService.GetGameResult((long)gameId));
-        }
-
-        private bool IsEndGame (PlayerInGameViewModel player)
-        {
-            return player.PlayerType == PlayerType.User && player.PlayerStatus != PlayerStatus.Play || player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose;
         }
 
         private bool IsNull(long? number)

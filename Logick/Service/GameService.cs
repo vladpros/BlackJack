@@ -174,6 +174,7 @@ namespace BlackJack.BusinessLogic.Service
             }
 
             await _gameRepository.Update(game);
+            await CheckEndGame(gameStat);
 
             return gameStat;
         }
@@ -372,5 +373,25 @@ namespace BlackJack.BusinessLogic.Service
 
             return result;
         }
+
+        private bool IsEndGame(PlayerInGameViewModel player)
+        {
+            return player.PlayerType == PlayerType.User && player.PlayerStatus != PlayerStatus.Play || player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose;
+        }
+
+        private async Task<IEnumerable<PlayerInGameViewModel>> CheckEndGame(IEnumerable<PlayerInGameViewModel> gameStat)
+        {
+            foreach (var player in gameStat)
+            {
+                if (IsEndGame(player))
+                {
+                    await DropCard(gameStat);
+
+                    return await GetGameResult(gameStat.First().GameId);
+                }
+            }
+
+            return gameStat;
+        } 
     }
 }

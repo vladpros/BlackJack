@@ -53,25 +53,9 @@ namespace BlackJack.Api.Controllers
                return await _gameService.DoFirstTwoRound((long)gameId);
             }
 
-
             var gameResult = await _gameService.ContinuePlay((long)gameId, (long)choos);
 
-            foreach (var player in gameResult)
-            {
-                if (IsEndGame(player))
-                {
-                    await _gameService.DropCard(gameResult);
-
-                    return await _gameService.GetGameResult((long)gameId);
-                }
-            }
-
             return gameResult;
-        }
-
-        private bool IsEndGame(PlayerInGameViewModel player)
-        {
-            return player.PlayerType == PlayerType.User && player.PlayerStatus != PlayerStatus.Play || player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose;
         }
     }
 }
