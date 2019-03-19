@@ -2,7 +2,7 @@
 
 <div>
   <form [formGroup]="myForm" (submit)="onSubmit()">
-    <input name="Player" list="player" class="dropdawn" required formControlName="name"/>
+    <input name="Player" list="player" class="dropdawn" [class.visible]="!isValid" required formControlName="name"/>
     <select name="botsNumber" formControlName="botsNumber">
       <option selected value="1">1</option>
       <option value="2">2</option>

@@ -1,8 +1,8 @@
 <h2 [hidden]="isEnd">GameShow</h2>
 <h2 [hidden]="!isEnd">GameResult</h2>
 <div [hidden]="isEnd">
-  <input class="btn btn-primary" value="Take Card" (click)="resumePlay()" />
-  <input class="btn btn-primary" value="Wait Other" (click)="stopPlay()" />
+  <input type="button" class="btn btn-primary" value="Take Card" (click)="resumePlay()" />
+  <input type="button" class="btn btn-primary" value="Wait Other" (click)="stopPlay()" />
 </div>
 
 <table class="table table-bordered">

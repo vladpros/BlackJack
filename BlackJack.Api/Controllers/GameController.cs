@@ -34,7 +34,7 @@ namespace BlackJack.Api.Controllers
         {
             await _gameService.ChekPlayer(name);
 
-            return await _gameService.StartGame(await _gameService.SearchPlayerWithName(name), botsNumber);
+            return await _gameService.StartGame(name, botsNumber);
         }
 
         [HttpGet]

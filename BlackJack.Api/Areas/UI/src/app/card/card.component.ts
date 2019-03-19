@@ -20,7 +20,6 @@ export class CardComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log(this.cardLear + '  ' + this.cardNumber);
     this.cardLearS = CardLear[this.cardLear];
     this.cardNumberS = CardNumber[this.cardNumber];
   }

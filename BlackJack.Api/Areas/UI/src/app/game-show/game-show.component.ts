@@ -34,7 +34,6 @@ export class GameShowComponent implements OnInit {
   showGame() {
     this.gameShowService.getGameInfo(this.id, this.choos).subscribe(result => {
       this.gameInfo = result;
-      console.log(this.gameInfo);
       this.findEndGame();
     },
     error => {

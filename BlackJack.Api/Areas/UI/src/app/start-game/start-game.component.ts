@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StartgameService } from '../services/startgame.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,19 +13,18 @@ export class StartGameComponent implements OnInit {
 
   myForm: FormGroup;
   names: string[];
+  isValid = true;
 
   constructor(
     private startgameService: StartgameService,
     private formBuilder: FormBuilder,
     private router: Router,
     ) {
-    console.log(this.names);
   }
 
   ngOnInit() {
     this.startgameService.getNames().subscribe(result => {
       this.names = result;
-      console.log(result);
     },
     error => {
       console.error(error);
@@ -35,16 +34,18 @@ export class StartGameComponent implements OnInit {
 
   initForm() {
     this.myForm = this.formBuilder.group({
-      name: [''],
+      name: ['', Validators.required],
       botsNumber: [1]
     });
   }
 
   onSubmit() {
-    console.log(this.myForm.value);
+    if (this.myForm.invalid) {
+      this.isValid = false;
+      return;
+    }
     this.startgameService.StartGame(this.myForm.value).subscribe(result => {
-      console.log(result);
-      this.router.navigate(['/playGame', result]);
+    this.router.navigate(['/playGame', result]);
     },
     error => {
       console.error(error);

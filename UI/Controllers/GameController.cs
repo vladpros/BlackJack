@@ -1,7 +1,5 @@
 ﻿using System.Web.Mvc;
 using BlackJack.BusinessLogic.Service.Interface;
-using BlackJack.DataAccess.Entities.Enums;
-using BlackJack.BusinessLogic.ViewModel;
 using System.Threading.Tasks;
 
 namespace BlackJack.UI.Controllers
@@ -27,12 +25,12 @@ namespace BlackJack.UI.Controllers
         {
             await _gameService.ChekPlayer(player);
 
-            return RedirectToAction("GameShow", new { gameId = await _gameService.StartGame(await _gameService.SearchPlayerWithName(player), botsNumber) });
+            return RedirectToAction("GameShow", new { gameId = await _gameService.StartGame(player, botsNumber) });
         }
 
         public async Task<ActionResult> GameShow(long? gameId)
         {
-            if (IsNull(gameId))
+            if (gameId == null)
             {
                 return RedirectToAction("Start");
             }
@@ -43,35 +41,27 @@ namespace BlackJack.UI.Controllers
         [HttpPost]
         public async Task<ActionResult> GameShow(long? gameId, long? number)
         {
-            if (IsNull(gameId) || IsNull(number))
+            if (gameId == null || number == null)
             {
                 return RedirectToAction("Start");
             }
 
             var v = await _gameService.ContinuePlay((long)gameId, (long)number);           
 
-            return View(v);
+            return View(await _gameService.ContinuePlay((long)gameId, (long)number));
         }
 
         public async Task<ActionResult> GameResult(long? gameId)
         {
-            if (IsNull(gameId))
+            if (gameId == null)
             {
                 return RedirectToAction("Start");
             }
 
+
             return View(await _gameService.GetGameResult((long)gameId));
         }
 
-        private bool IsNull(long? number)
-        {
-            if (number == null)
-            {
 
-                return true;
-            }
-
-            return false;
-        }
     }
 }
