@@ -18,7 +18,6 @@ namespace BlackJack.DataAccess.Repositories.EF
         public async Task<List<Game>>  GetAllGameWithPlayer(Player player)
         {
             var result = await Task.Run(() => _context.Turns.Where(c => c.PlayerId == player.Id).Select(p => p.Game).Distinct().ToList());
-
             return result;
         }
     }

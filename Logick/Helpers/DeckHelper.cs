@@ -39,7 +39,18 @@ namespace BlackJack.BusinessLogic.Helpers
             }
         }
 
-        private Card GiveCard(DeckHelper deck)
+        public DeckHelper(IEnumerable<PlayerInGameViewModel> players) : this()
+        {
+            foreach (var player in players)
+            {
+                foreach (var card in player.Cards)
+                {
+                    Cards.RemoveAt(Cards.FindIndex(p => p.CardLear == card.CardLear && p.CardNumber == card.CardNumber));
+                }
+            }
+        }
+
+        public Card GiveCard(DeckHelper deck)
         {
             int rand = _random.Next(0, deck.NumberCard);
             Card card = deck.Cards[rand];
@@ -48,7 +59,7 @@ namespace BlackJack.BusinessLogic.Helpers
             return card;
         }
 
-        private int GetCardPoint(Card card)
+        public int GetCardPoint(Card card)
         {
             if ((int)card.CardNumber < 10)
             {
@@ -60,34 +71,6 @@ namespace BlackJack.BusinessLogic.Helpers
             }
 
             return (int)card.CardNumber;
-        }
-
-        public void GetDeck(IEnumerable<PlayerInGame> Players)
-        {
-  
-            foreach (var player in Players)
-            {
-                foreach (var card in player.Cards)
-                {
-                    int index = SearchCardInDeck( card);
-                    Cards.RemoveAt(index);
-                }
-            }
-
-            return;
-        }
-
-        private int SearchCardInDeck(Card card)
-        {
-            for (int i = 0; i < NumberCard; i++)
-            {
-                if (Cards[i].CardLear == card.CardLear && Cards[i].CardNumber == card.CardNumber)
-                {
-                    return i;
-                }
-            }
-
-            return -1;
         }
 
     }

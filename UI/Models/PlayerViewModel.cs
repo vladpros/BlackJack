@@ -1,5 +1,5 @@
-﻿using BlackJack.DataAccess.Entities.Enums;
-using BlackJack.BusinessLogic.ViewModel;
+﻿using BlackJack.BusinessLogic.Helpers;
+using BlackJack.DataAccess.Entities.Enums;
 using System.Collections.Generic;
 
 namespace BlackJack.UI.Models

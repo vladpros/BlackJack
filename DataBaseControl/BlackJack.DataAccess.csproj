@@ -129,6 +129,7 @@
     <Compile Include="Repositories\Interfaces\ITurnRepository.cs" />
     <Compile Include="Repositories\EF\TurnRepository.cs" />
     <Compile Include="Repositories\EF\PlayerRepository.cs" />
+    <Compile Include="Util\NinjectRegistrationRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

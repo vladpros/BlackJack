@@ -16,9 +16,9 @@ namespace BlackJack.DataAccess.Repositories.Dapper
         private readonly string _tableName;
         private readonly string _conString;
 
-        public DapperGenericRepository(string tableName)
+        public DapperGenericRepository(string tableName, string conString)
         {
-            _conString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            _conString = conString;
             _tableName = tableName;
         }
 

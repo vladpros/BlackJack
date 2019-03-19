@@ -15,9 +15,9 @@ namespace BlackJack.DataAccess.Repositories.Dapper
 
         private readonly string _conString;
 
-        public DapperTurnRepository() : base("Turns")
+        public DapperTurnRepository(string conString) : base("Turns", conString)
         {
-            _conString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            _conString = conString;
         }
 
         public async Task<List<Turn>> GetAllTurns(Game game)

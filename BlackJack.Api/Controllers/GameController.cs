@@ -1,5 +1,5 @@
 ﻿using BlackJack.DataAccess.Entities.Enums;
-using BlackJack.BusinessLogic..Service.Interface;
+using BlackJack.BusinessLogic.Service.Interface;
 using BlackJack.BusinessLogic.ViewModel;
 using BlackJack.BusinessLogic.Utils;
 using Ninject;
@@ -7,6 +7,7 @@ using Ninject.Modules;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DataBaseControl.Util;
 
 namespace BlackJack.Api.Controllers
 {
@@ -16,8 +17,9 @@ namespace BlackJack.Api.Controllers
 
         public GameController()
         {
-            NinjectModule registrations = new NinjectRegistration();
+            INinjectModule[] registrations = { new NinjectRegistrationService(), new NinjectRegistrationRepository() };
             var kernel = new StandardKernel(registrations);
+
             _gameService = kernel.Get<IGameService>();
         }
 
@@ -36,15 +38,15 @@ namespace BlackJack.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<PlayerInGame>> ShowGame(long? gameId, long? choos)
+        public async Task<IEnumerable<PlayerInGameViewModel>> ShowGame(long? gameId, long? choos)
         {
             if(gameId == null)
             {
-                return new List<PlayerInGame>();
+                return new List<PlayerInGameViewModel>();
             }
             if ((await _gameService.GetGame((long)gameId)).GameStatus == GameStatus.Done)
             {
-                return new List<PlayerInGame>();
+                return new List<PlayerInGameViewModel>();
             }
             if (choos == null)
             {
@@ -67,7 +69,7 @@ namespace BlackJack.Api.Controllers
             return gameResult;
         }
 
-        private bool IsEndGame(PlayerInGame player)
+        private bool IsEndGame(PlayerInGameViewModel player)
         {
             return player.PlayerType == PlayerType.User && player.PlayerStatus != PlayerStatus.Play || player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose;
         }

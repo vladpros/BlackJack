@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace BlackJack.BusinessLogic.ViewModel
 {
 
-    public class PlayerInGame
+    public class PlayerInGameViewModel
     {
         public long PlayerId { get; set; }
         public PlayerType PlayerType { get; set; }
@@ -16,7 +16,7 @@ namespace BlackJack.BusinessLogic.ViewModel
         public PlayerStatus PlayerStatus { get; set; }
         public long GameId { get; set; }
 
-        public PlayerInGame()
+        public PlayerInGameViewModel()
         {
             PlayerStatus = PlayerStatus.Play;
             Cards = new List<Card>();

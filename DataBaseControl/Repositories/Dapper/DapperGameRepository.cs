@@ -1,6 +1,5 @@
 ﻿using BlackJack.DataAccess.Entities;
 using BlackJack.DataAccess.Repositories.Interfaces;
-using System.Configuration;
 
 namespace BlackJack.DataAccess.Repositories.Dapper
 {
@@ -8,9 +7,9 @@ namespace BlackJack.DataAccess.Repositories.Dapper
     {
         private readonly string _conString;
 
-        public DapperGameRepository() : base("Games")
+        public DapperGameRepository(string conString) : base("Games", conString)
         {
-            _conString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            _conString = conString;
         }
     }
 }

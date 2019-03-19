@@ -16,7 +16,7 @@ namespace BlackJack.DataAccess.Repositories.Dapper
 
         private readonly string _conString;
 
-        public DapperPlayerRepository() : base ("Players")
+        public DapperPlayerRepository(string conString) : base ("Players", conString)
         {
             _conString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
         }
@@ -35,7 +35,6 @@ namespace BlackJack.DataAccess.Repositories.Dapper
             using (IDbConnection cn = new SqlConnection(_conString))
             {
                 var result = (await cn.QueryAsync<Player>("SELECT * FROM Players WHERE Name=@name", new { name })).SingleOrDefault();
-
                 return result;
             }
         }
