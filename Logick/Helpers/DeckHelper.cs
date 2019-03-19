@@ -51,11 +51,11 @@ namespace BlackJack.BusinessLogic.Helpers
             }
         }
 
-        public Card GiveCard(DeckHelper deck)
+        public Card GiveCard()
         {
-            int rand = _random.Next(0, deck.NumberCard);
-            Card card = deck.Cards[rand];
-            deck.Cards.RemoveAt(rand);
+            int rand = _random.Next(0, Cards.Count);
+            Card card = Cards[rand];
+            Cards.RemoveAt(rand);
 
             return card;
         }

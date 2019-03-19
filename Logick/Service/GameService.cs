@@ -105,7 +105,7 @@ namespace BlackJack.BusinessLogic.Service
 
         private async Task<Card> DoTurn(long playerId, long gameId, DeckHelper deck)
         {
-            Card card = await Task.Run(() => _deckHelper.GiveCard(deck));
+            Card card = deck.GiveCard();
             Game game = await _gameRepository.FindById(gameId);
 
             await _turnRepository.Create(
