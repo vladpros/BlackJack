@@ -1,5 +1,5 @@
-﻿@using BlackJack.UI.Models
-@model IEnumerable<PlayerViewModel>
+﻿@using BlackJack.BusinessLogic.ViewModel
+@model IEnumerable<PlayerInGameViewModel>
 
 @{
     ViewBag.Title = "GameShow";
@@ -7,7 +7,7 @@
 
 <h2>GameShow</h2>
 
-@helper BuildMenu(IEnumerable<PlayerViewModel> data)
+@helper BuildMenu(IEnumerable<PlayerInGameViewModel> data)
 {
     <table>
         <tr>
@@ -21,8 +21,8 @@
                 <td><p>@b.PlayerName</p></td>
                 @foreach (var k in b.Cards)
                 {
-                    <td><p>@k.NumberCard</p></td>
-                    <td><p>@k.LearCard</p></td>
+                    <td><p>@k.CardNumber</p></td>
+                    <td><p>@k.CardLear</p></td>
                 }
                 <td><p>@b.Point</p></td>
                 <td><p>@b.PlayerStatus</p></td>
