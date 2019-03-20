@@ -6,6 +6,6 @@ namespace BlackJack.DataAccess.Repositories.Interfaces
 {
     public interface ITurnRepository : IGenericRepository<Turn>
     {
-        Task<List<Turn>> GetAllTurns(Game game);
+        Task<List<Turn>> GetAllTurns(long gameId);
     }
 }

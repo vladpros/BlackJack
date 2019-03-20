@@ -19,11 +19,11 @@ namespace BlackJack.DataAccess.Repositories.Dapper
             _conString = conString;
         }
 
-        public async Task<List<Turn>> GetAllTurns(Game game)
+        public async Task<List<Turn>> GetAllTurns(long gameId)
         {
             using (IDbConnection cn = new SqlConnection(_conString))
             {
-                var result = (await cn.QueryAsync<Turn>("SELECT * FROM Turns WHERE GameId=@gameId", new { gameId = game.Id })).ToList();
+                var result = (await cn.QueryAsync<Turn>("SELECT * FROM Turns WHERE GameId=@gameId", new { gameId = gameId })).ToList();
                 return result;
             }
         }

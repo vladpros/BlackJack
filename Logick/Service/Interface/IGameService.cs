@@ -14,5 +14,7 @@ namespace BlackJack.BusinessLogic.Service.Interface
         Task<List<string>> GetUserOrdered();
         Task<Game> GetGame(long gameId);
         Task<IEnumerable<PlayerInGameViewModel>> GetGameResult(IEnumerable<PlayerInGameViewModel> gameStat);
+        Task<bool> IsNewGame(long gameId);
+        Task<IEnumerable<PlayerInGameViewModel>> LoadGame(long gameId);
     }
 }

@@ -158,7 +158,7 @@ namespace BlackJack.BusinessLogic.Service
 
         public async Task<IEnumerable<PlayerInGameViewModel>> ContinuePlay(long gameId, long choose)
         {
-            Game game = await _gameRepository.FindById(gameId);
+            //Game game = await _gameRepository.FindById(gameId);
             IEnumerable<PlayerInGameViewModel> gameStat = await InitializationGameStat(gameId);
             int continueGame = 1;
             int stopGame = 2;
@@ -173,7 +173,7 @@ namespace BlackJack.BusinessLogic.Service
                 gameStat = await DropCard(gameStat);
             }
 
-            await _gameRepository.Update(game);
+            //await _gameRepository.Update(game);
             gameStat = await CheckEndGame(gameStat);
 
             return gameStat;
@@ -285,7 +285,7 @@ namespace BlackJack.BusinessLogic.Service
 
         private async Task<IEnumerable<PlayerInGameViewModel>> CreatPlayersInGame(Game game)
         {
-            var turns = await _turnRepository.GetAllTurns(game);
+            var turns = await _turnRepository.GetAllTurns(game.Id);
             List<long> players = turns.Select(p => p.PlayerId).Distinct().ToList();
             List<PlayerInGameViewModel> playersInGame = new List<PlayerInGameViewModel>();
 
@@ -393,6 +393,24 @@ namespace BlackJack.BusinessLogic.Service
                     return await GetGameResult(gameStat);
                 }
             }
+
+            return gameStat;
+        }
+
+        public async Task<bool> IsNewGame(long gameId)
+        {
+            var turn = (await _turnRepository.GetAllTurns(gameId)).FirstOrDefault();
+            if (turn == null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<IEnumerable<PlayerInGameViewModel>> LoadGame(long gameId)
+        {
+            IEnumerable<PlayerInGameViewModel> gameStat = await InitializationGameStat(gameId);
 
             return gameStat;
         }

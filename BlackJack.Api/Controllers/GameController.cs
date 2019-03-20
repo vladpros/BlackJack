@@ -40,20 +40,24 @@ namespace BlackJack.Api.Controllers
         [HttpGet]
         public async Task<IEnumerable<PlayerInGameViewModel>> ShowGame(long? gameId, long? choos)
         {
+            long gameIdLong = (long)gameId;
             if(gameId == null)
             {
                 return new List<PlayerInGameViewModel>();
             }
-            if ((await _gameService.GetGame((long)gameId)).GameStatus == GameStatus.Done)
+            if ((await _gameService.GetGame(gameIdLong)).GameStatus == GameStatus.Done)
             {
                 return new List<PlayerInGameViewModel>();
             }
-            if (choos == null)
+            if (choos == null && await _gameService.IsNewGame(gameIdLong))
             {
-               return await _gameService.DoFirstTwoRound((long)gameId);
+               return await _gameService.DoFirstTwoRound(gameIdLong);
             }
-
-            var gameResult = await _gameService.ContinuePlay((long)gameId, (long)choos);
+            if (choos == null && !(await _gameService.IsNewGame(gameIdLong)))
+            {
+                return await _gameService.LoadGame(gameIdLong);
+            }
+            var gameResult = await _gameService.ContinuePlay(gameIdLong, (long)choos);
 
             return gameResult;
         }

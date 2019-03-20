@@ -15,9 +15,9 @@ namespace BlackJack.DataAccess.Repositories.EF
             _context = context;
         }
 
-        public async Task<List<Turn>> GetAllTurns (Game game)
+        public async Task<List<Turn>> GetAllTurns (long gameId)
         {
-            var result = await Task.Run(() => _context.Turns.Where(c => c.GameId == game.Id).ToList()); 
+            var result = await Task.Run(() => _context.Turns.Where(c => c.GameId == gameId).ToList()); 
             return result;
         }
     }
