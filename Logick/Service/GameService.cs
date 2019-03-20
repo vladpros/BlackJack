@@ -81,7 +81,7 @@ namespace BlackJack.BusinessLogic.Service
             {
                 if (player.PlayerType != playerType && player.PlayerStatus == PlayerStatus.Play)
                 {
-                    Card card = await DoTurn(player.PlayerId, player.GameId, deck);
+                    CardHelper card = await DoTurn(player.PlayerId, player.GameId, deck);
                     player.Cards.Add(card);
                 }
             }
@@ -95,7 +95,7 @@ namespace BlackJack.BusinessLogic.Service
             {
                 if (player.PlayerType == playerType1 && player.PlayerStatus == PlayerStatus.Play)
                 {
-                    Card card = await Task.Run(() => DoTurn(player.PlayerId, player.GameId, deck));
+                    CardHelper card = await Task.Run(() => DoTurn(player.PlayerId, player.GameId, deck));
                     player.Cards.Add(card);
                 }
             }
@@ -103,9 +103,9 @@ namespace BlackJack.BusinessLogic.Service
             return gameStat;
         }
 
-        private async Task<Card> DoTurn(long playerId, long gameId, DeckHelper deck)
+        private async Task<CardHelper> DoTurn(long playerId, long gameId, DeckHelper deck)
         {
-            Card card = deck.GiveCard();
+            CardHelper card = deck.GiveCard();
             Game game = await _gameRepository.FindById(gameId);
 
             await _turnRepository.Create(
@@ -117,7 +117,7 @@ namespace BlackJack.BusinessLogic.Service
                     NumberCard = card.CardNumber,
                 });
 
-            return new Card { CardLear = card.CardLear, CardNumber = card.CardNumber };
+            return new CardHelper { CardLear = card.CardLear, CardNumber = card.CardNumber };
         }
 
         private int CountPoint(PlayerInGameViewModel player)
@@ -240,7 +240,7 @@ namespace BlackJack.BusinessLogic.Service
                 }
             }
 
-            await SaveWinner(gameStat);
+            await SaveResult(gameStat);
 
             return gameStat;
         }
@@ -304,10 +304,10 @@ namespace BlackJack.BusinessLogic.Service
             return playersInGame;
         }
 
-        private List<Card> GetPlayerCard(long playerId, List<Turn> turns)
+        private List<CardHelper> GetPlayerCard(long playerId, List<Turn> turns)
         {
             var result = turns.Where(p => p.PlayerId == playerId);
-            var result1 = result.Select(k => new Card { CardLear = k.LearCard, CardNumber = k.NumberCard }).ToList();
+            var result1 = result.Select(k => new CardHelper { CardLear = k.LearCard, CardNumber = k.NumberCard }).ToList();
             return result1;
         }
 
@@ -349,7 +349,7 @@ namespace BlackJack.BusinessLogic.Service
             return players;
         }
 
-        private async Task SaveWinner(IEnumerable<PlayerInGameViewModel> gameStat)
+        private async Task SaveResult(IEnumerable<PlayerInGameViewModel> gameStat)
         {
             foreach (var player in gameStat)
             {

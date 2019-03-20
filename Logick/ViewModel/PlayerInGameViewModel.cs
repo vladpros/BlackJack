@@ -11,7 +11,7 @@ namespace BlackJack.BusinessLogic.ViewModel
         public long PlayerId { get; set; }
         public PlayerType PlayerType { get; set; }
         public string PlayerName { get; set; }
-        public List<Card> Cards { get; set; }
+        public List<CardHelper> Cards { get; set; }
         public int Point { get; set; }
         public PlayerStatus PlayerStatus { get; set; }
         public long GameId { get; set; }
@@ -19,7 +19,7 @@ namespace BlackJack.BusinessLogic.ViewModel
         public PlayerInGameViewModel()
         {
             PlayerStatus = PlayerStatus.Play;
-            Cards = new List<Card>();
+            Cards = new List<CardHelper>();
         }
     }
 }

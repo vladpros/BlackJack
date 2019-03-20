@@ -1,4 +1,4 @@
-import { GameInfo } from './../model/game-info';
+import { GameInfo } from './../models/game-info';
 import { GameShowService } from './../services/game-show.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';

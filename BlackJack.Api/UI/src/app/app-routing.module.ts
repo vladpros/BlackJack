@@ -1,7 +1,7 @@
-import { StartGameComponent } from './start-game/start-game.component';
+import { StartGameComponent } from './game/start-game/start-game.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GameShowComponent } from './game-show/game-show.component';
+import { GameShowComponent } from './game/game-show/game-show.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'startGame', pathMatch: 'full'},

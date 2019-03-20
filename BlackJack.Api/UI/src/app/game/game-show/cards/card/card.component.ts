@@ -1,6 +1,6 @@
-import { CardNumber } from './../enams/card-number.enum';
-import { CardLear } from './../enams/card-lear.enum';
+import { CardNumber } from './../../../enams/card-number.enum';
 import { Component, OnInit, Input } from '@angular/core';
+import { CardLear } from './../../../enams/card-lear.enum';
 
 @Component({
   selector: 'app-card',

@@ -2,7 +2,7 @@
 
 namespace BlackJack.BusinessLogic.Helpers
 {
-    public class Card
+    public class CardHelper
     {
         public CardLear CardLear { get; set; }
         public CardNumber CardNumber { get; set; }

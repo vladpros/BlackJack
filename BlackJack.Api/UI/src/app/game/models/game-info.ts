@@ -1,8 +1,8 @@
-import { CardComponent } from '../card/card.component';
+import { Card } from './card';
 
 export interface GameInfo {
   PlayerName: string;
-  Cards: CardComponent;
+  Cards: Card;
   Point: number;
   PlayerStatus: number;
   GameId: number;

@@ -1,4 +1,4 @@
-import { PlayerStatus } from './../enams/player-status.enum';
+import { PlayerStatus } from '../enams/player-status.enum';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

@@ -11,7 +11,7 @@ namespace BlackJack.BusinessLogic.Helpers
         private int _numberLeaf = 4;
         private int _nuberCardNumber = 14;
         private int _pointCard = 10;
-        public List<Card> Cards { get; set; }
+        public List<CardHelper> Cards { get; set; }
         public int NumberCard
         {
             get
@@ -23,14 +23,14 @@ namespace BlackJack.BusinessLogic.Helpers
         public DeckHelper()
         {
             _random = new Random();
-            Cards = new List<Card>();
+            Cards = new List<CardHelper>();
 
             for (int i = 1; i < _numberLeaf + 1; i++)
             {
                 for (int j = 2; j < _nuberCardNumber + 1; j++)
                 {
                     Cards.Add(
-                              new Card
+                              new CardHelper
                               {
                                   CardLear = (CardLear)i,
                                   CardNumber = (CardNumber)j
@@ -51,16 +51,16 @@ namespace BlackJack.BusinessLogic.Helpers
             }
         }
 
-        public Card GiveCard()
+        public CardHelper GiveCard()
         {
             int rand = _random.Next(0, Cards.Count);
-            Card card = Cards[rand];
+            CardHelper card = Cards[rand];
             Cards.RemoveAt(rand);
 
             return card;
         }
 
-        public int GetCardPoint(Card card)
+        public int GetCardPoint(CardHelper card)
         {
             if ((int)card.CardNumber < _pointCard)
             {
