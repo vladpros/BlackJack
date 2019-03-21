@@ -60,7 +60,7 @@ namespace BlackJack.UI.Controllers
             return View(gameStat);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<ActionResult> GameResult(long? gameId)
         {
             if (gameId == null)
