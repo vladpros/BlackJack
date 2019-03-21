@@ -12,18 +12,18 @@ namespace BlackJack.DataAccess.Repositories.Dapper
     public class DapperTurnRepository : DapperGenericRepository<Turn>, ITurnRepository
     {
 
-        private readonly string _conString;
+        private readonly string _connectionString;
 
-        public DapperTurnRepository(string conString) : base("Turns", conString)
+        public DapperTurnRepository(string connectionString) : base("Turns", connectionString)
         {
-            _conString = conString;
+            _connectionString = connectionString;
         }
 
         public async Task<List<Turn>> GetAllTurns(long gameId)
         {
-            using (IDbConnection cn = new SqlConnection(_conString))
+            using (IDbConnection cn = new SqlConnection(_connectionString))
             {
-                var result = (await cn.QueryAsync<Turn>("SELECT * FROM Turns WHERE GameId=@gameId", new { gameId = gameId })).ToList();
+                var result = (await cn.QueryAsync<Turn>($"SELECT * FROM {_tableName} WHERE GameId=@gameId", new { gameId = gameId })).ToList();
                 return result;
             }
         }

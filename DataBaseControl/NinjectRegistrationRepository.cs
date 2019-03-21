@@ -16,10 +16,10 @@ namespace DataBaseControl.Util
             {
                 string conString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
 
-                Bind<IGameRepository>().To<DapperGameRepository>().WithConstructorArgument("conString", conString);
-                Bind<IGameResultRepository>().To<DapperGameResultRepository>().WithConstructorArgument("conString", conString);
-                Bind<IPlayerRepository>().To<DapperPlayerRepository>().WithConstructorArgument("conString", conString);
-                Bind<ITurnRepository>().To<DapperTurnRepository>().WithConstructorArgument("conString", conString);
+                Bind<IGameRepository>().To<DapperGameRepository>().WithConstructorArgument("connectionString", conString);
+                Bind<IGameResultRepository>().To<DapperGameResultRepository>().WithConstructorArgument("connectionString", conString);
+                Bind<IPlayerRepository>().To<DapperPlayerRepository>().WithConstructorArgument("connectionString", conString);
+                Bind<ITurnRepository>().To<DapperTurnRepository>().WithConstructorArgument("connectionString", conString);
 
                 return;
             }

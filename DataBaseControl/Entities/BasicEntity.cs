@@ -1,6 +1,6 @@
 ﻿namespace BlackJack.DataAccess.Entities
 {
-    public class BasicEntitie
+    public class BasicEntity
     {
         public long Id { get; set; }
     }

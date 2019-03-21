@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BlackJack.DataAccess.Repositories.EF
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BasicEntitie
+    public class GenericRepository<T> : IGenericRepository<T> where T : BasicEntity
     {
         private BlackJackContext _context;
         private DbSet<T> _dbSet;

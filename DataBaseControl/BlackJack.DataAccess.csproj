@@ -88,7 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlackJackContext.cs" />
-    <Compile Include="Entities\BasicEntitie.cs" />
+    <Compile Include="Entities\BasicEntity.cs" />
     <Compile Include="Entities\Enums\GameStatus.cs" />
     <Compile Include="Entities\Enums\CardLear.cs" />
     <Compile Include="Entities\Enums\CardNumber.cs" />
@@ -98,13 +98,9 @@
     <Compile Include="Entities\GameWinner.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Turn.cs" />
-    <Compile Include="Migrations\201903180945417_1.cs" />
-    <Compile Include="Migrations\201903180945417_1.Designer.cs">
-      <DependentUpon>201903180945417_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903180948507_2.cs" />
-    <Compile Include="Migrations\201903180948507_2.Designer.cs">
-      <DependentUpon>201903180948507_2.cs</DependentUpon>
+    <Compile Include="Migrations\201903211254227_1.cs" />
+    <Compile Include="Migrations\201903211254227_1.Designer.cs">
+      <DependentUpon>201903211254227_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\Dapper\DapperGenericRepository.cs" />
@@ -123,18 +119,15 @@
     <Compile Include="Repositories\Interfaces\ITurnRepository.cs" />
     <Compile Include="Repositories\EF\TurnRepository.cs" />
     <Compile Include="Repositories\EF\PlayerRepository.cs" />
-    <Compile Include="Util\NinjectRegistrationRepository.cs" />
+    <Compile Include="NinjectRegistrationRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903180945417_1.resx">
-      <DependentUpon>201903180945417_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903180948507_2.resx">
-      <DependentUpon>201903180948507_2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903211254227_1.resx">
+      <DependentUpon>201903211254227_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

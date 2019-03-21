@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace BlackJack.DataAccess.Repositories.Interfaces
 {
-    public interface IGenericRepository<T> where T : BasicEntitie
+    public interface IGenericRepository<T> where T : BasicEntity
     {
         Task<long> Create(T item);
         Task<T> FindById(long id);

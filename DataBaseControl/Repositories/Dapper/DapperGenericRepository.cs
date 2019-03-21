@@ -9,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace BlackJack.DataAccess.Repositories.Dapper
 {
-    public class DapperGenericRepository<T> : IGenericRepository<T> where T : BasicEntitie
+    public class DapperGenericRepository<T> : IGenericRepository<T> where T : BasicEntity
     {
 
-        private readonly string _tableName;
-        private readonly string _conString;
+        protected readonly string _tableName;
+        private readonly string _connectionString;
 
-        public DapperGenericRepository(string tableName, string conString)
+        public DapperGenericRepository(string tableName, string connectionString)
         {
-            _conString = conString;
+            _connectionString = connectionString;
             _tableName = tableName;
         }
 
         public async virtual Task Remove(T item)
         {
-            using (IDbConnection cn = new SqlConnection(_conString))
+            using (IDbConnection cn = new SqlConnection(_connectionString))
             {
                 cn.Open();
                 await cn.ExecuteAsync($"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = item.Id });
@@ -32,7 +32,7 @@ namespace BlackJack.DataAccess.Repositories.Dapper
 
         public async virtual Task<T> FindById(long id)
         {
-            using (IDbConnection cn = new SqlConnection(_conString))
+            using (IDbConnection cn = new SqlConnection(_connectionString))
             {
                 var result = (await cn.QueryAsync<T>($"SELECT * FROM {_tableName} WHERE Id=@Id", new { Id = id })).SingleOrDefault();
                 return result;
@@ -41,7 +41,7 @@ namespace BlackJack.DataAccess.Repositories.Dapper
 
         public async virtual Task<long> Create(T item)
         {
-            using (IDbConnection cn = new SqlConnection(_conString))
+            using (IDbConnection cn = new SqlConnection(_connectionString))
             {
                 item.Id = await cn.InsertAsync(item);
                 return item.Id;
@@ -50,7 +50,7 @@ namespace BlackJack.DataAccess.Repositories.Dapper
 
         public async virtual Task Update(T item)
         {
-            using (IDbConnection cn = new SqlConnection(_conString))
+            using (IDbConnection cn = new SqlConnection(_connectionString))
             {
                 await cn.UpdateAsync(item);
             }

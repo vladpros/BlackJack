@@ -1,4 +1,4 @@
-namespace BlackJack.DataAccess.Migrations
+namespace DataBaseControl.Migrations
 {
     using System;
     using System.Data.Entity;

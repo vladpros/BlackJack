@@ -113,8 +113,8 @@ namespace BlackJack.BusinessLogic.Service
                 {
                     GameId = game.Id,
                     PlayerId = playerId,
-                    LearCard = card.CardLear,
-                    NumberCard = card.CardNumber,
+                    CardLear = card.CardLear,
+                    CardNumber = card.CardNumber,
                 });
 
             return new CardHelper { CardLear = card.CardLear, CardNumber = card.CardNumber };
@@ -307,7 +307,7 @@ namespace BlackJack.BusinessLogic.Service
         private List<CardHelper> GetPlayerCard(long playerId, List<Turn> turns)
         {
             var result = turns.Where(p => p.PlayerId == playerId);
-            var result1 = result.Select(k => new CardHelper { CardLear = k.LearCard, CardNumber = k.NumberCard }).ToList();
+            var result1 = result.Select(k => new CardHelper { CardLear = k.CardLear, CardNumber = k.CardNumber }).ToList();
             return result1;
         }
 

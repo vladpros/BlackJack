@@ -14,27 +14,27 @@ namespace BlackJack.DataAccess.Repositories.Dapper
     public class DapperPlayerRepository : DapperGenericRepository<Player>, IPlayerRepository
     {
 
-        private readonly string _conString;
+        private readonly string _connectionString;
 
-        public DapperPlayerRepository(string conString) : base ("Players", conString)
+        public DapperPlayerRepository(string connectionString) : base ("Players", connectionString)
         {
-            _conString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            _connectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
         }
 
         public async Task<List<Player>> GetByType(PlayerType playerType)
         {
-            using (IDbConnection cn = new SqlConnection(_conString))
+            using (IDbConnection cn = new SqlConnection(_connectionString))
             {
-                var result = (await cn.QueryAsync<Player>("SELECT * FROM Players WHERE PlayerType=@playerType", new { playerType })).ToList();
+                var result = (await cn.QueryAsync<Player>($"SELECT * FROM {_tableName} WHERE PlayerType=@playerType", new { playerType })).ToList();
                 return result;
             }
         }
 
         public async Task<Player> SearchPlayerWithName(string name)
         {
-            using (IDbConnection cn = new SqlConnection(_conString))
+            using (IDbConnection cn = new SqlConnection(_connectionString))
             {
-                var result = (await cn.QueryAsync<Player>("SELECT * FROM Players WHERE Name=@name", new { name })).SingleOrDefault();
+                var result = (await cn.QueryAsync<Player>($"SELECT * FROM {_tableName} WHERE Name=@name", new { name })).SingleOrDefault();
                 return result;
             }
         }

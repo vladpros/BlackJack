@@ -5,11 +5,11 @@ namespace BlackJack.DataAccess.Repositories.Dapper
 {
     public class DapperGameResultRepository : DapperGenericRepository<GameResult>, IGameResultRepository
     {
-        private readonly string _conString;
+        private readonly string _connectionString;
 
-        public DapperGameResultRepository(string conString) : base("GameResults", conString)
+        public DapperGameResultRepository(string connectionString) : base("GameResults", connectionString)
         {
-            _conString = conString;
+            _connectionString = connectionString;
         }
     }
 }
