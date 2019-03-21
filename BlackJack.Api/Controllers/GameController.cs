@@ -4,6 +4,9 @@ using BlackJack.BusinessLogic.ViewModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Net;
+using System;
+using System.Web.Http.Results;
 
 namespace BlackJack.Api.Controllers
 {
@@ -18,42 +21,52 @@ namespace BlackJack.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<List<string>> GetName()
+        public async Task<IHttpActionResult> GetName()
         {
-            return await _gameService.GetUserOrdered(); ;
+            var names = await _gameService.GetUserOrdered();
+
+            return Ok(names);
         }
 
         [HttpGet]
-        public async Task<long> StartGame(string name, int botsNumber)
+        public async Task<IHttpActionResult> StartGame(string name, int botsNumber)
         {
-            await _gameService.ChekPlayer(name);
-
-            return await _gameService.StartGame(name, botsNumber);
+            long gameId;
+            try
+            {
+                await _gameService.ChekPlayer(name);
+                gameId = await _gameService.StartGame(name, botsNumber);
+            }
+            catch (Exception ex)
+            {
+                return new ExceptionResult(ex, this);
+            }
+            return Ok(gameId);
         }
 
         [HttpGet]
-        public async Task<IEnumerable<PlayerInGameViewModel>> ShowGame(long? gameId, long? choos)
+        public async Task<IHttpActionResult> ShowGame(long? gameId, long? choos)
         {
             long gameIdLong = (long)gameId;
             if(gameId == null)
             {
-                return new List<PlayerInGameViewModel>();
+                return NotFound();
             }
             if ((await _gameService.GetGame(gameIdLong)).GameStatus == GameStatus.Done)
             {
-                return new List<PlayerInGameViewModel>();
+                return NotFound();
             }
             if (choos == null && await _gameService.IsNewGame(gameIdLong))
             {
-               return await _gameService.DoFirstTwoRound(gameIdLong);
+               return Ok(await _gameService.DoFirstTwoRound(gameIdLong));
             }
             if (choos == null && !(await _gameService.IsNewGame(gameIdLong)))
             {
-                return await _gameService.LoadGame(gameIdLong);
+                return Ok(await _gameService.LoadGame(gameIdLong));
             }
             var gameResult = await _gameService.ContinuePlay(gameIdLong, (long)choos);
 
-            return gameResult;
+            return Ok(gameResult);
         }
     }
 }
