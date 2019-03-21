@@ -1,10 +1,7 @@
 ﻿using BlackJack.DataAccess.Entities.Enums;
 using BlackJack.BusinessLogic.Service.Interface;
-using BlackJack.BusinessLogic.ViewModel;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Net;
 using System;
 using System.Web.Http.Results;
 
