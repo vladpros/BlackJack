@@ -1,22 +1,24 @@
 ﻿using BlackJack.DataAccess.Entities.Enums;
 using BlackJack.BusinessLogic.Service.Interface;
 using BlackJack.BusinessLogic.ViewModel;
+using BlackJack.BusinessLogic.Utils;
 using Ninject;
+using Ninject.Modules;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DataBaseControl.Util;
 
-namespace BlackJack.Api.Controllers
+namespace BlackJack.Api2.Controllers
 {
 
     public class GameController : ApiController
     {
         private IGameService _gameService;
 
-        [Inject]
         public GameController(IGameService gameService)
         {
-           _gameService = gameService;
+            _gameService = gameService;
         }
 
         [HttpGet]
