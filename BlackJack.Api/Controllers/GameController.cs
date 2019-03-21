@@ -1,7 +1,6 @@
 ﻿using BlackJack.DataAccess.Entities.Enums;
 using BlackJack.BusinessLogic.Service.Interface;
 using BlackJack.BusinessLogic.ViewModel;
-using Ninject;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;

@@ -158,7 +158,6 @@ namespace BlackJack.BusinessLogic.Service
 
         public async Task<IEnumerable<PlayerInGameViewModel>> ContinuePlay(long gameId, long choose)
         {
-            //Game game = await _gameRepository.FindById(gameId);
             IEnumerable<PlayerInGameViewModel> gameStat = await InitializationGameStat(gameId);
             int continueGame = 1;
             int stopGame = 2;
@@ -173,7 +172,6 @@ namespace BlackJack.BusinessLogic.Service
                 gameStat = await DropCard(gameStat);
             }
 
-            //await _gameRepository.Update(game);
             gameStat = await CheckEndGame(gameStat);
 
             return gameStat;

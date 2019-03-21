@@ -6,7 +6,6 @@ namespace BlackJack.BusinessLogic
 {
     public class NinjectRegistrationService : NinjectModule
     {
-
         public override void Load()
         {
             Bind<IGameService>().To<GameService>();
