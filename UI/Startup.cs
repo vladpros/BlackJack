@@ -1,4 +1,8 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Optimization;
+using System.Web.Routing;
 using BlackJack.BusinessLogic.Utils;
 using DataBaseControl.Util;
 using Microsoft.Owin;
@@ -7,24 +11,17 @@ using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
 
-[assembly: OwinStartup(typeof(BlackJack.Api.Startup))]
+[assembly: OwinStartup(typeof(BlackJack.UI.Startup))]
 
-namespace BlackJack.Api
+namespace BlackJack.UI
 {
     public class Startup
     {
         public static void Configuration(IAppBuilder app)
         {
-            var webApiConfiguration = CreateHttpConfiguration();
-
-            app.UseNinjectMiddleware(CreateKernel).UseNinjectWebApi(webApiConfiguration);
-        }
-
-        public static HttpConfiguration CreateHttpConfiguration()
-        {
-            var httpConfiguration = new HttpConfiguration();
-            WebApiConfig.Register(httpConfiguration);
-            return httpConfiguration;
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            app.UseNinjectMiddleware(CreateKernel);
         }
 
         public static IKernel CreateKernel()

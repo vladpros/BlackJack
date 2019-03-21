@@ -13,7 +13,6 @@ namespace BlackJack.Api.Controllers
     {
         private IGameService _gameService;
 
-        [Inject]
         public GameController(IGameService gameService)
         {
            _gameService = gameService;

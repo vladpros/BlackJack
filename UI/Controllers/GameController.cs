@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
 using BlackJack.BusinessLogic.Service.Interface;
 using System.Threading.Tasks;
+using BlackJack.BusinessLogic.ViewModel;
+using BlackJack.DataAccess.Entities.Enums;
 
 namespace BlackJack.UI.Controllers
 {
@@ -46,9 +48,16 @@ namespace BlackJack.UI.Controllers
                 return RedirectToAction("Start");
             }
 
-            var v = await _gameService.ContinuePlay((long)gameId, (long)number);           
+            var gameStat = await _gameService.ContinuePlay((long)gameId, (long)number);
+            foreach (var player in gameStat)
+            {
+                if (IsEndGame(player))
+                {
+                    return RedirectToAction("GameResult", new { gameId });
+                }
+            }
 
-            return View(await _gameService.ContinuePlay((long)gameId, (long)number));
+            return View(gameStat);
         }
 
         public async Task<ActionResult> GameResult(long? gameId)
@@ -62,6 +71,10 @@ namespace BlackJack.UI.Controllers
             return View(await _gameService.ContinuePlay((long)gameId, 2));
         }
 
+        private bool IsEndGame(PlayerInGameViewModel player)
+        {
+            return player.PlayerType == PlayerType.User && player.PlayerStatus != PlayerStatus.Play || player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose;
+        }
 
     }
 }
