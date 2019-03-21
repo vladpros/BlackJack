@@ -10,7 +10,7 @@ namespace BlackJack.DataAccess.Entities
         public int BotsNumber { get; set; }
         public long PlayerId { get; set; }
 
-        [Computed]
+        [Write(false)]
         public List<Turn> Turns { get; set; }
 
         public Game()

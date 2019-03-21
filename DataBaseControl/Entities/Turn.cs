@@ -12,11 +12,11 @@ namespace BlackJack.DataAccess.Entities
         public CardNumber CardNumber { get; set; }
 
         [ForeignKey("GameId")]
-        [Computed]
+        [Write(false)]
         public Game Game { get; set; }
 
         [ForeignKey("PlayerId")]
-        [Computed]
+        [Write(false)]
         public Player Player { get; set; }
     }
 }

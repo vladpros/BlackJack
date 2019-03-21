@@ -9,7 +9,7 @@ namespace BlackJack.DataAccess.Entities
         public string Name { get; set; }
         public PlayerType PlayerType { get; set; }
 
-        [Computed]
+        [Write(false)]
         public virtual List<Turn> Turns { get; set; }
 
         public Player()
