@@ -8,8 +8,10 @@ namespace BlackJack.BusinessLogic.Helpers
     public class DeckHelper
     {
         private Random _random;
-        private int _numberLeaf = 4;
-        private int _nuberCardNumber = 14;
+        private int _maxCardLeaf = 4;
+        private int _maxCardNumber = 14;
+        private int _minCardLeaf = 1;
+        private int _minCardNumber = 2;
         private int _pointCard = 10;
         public List<CardHelper> Cards { get; set; }
         public int NumberCard
@@ -25,9 +27,9 @@ namespace BlackJack.BusinessLogic.Helpers
             _random = new Random();
             Cards = new List<CardHelper>();
 
-            for (int i = 1; i < _numberLeaf + 1; i++)
+            for (int i = _minCardLeaf; i <= _maxCardLeaf; i++)
             {
-                for (int j = 2; j < _nuberCardNumber + 1; j++)
+                for (int j = _minCardNumber; j <= _maxCardNumber; j++)
                 {
                     Cards.Add(
                               new CardHelper

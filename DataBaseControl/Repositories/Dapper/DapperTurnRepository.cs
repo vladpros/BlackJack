@@ -11,7 +11,6 @@ namespace BlackJack.DataAccess.Repositories.Dapper
 {
     public class DapperTurnRepository : DapperGenericRepository<Turn>, ITurnRepository
     {
-
         private readonly string _connectionString;
 
         public DapperTurnRepository(string connectionString) : base("Turns", connectionString)

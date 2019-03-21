@@ -1,14 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 using System.Web.Routing;
-using BlackJack.BusinessLogic.Utils;
-using DataBaseControl.Util;
+using BlackJack.BusinessLogic;
+using BlackJack.DataAccess;
 using Microsoft.Owin;
 using Ninject;
 using Ninject.Web.Common.OwinHost;
-using Ninject.Web.WebApi.OwinHost;
 using Owin;
 
 [assembly: OwinStartup(typeof(BlackJack.UI.Startup))]

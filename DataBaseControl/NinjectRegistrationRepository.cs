@@ -1,17 +1,16 @@
-﻿using BlackJack.DataAccess;
-using BlackJack.DataAccess.Repositories.Dapper;
+﻿using BlackJack.DataAccess.Repositories.Dapper;
 using BlackJack.DataAccess.Repositories.EF;
 using BlackJack.DataAccess.Repositories.Interfaces;
 using Ninject.Modules;
 using System.Configuration;
 
-namespace DataBaseControl.Util
+namespace BlackJack.DataAccess
 {
     public class NinjectRegistrationRepository : NinjectModule
     {
         public override void Load()
         {
-            bool useDapper = false;
+            bool useDapper = true;
             if (useDapper)
             {
                 string conString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;

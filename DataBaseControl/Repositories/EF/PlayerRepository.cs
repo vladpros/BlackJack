@@ -9,7 +9,6 @@ namespace BlackJack.DataAccess.Repositories.EF
 {
     public class PlayerRepository : GenericRepository<Player>, IPlayerRepository
     {
-
         private BlackJackContext _context;
 
         public PlayerRepository(BlackJackContext context) : base(context)

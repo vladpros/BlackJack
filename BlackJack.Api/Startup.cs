@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
-using BlackJack.BusinessLogic.Utils;
-using DataBaseControl.Util;
+using BlackJack.BusinessLogic;
+using BlackJack.DataAccess;
 using Microsoft.Owin;
 using Ninject;
 using Ninject.Web.Common.OwinHost;

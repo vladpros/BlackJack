@@ -13,12 +13,11 @@ namespace BlackJack.DataAccess.Repositories.Dapper
 {
     public class DapperPlayerRepository : DapperGenericRepository<Player>, IPlayerRepository
     {
-
         private readonly string _connectionString;
 
         public DapperPlayerRepository(string connectionString) : base ("Players", connectionString)
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            _connectionString = connectionString;
         }
 
         public async Task<List<Player>> GetByType(PlayerType playerType)

@@ -11,7 +11,6 @@ namespace BlackJack.DataAccess.Repositories.Dapper
 {
     public class DapperGenericRepository<T> : IGenericRepository<T> where T : BasicEntity
     {
-
         protected readonly string _tableName;
         private readonly string _connectionString;
 

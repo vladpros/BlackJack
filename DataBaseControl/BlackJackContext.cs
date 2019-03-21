@@ -5,7 +5,6 @@ namespace BlackJack.DataAccess
 {
     public class BlackJackContext : DbContext
     {
-
         public BlackJackContext() : base("DbConnection")
         { }
 

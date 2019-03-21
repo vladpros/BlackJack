@@ -2,7 +2,7 @@
 using Ninject.Modules;
 using BlackJack.BusinessLogic.Service;
 
-namespace BlackJack.BusinessLogic.Utils
+namespace BlackJack.BusinessLogic
 {
     public class NinjectRegistrationService : NinjectModule
     {
