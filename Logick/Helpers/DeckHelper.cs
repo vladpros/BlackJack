@@ -12,7 +12,7 @@ namespace BlackJack.BusinessLogic.Helpers
         private int _maxCardNumber = 14;
         private int _minCardLear = 1;
         private int _minCardNumber = 2;
-        public List<CardHelper> Cards { get; set; }
+        public List<CardView> Cards { get; set; }
         public int NumberCard
         {
             get
@@ -24,14 +24,14 @@ namespace BlackJack.BusinessLogic.Helpers
         public DeckHelper()
         {
             _random = new Random();
-            Cards = new List<CardHelper>();
+            Cards = new List<CardView>();
 
             for (int i = _minCardLear; i <= _maxCardLear; i++)
             {
                 for (int j = _minCardNumber; j <= _maxCardNumber; j++)
                 {
                     Cards.Add(
-                              new CardHelper
+                              new CardView
                               {
                                   CardLear = (CardLear)i,
                                   CardNumber = (CardNumber)j
@@ -52,10 +52,10 @@ namespace BlackJack.BusinessLogic.Helpers
             }
         }
 
-        public CardHelper GiveCard()
+        public CardView GiveCard()
         {
             int rand = _random.Next(0, Cards.Count);
-            CardHelper card = Cards[rand];
+            CardView card = Cards[rand];
             Cards.RemoveAt(rand);
 
             return card;

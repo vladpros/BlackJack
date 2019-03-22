@@ -1,5 +1,6 @@
 ﻿using BlackJack.DataAccess.Entities;
 using BlackJack.DataAccess.Repositories.Interfaces;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
@@ -30,6 +31,11 @@ namespace BlackJack.DataAccess.Repositories.EF
             return  iten.Id;
         }
 
+        public async Task Create(IEnumerable<T> items)
+        {
+            var iten = await Task.Run(() => _dbSet.AddRange(items));
+            await Task.Run(() => _context.SaveChanges());
+        }
         public async Task Update(T item)
         {
             await Task.Run(() => _context.Entry(item).State = EntityState.Modified);

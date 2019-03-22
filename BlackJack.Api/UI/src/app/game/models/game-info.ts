@@ -3,7 +3,7 @@ import { Card } from './card';
 export interface GameInfo {
   PlayerName: string;
   Cards: Card;
-  Point: number;
+  Points: number;
   PlayerStatus: number;
   GameId: number;
 }

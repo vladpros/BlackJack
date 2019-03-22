@@ -48,6 +48,8 @@
     <Compile Include="Service\Interface\IGameService.cs" />
     <Compile Include="Helpers\CardHelper.cs" />
     <Compile Include="Helpers\DeckHelper.cs" />
+    <Compile Include="ViewModel\CardView.cs" />
+    <Compile Include="ViewModel\Enum\PlayerChoos.cs" />
     <Compile Include="ViewModel\PlayerInGameView.cs" />
     <Compile Include="Service\GameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

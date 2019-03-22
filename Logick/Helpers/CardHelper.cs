@@ -1,14 +1,12 @@
-﻿using BlackJack.DataAccess.Entities.Enums;
+﻿using BlackJack.BusinessLogic.ViewModel;
 
 namespace BlackJack.BusinessLogic.Helpers
 {
     public class CardHelper
     {
-        public CardLear CardLear { get; set; }
-        public CardNumber CardNumber { get; set; }
         private int _pointCard = 10;
 
-        public int GetCardPoint(CardHelper card)
+        public int GetCardPoint(CardView card)
         {
             if ((int)card.CardNumber < _pointCard)
             {

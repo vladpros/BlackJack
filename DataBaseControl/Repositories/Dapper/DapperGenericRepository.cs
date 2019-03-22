@@ -2,6 +2,7 @@
 using BlackJack.DataAccess.Repositories.Interfaces;
 using Dapper;
 using Dapper.Contrib.Extensions;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -43,6 +44,14 @@ namespace BlackJack.DataAccess.Repositories.Dapper
             {
                 item.Id = await cn.InsertAsync(item);
                 return item.Id;
+            }
+        }
+
+        public async virtual Task Create(IEnumerable<T> items)
+        {
+            using (IDbConnection cn = new SqlConnection(_connectionString))
+            {
+                await cn.InsertAsync(items);
             }
         }
 

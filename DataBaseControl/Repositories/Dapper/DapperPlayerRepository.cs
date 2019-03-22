@@ -20,11 +20,30 @@ namespace BlackJack.DataAccess.Repositories.Dapper
             _connectionString = connectionString;
         }
 
-        public async Task<List<Player>> GetByType(PlayerType playerType, int number)
+        public async Task<List<Player>> GetByType(PlayerType playerType)
+        {
+            using (IDbConnection cn = new SqlConnection(_connectionString))
+            {
+                var result = (await cn.QueryAsync<Player>($"SELECT * FROM {_tableName} WHERE PlayerType=@playerType", new { playerType })).ToList();
+                return result;
+            }
+        }
+
+        public async Task<List<Player>> GetByTypeNumber(PlayerType playerType, int number = 1)
         {
             using (IDbConnection cn = new SqlConnection(_connectionString))
             {
                 var result = (await cn.QueryAsync<Player>($"SELECT TOP (@number) * FROM {_tableName} WHERE PlayerType=@playerType", new { number, playerType })).ToList();
+                return result;
+            }
+        }
+
+        public async Task<List<Player>> SearchPlayersWithIds(List<long> playersId)
+        {
+            using (IDbConnection cn = new SqlConnection(_connectionString))
+            {
+                var result = (await cn.QueryAsync<Player>($"SELECT * FROM {_tableName} WHERE Id IN @playersId", new { playersId })).ToList();
+
                 return result;
             }
         }

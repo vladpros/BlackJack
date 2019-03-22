@@ -1,5 +1,5 @@
 ﻿@using BlackJack.BusinessLogic.ViewModel
-@model IEnumerable<PlayerInGameViewModel>
+@model IEnumerable<PlayerInGameView>
 @{
     ViewBag.Title = "GameResult";
 }
@@ -16,7 +16,7 @@
     {
         <tr>
             <td><p>@b.PlayerName</p></td>
-            <td><p>@b.Point</p></td>
+            <td><p>@b.Points</p></td>
             <td><p>@b.PlayerStatus</p></td>
         </tr>
     }

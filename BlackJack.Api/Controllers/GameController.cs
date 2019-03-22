@@ -5,6 +5,7 @@ using System.Web.Http;
 using System;
 using BlackJack.BusinessLogic.ViewModel;
 using System.Collections.Generic;
+using BlackJack.BusinessLogick.ViewModel.Enum;
 
 namespace BlackJack.Api.Controllers
 {
@@ -39,7 +40,7 @@ namespace BlackJack.Api.Controllers
             long gameId;
             try
             {
-                await _gameService.CheсkPlayer(name);
+                await _gameService.CheсkAndRegisterPlayer(name);
                 gameId = await _gameService.StartGame(name, botsNumber);
             }
             catch (Exception exception)
@@ -72,7 +73,7 @@ namespace BlackJack.Api.Controllers
                 {
                     return Ok(await _gameService.LoadGame(gameIdLong));
                 }
-                gameStatistics = await _gameService.ContinuePlaying(gameIdLong, (long)choos);
+                gameStatistics = await _gameService.ContinuePlaying(gameIdLong, (PlayerChoos)choos);
             }
             catch (Exception exeption)
             {
