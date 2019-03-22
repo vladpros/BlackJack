@@ -319,9 +319,9 @@ namespace BlackJack.BusinessLogic.Service
             List<PlayerInGameView> players = new List<PlayerInGameView>();
             List<Player> bots = await _playerRepository.GetByTypeNumber(PlayerType.Bot, botsNumber);
             Player dealer = (await _playerRepository.GetByTypeNumber(PlayerType.Dealer)).SingleOrDefault();
-            players.Add(GetPlayerInGameView(player, gameId));
             players.Add(GetPlayerInGameView(dealer, gameId));
             players.AddRange(bots.Select(bot => GetPlayerInGameView(bot,gameId)));
+            players.Add(GetPlayerInGameView(player, gameId));
 
             return players;
         }
@@ -409,6 +409,16 @@ namespace BlackJack.BusinessLogic.Service
         public async Task<IEnumerable<PlayerInGameView>> LoadGame(long gameId)
         {
             IEnumerable<PlayerInGameView> gameStatistics = await InitializGameStatistics(gameId);
+            IEnumerable<GameResult> gameResults = await _gameResultRepository.GetGameResult(gameId);
+            if(gameResults.FirstOrDefault() == null)
+            {
+                return gameStatistics;
+            }
+
+            foreach(var player in gameStatistics)
+            {
+                player.PlayerStatus = gameResults.SingleOrDefault(p => p.PlayerId == player.PlayerId).PlayerStatus;
+            }
 
             return gameStatistics;
         }

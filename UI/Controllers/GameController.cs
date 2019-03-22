@@ -77,9 +77,10 @@ namespace BlackJack.UI.Controllers
                 }
 
                 gameStatistics = await _gameService.ContinuePlaying((long)gameId, (PlayerChoos)number);
+
                 foreach (var player in gameStatistics)
                 {
-                    if (IsEndGame(player))
+                    if (player.PlayerStatus == PlayerStatus.Won)
                     {
                         return RedirectToAction("GameResult", new { gameId });
                     }
@@ -110,11 +111,6 @@ namespace BlackJack.UI.Controllers
                 return View("~/Views/Shared/Error.cshtml", exeption);
             }
             return View(gameStatistics);
-        }
-
-        private bool IsEndGame(PlayerInGameView player)
-        {
-            return player.PlayerType == PlayerType.User && player.PlayerStatus != PlayerStatus.Play || player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose;
         }
 
     }

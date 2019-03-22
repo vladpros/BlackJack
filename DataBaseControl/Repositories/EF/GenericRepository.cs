@@ -36,6 +36,7 @@ namespace BlackJack.DataAccess.Repositories.EF
             var iten = await Task.Run(() => _dbSet.AddRange(items));
             await Task.Run(() => _context.SaveChanges());
         }
+
         public async Task Update(T item)
         {
             await Task.Run(() => _context.Entry(item).State = EntityState.Modified);
