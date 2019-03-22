@@ -11,7 +11,7 @@ namespace BlackJack.BusinessLogic.Service.Interface
         Task<IEnumerable<PlayerInGameView>> DoFirstTwoRounds(long gameId);
         Task<IEnumerable<PlayerInGameView>> ContinuePlaying(long gameId, long choose);
         Task CheсkPlayer(string name);
-        Task<List<string>> GetUserOrdered();
+        Task<List<string>> GetOrderedUsers();
         Task<Game> GetGame(long gameId);
         Task<IEnumerable<PlayerInGameView>> GetGameResult(IEnumerable<PlayerInGameView> gameStat);
         Task<bool> IsNewGame(long gameId);

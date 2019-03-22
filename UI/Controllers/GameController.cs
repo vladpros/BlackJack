@@ -17,7 +17,7 @@ namespace BlackJack.UI.Controllers
 
         public async Task<ActionResult> Start()
         {
-            ViewBag.Player = await _gameService.GetUserOrdered();
+            ViewBag.Player = await _gameService.GetOrderedUsers();
 
             return View();
         }

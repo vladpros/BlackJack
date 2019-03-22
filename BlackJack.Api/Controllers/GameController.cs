@@ -20,7 +20,7 @@ namespace BlackJack.Api.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> GetName()
         {
-            var names = await _gameService.GetUserOrdered();
+            var names = await _gameService.GetOrderedUsers();
 
             return Ok(names);
         }
