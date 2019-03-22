@@ -6,19 +6,19 @@ using System.Configuration;
 
 namespace BlackJack.DataAccess
 {
-    public class NinjectRegistrationRepository : NinjectModule
+    public class NinjectRepositoryRegistration : NinjectModule
     {
         public override void Load()
         {
             bool useDapper = true;
             if (useDapper)
             {
-                string conString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+                string connectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
 
-                Bind<IGameRepository>().To<DapperGameRepository>().WithConstructorArgument("connectionString", conString);
-                Bind<IGameResultRepository>().To<DapperGameResultRepository>().WithConstructorArgument("connectionString", conString);
-                Bind<IPlayerRepository>().To<DapperPlayerRepository>().WithConstructorArgument("connectionString", conString);
-                Bind<ITurnRepository>().To<DapperTurnRepository>().WithConstructorArgument("connectionString", conString);
+                Bind<IGameRepository>().To<DapperGameRepository>().WithConstructorArgument("connectionString", connectionString);
+                Bind<IGameResultRepository>().To<DapperGameResultRepository>().WithConstructorArgument("connectionString", connectionString);
+                Bind<IPlayerRepository>().To<DapperPlayerRepository>().WithConstructorArgument("connectionString", connectionString);
+                Bind<ITurnRepository>().To<DapperTurnRepository>().WithConstructorArgument("connectionString", connectionString);
 
                 return;
             }

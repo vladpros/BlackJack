@@ -55,7 +55,7 @@ namespace BlackJack.BusinessLogic.Service
             return gameStat;
         }
 
-        public async Task<IEnumerable<PlayerInGameViewModel>> DoFirstTwoRound(long gameId)
+        public async Task<IEnumerable<PlayerInGameViewModel>> DoFirstTwoRounds(long gameId)
         {
             DeckHelper deck = new DeckHelper();
             Game game = await _gameRepository.FindById(gameId);
@@ -156,7 +156,7 @@ namespace BlackJack.BusinessLogic.Service
             return gameStat;
         }
 
-        public async Task<IEnumerable<PlayerInGameViewModel>> ContinuePlay(long gameId, long choose)
+        public async Task<IEnumerable<PlayerInGameViewModel>> ContinuePlaying(long gameId, long choose)
         {
             IEnumerable<PlayerInGameViewModel> gameStat = await InitializationGameStat(gameId);
             int continueGame = 1;
@@ -273,7 +273,7 @@ namespace BlackJack.BusinessLogic.Service
             return true;
         }
 
-        public async Task ChekPlayer(string name)
+        public async Task CheсkPlayer(string name)
         {
             if ((await _playerRepository.SearchPlayerWithName(name)) == null)
             {

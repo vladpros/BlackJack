@@ -8,9 +8,9 @@ namespace BlackJack.BusinessLogic.Helpers
     public class DeckHelper
     {
         private Random _random;
-        private int _maxCardLeaf = 4;
+        private int _maxCardLear = 4;
         private int _maxCardNumber = 14;
-        private int _minCardLeaf = 1;
+        private int _minCardLear = 1;
         private int _minCardNumber = 2;
         private int _pointCard = 10;
         public List<CardHelper> Cards { get; set; }
@@ -27,7 +27,7 @@ namespace BlackJack.BusinessLogic.Helpers
             _random = new Random();
             Cards = new List<CardHelper>();
 
-            for (int i = _minCardLeaf; i <= _maxCardLeaf; i++)
+            for (int i = _minCardLear; i <= _maxCardLear; i++)
             {
                 for (int j = _minCardNumber; j <= _maxCardNumber; j++)
                 {

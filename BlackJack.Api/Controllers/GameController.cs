@@ -31,7 +31,7 @@ namespace BlackJack.Api.Controllers
             long gameId;
             try
             {
-                await _gameService.ChekPlayer(name);
+                await _gameService.CheсkPlayer(name);
                 gameId = await _gameService.StartGame(name, botsNumber);
             }
             catch (Exception ex)
@@ -55,13 +55,13 @@ namespace BlackJack.Api.Controllers
             }
             if (choos == null && await _gameService.IsNewGame(gameIdLong))
             {
-               return Ok(await _gameService.DoFirstTwoRound(gameIdLong));
+               return Ok(await _gameService.DoFirstTwoRounds(gameIdLong));
             }
             if (choos == null && !(await _gameService.IsNewGame(gameIdLong)))
             {
                 return Ok(await _gameService.LoadGame(gameIdLong));
             }
-            var gameResult = await _gameService.ContinuePlay(gameIdLong, (long)choos);
+            var gameResult = await _gameService.ContinuePlaying(gameIdLong, (long)choos);
 
             return Ok(gameResult);
         }

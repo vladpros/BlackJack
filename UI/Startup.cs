@@ -23,7 +23,7 @@ namespace BlackJack.UI
         public static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
-            kernel.Load(new NinjectRegistrationRepository(), new NinjectRegistrationService());
+            kernel.Load(new NinjectRepositoryRegistration(), new NinjectServiceRegistration());
             return kernel;
         }
     }

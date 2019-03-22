@@ -4,7 +4,7 @@ using BlackJack.BusinessLogic.Service;
 
 namespace BlackJack.BusinessLogic
 {
-    public class NinjectRegistrationService : NinjectModule
+    public class NinjectServiceRegistration : NinjectModule
     {
         public override void Load()
         {

@@ -25,7 +25,7 @@ namespace BlackJack.UI.Controllers
         [HttpPost]
         public async Task<ActionResult> Start(string player, int botsNumber)
         {
-            await _gameService.ChekPlayer(player);
+            await _gameService.CheсkPlayer(player);
 
             return RedirectToAction("GameShow", new { gameId = await _gameService.StartGame(player, botsNumber) });
         }
@@ -37,7 +37,7 @@ namespace BlackJack.UI.Controllers
                 return RedirectToAction("Start");
             }
          
-            return View(await _gameService.DoFirstTwoRound((long)gameId));
+            return View(await _gameService.DoFirstTwoRounds((long)gameId));
         }
 
         [HttpPost]
@@ -48,7 +48,7 @@ namespace BlackJack.UI.Controllers
                 return RedirectToAction("Start");
             }
 
-            var gameStat = await _gameService.ContinuePlay((long)gameId, (long)number);
+            var gameStat = await _gameService.ContinuePlaying((long)gameId, (long)number);
             foreach (var player in gameStat)
             {
                 if (IsEndGame(player))
@@ -69,7 +69,7 @@ namespace BlackJack.UI.Controllers
             }
 
 
-            return View(await _gameService.ContinuePlay((long)gameId, 2));
+            return View(await _gameService.ContinuePlaying((long)gameId, 2));
         }
 
         private bool IsEndGame(PlayerInGameViewModel player)

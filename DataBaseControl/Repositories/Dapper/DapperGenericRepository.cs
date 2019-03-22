@@ -24,7 +24,6 @@ namespace BlackJack.DataAccess.Repositories.Dapper
         {
             using (IDbConnection cn = new SqlConnection(_connectionString))
             {
-                cn.Open();
                 await cn.ExecuteAsync($"DELETE FROM {_tableName} WHERE Id=@Id", new { Id = item.Id });
             }
         }
