@@ -8,13 +8,13 @@ namespace BlackJack.BusinessLogic.Service.Interface
     public interface IGameService
     {
         Task<long> StartGame(string playerName, int botsNumber);
-        Task<IEnumerable<PlayerInGameViewModel>> DoFirstTwoRounds(long gameId);
-        Task<IEnumerable<PlayerInGameViewModel>> ContinuePlaying(long gameId, long choose);
+        Task<IEnumerable<PlayerInGameView>> DoFirstTwoRounds(long gameId);
+        Task<IEnumerable<PlayerInGameView>> ContinuePlaying(long gameId, long choose);
         Task CheсkPlayer(string name);
         Task<List<string>> GetUserOrdered();
         Task<Game> GetGame(long gameId);
-        Task<IEnumerable<PlayerInGameViewModel>> GetGameResult(IEnumerable<PlayerInGameViewModel> gameStat);
+        Task<IEnumerable<PlayerInGameView>> GetGameResult(IEnumerable<PlayerInGameView> gameStat);
         Task<bool> IsNewGame(long gameId);
-        Task<IEnumerable<PlayerInGameViewModel>> LoadGame(long gameId);
+        Task<IEnumerable<PlayerInGameView>> LoadGame(long gameId);
     }
 }

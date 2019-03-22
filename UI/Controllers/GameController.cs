@@ -72,7 +72,7 @@ namespace BlackJack.UI.Controllers
             return View(await _gameService.ContinuePlaying((long)gameId, 2));
         }
 
-        private bool IsEndGame(PlayerInGameViewModel player)
+        private bool IsEndGame(PlayerInGameView player)
         {
             return player.PlayerType == PlayerType.User && player.PlayerStatus != PlayerStatus.Play || player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose;
         }

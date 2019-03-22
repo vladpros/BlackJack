@@ -13,32 +13,27 @@ namespace BlackJack.BusinessLogic.Service
 {
     public class GameService : IGameService
     {
-        private Random _random;
         private IPlayerRepository _playerRepository;
         private IGameRepository _gameRepository;
         private ITurnRepository _turnRepository;
         private int _maxPoint;
         private int _minPoint;
         private IGameResultRepository _gameResultRepository;
-        private DeckHelper _deckHelper;
 
         public GameService(IGameRepository gameRepository, ITurnRepository turnRepository, IPlayerRepository playerRepository, IGameResultRepository gameResultRepository)
         {
-            _random = new Random();
             _playerRepository = playerRepository;
             _gameRepository = gameRepository;
             _turnRepository = turnRepository;
             _maxPoint = 21;
             _minPoint = 17;
             _gameResultRepository = gameResultRepository;
-            _deckHelper = new DeckHelper();
         }
 
         public async Task<long> StartGame(string playerName, int botsNumber)
         {
             Player player = await _playerRepository.SearchPlayerWithName(playerName);
             Game game = new Game();
-
             game.GameStatus = GameStatus.InProgress;
             game.PlayerId = player.Id;
             game.BotsNumber = botsNumber;
@@ -46,38 +41,38 @@ namespace BlackJack.BusinessLogic.Service
             return await _gameRepository.Create(game); 
         }
 
-        private async Task<IEnumerable<PlayerInGameViewModel>> CreatGameStat(Game game)
+        private async Task<IEnumerable<PlayerInGameView>> CreateGameStatistics(Game game)
         {
-            IEnumerable<PlayerInGameViewModel> gameStat = new List<PlayerInGameViewModel>();
+            IEnumerable<PlayerInGameView> gameStatistics = new List<PlayerInGameView>();
             Player player = await _playerRepository.FindById(game.PlayerId);
-            gameStat = await GeneratePlayers(player, game.BotsNumber, game.Id);
+            gameStatistics = await GeneratePlayers(player, game.BotsNumber, game.Id);
 
-            return gameStat;
+            return gameStatistics;
         }
 
-        public async Task<IEnumerable<PlayerInGameViewModel>> DoFirstTwoRounds(long gameId)
+        public async Task<IEnumerable<PlayerInGameView>> DoFirstTwoRounds(long gameId)
         {
             DeckHelper deck = new DeckHelper();
             Game game = await _gameRepository.FindById(gameId);
-            IEnumerable<PlayerInGameViewModel> gameStat = await CreatGameStat(game);
+            IEnumerable<PlayerInGameView> gameStatistics = await CreateGameStatistics(game);
 
-            gameStat = await DoRound(gameStat, deck);
-            CheckPoint(gameStat);
+            gameStatistics = await DoRound(gameStatistics, deck);
+            CheckPoint(gameStatistics);
 
-            return gameStat;
+            return gameStatistics;
         }
 
-        private async Task<IEnumerable<PlayerInGameViewModel>> DoRound(IEnumerable<PlayerInGameViewModel> gameStat, DeckHelper deck)
+        private async Task<IEnumerable<PlayerInGameView>> DoRound(IEnumerable<PlayerInGameView> gameStatistics, DeckHelper deck)
         {
-            await DoRoundWithoutPlayerType(gameStat, deck, PlayerType.None);
-            await DoRoundWithoutPlayerType(gameStat, deck, PlayerType.None);
+            await DoRoundWithoutPlayerType(gameStatistics, deck, PlayerType.None);
+            await DoRoundWithoutPlayerType(gameStatistics, deck, PlayerType.None);
 
-            return gameStat;
+            return gameStatistics;
         }
 
-        private async Task<IEnumerable<PlayerInGameViewModel>> DoRoundWithoutPlayerType(IEnumerable<PlayerInGameViewModel> gameStat, DeckHelper deck, PlayerType playerType)
+        private async Task<IEnumerable<PlayerInGameView>> DoRoundWithoutPlayerType(IEnumerable<PlayerInGameView> gameStatistics, DeckHelper deck, PlayerType playerType)
         {
-            foreach (var player in gameStat)
+            foreach (var player in gameStatistics)
             {
                 if (player.PlayerType != playerType && player.PlayerStatus == PlayerStatus.Play)
                 {
@@ -86,21 +81,21 @@ namespace BlackJack.BusinessLogic.Service
                 }
             }
 
-            return gameStat;
+            return gameStatistics;
         }
 
-        private async Task<IEnumerable<PlayerInGameViewModel>> DoRoundWithPlayerType(IEnumerable<PlayerInGameViewModel> gameStat, DeckHelper deck, PlayerType playerType1)
+        private async Task<IEnumerable<PlayerInGameView>> DoRoundWithPlayerType(IEnumerable<PlayerInGameView> gameStatistics, DeckHelper deck, PlayerType playerType)
         {
-            foreach (var player in gameStat)
+            foreach (var player in gameStatistics)
             {
-                if (player.PlayerType == playerType1 && player.PlayerStatus == PlayerStatus.Play)
+                if (player.PlayerType == playerType && player.PlayerStatus == PlayerStatus.Play)
                 {
                     CardHelper card = await Task.Run(() => DoTurn(player.PlayerId, player.GameId, deck));
                     player.Cards.Add(card);
                 }
             }
 
-            return gameStat;
+            return gameStatistics;
         }
 
         private async Task<CardHelper> DoTurn(long playerId, long gameId, DeckHelper deck)
@@ -120,20 +115,21 @@ namespace BlackJack.BusinessLogic.Service
             return new CardHelper { CardLear = card.CardLear, CardNumber = card.CardNumber };
         }
 
-        private int CountPoint(PlayerInGameViewModel player)
+        private int CountPoint(PlayerInGameView player)
         {
+            CardHelper cardHelper = new CardHelper();
             player.Point = 0;
             foreach (var card in player.Cards)
             {
-                player.Point += _deckHelper.GetCardPoint(card);
+                player.Point += cardHelper.GetCardPoint(card);
             }
 
             return player.Point;
         }
 
-        private void CheckPoint(IEnumerable<PlayerInGameViewModel> playersInGame)
+        private void CheckPoint(IEnumerable<PlayerInGameView> gameStatistics)
         {
-            foreach (var player in playersInGame)
+            foreach (var player in gameStatistics)
             {
                 player.Point = CountPoint(player);
                 if (player.Point > _maxPoint)
@@ -145,107 +141,107 @@ namespace BlackJack.BusinessLogic.Service
             return;
         }
 
-        private async Task<IEnumerable<PlayerInGameViewModel>> InitializationGameStat(long gameId)
+        private async Task<IEnumerable<PlayerInGameView>> InitializationGameStatistics(long gameId)
         {
             Game game = await _gameRepository.FindById(gameId);
-            IEnumerable<PlayerInGameViewModel> gameStat = new List<PlayerInGameViewModel>();
-            gameStat = await CreatPlayersInGame(game);
+            IEnumerable<PlayerInGameView> gameStatistics = new List<PlayerInGameView>();
+            gameStatistics = await CreatPlayersInGame(game);
 
-            CheckPoint(gameStat);
+            CheckPoint(gameStatistics);
 
-            return gameStat;
+            return gameStatistics;
         }
 
-        public async Task<IEnumerable<PlayerInGameViewModel>> ContinuePlaying(long gameId, long choose)
+        public async Task<IEnumerable<PlayerInGameView>> ContinuePlaying(long gameId, long choose)
         {
-            IEnumerable<PlayerInGameViewModel> gameStat = await InitializationGameStat(gameId);
+            IEnumerable<PlayerInGameView> gameStatistics = await InitializationGameStatistics(gameId);
             int continueGame = 1;
             int stopGame = 2;
 
             if (choose == continueGame)
             {
-                gameStat = await TakeCard(gameStat);
+                gameStatistics = await TakeCard(gameStatistics);
             }
             if (choose == stopGame)
             {
-                gameStat.ToList().Find(p => p.PlayerType == PlayerType.User).PlayerStatus = PlayerStatus.Wait;
-                gameStat = await DropCard(gameStat);
+                gameStatistics.ToList().Find(p => p.PlayerType == PlayerType.User).PlayerStatus = PlayerStatus.Wait;
+                gameStatistics = await DropCard(gameStatistics);
             }
 
-            gameStat = await CheckEndGame(gameStat);
+            gameStatistics = await CheckEndGame(gameStatistics);
 
-            return gameStat;
+            return gameStatistics;
         }
 
-        private async Task<IEnumerable<PlayerInGameViewModel>> TakeCard(IEnumerable<PlayerInGameViewModel> gameStat)
+        private async Task<IEnumerable<PlayerInGameView>> TakeCard(IEnumerable<PlayerInGameView> gameStatistics)
         {
-            DeckHelper deck = new DeckHelper(gameStat);
-            await DoRoundWithoutPlayerType(gameStat, deck, PlayerType.Dealer);
-            CheckPoint(gameStat);
+            DeckHelper deck = new DeckHelper(gameStatistics);
+            await DoRoundWithoutPlayerType(gameStatistics, deck, PlayerType.Dealer);
+            CheckPoint(gameStatistics);
 
-            return gameStat;
+            return gameStatistics;
         }
 
-        private async Task<IEnumerable<PlayerInGameViewModel>> DropCard(IEnumerable<PlayerInGameViewModel> gameStat)
+        private async Task<IEnumerable<PlayerInGameView>> DropCard(IEnumerable<PlayerInGameView> gameStatistics)
         {
-            DeckHelper deck = new DeckHelper(gameStat);
-            int dealerIndex = gameStat.ToList().FindIndex(p => p.PlayerType == PlayerType.Dealer);
+            DeckHelper deck = new DeckHelper(gameStatistics);
+            int dealerIndex = gameStatistics.ToList().FindIndex(p => p.PlayerType == PlayerType.Dealer);
 
-            while (CountPoint(gameStat.ElementAtOrDefault(dealerIndex)) <= _minPoint)
+            while (CountPoint(gameStatistics.ElementAtOrDefault(dealerIndex)) <= _minPoint)
             {
-                await DoRoundWithPlayerType(gameStat, deck, PlayerType.Dealer);
+                await DoRoundWithPlayerType(gameStatistics, deck, PlayerType.Dealer);
             }
-            if (CountPoint(gameStat.ElementAtOrDefault(dealerIndex)) > _maxPoint)
+            if (CountPoint(gameStatistics.ElementAtOrDefault(dealerIndex)) > _maxPoint)
             {
-                gameStat.ElementAtOrDefault(dealerIndex).PlayerStatus = PlayerStatus.Lose;
+                gameStatistics.ElementAtOrDefault(dealerIndex).PlayerStatus = PlayerStatus.Lose;
             }
 
-            return gameStat;
+            return gameStatistics;
         }
 
-        public async Task<IEnumerable<PlayerInGameViewModel>> GetGameResult(IEnumerable<PlayerInGameViewModel> gameStat)
+        public async Task<IEnumerable<PlayerInGameView>> GetGameResult(IEnumerable<PlayerInGameView> gameStatistics)
         {
-            Game game = (await _gameRepository.FindById(gameStat.FirstOrDefault().GameId));
+            Game game = (await _gameRepository.FindById(gameStatistics.FirstOrDefault().GameId));
             game.GameStatus = GameStatus.Done;
             await _gameRepository.Update(game);
 
-            int dealerIndex = gameStat.ToList().FindIndex(p => p.PlayerType == PlayerType.Dealer);
+            int dealerIndex = gameStatistics.ToList().FindIndex(p => p.PlayerType == PlayerType.Dealer);
 
-            if (gameStat.ElementAtOrDefault(dealerIndex).PlayerStatus == PlayerStatus.Lose)
+            if (gameStatistics.ElementAtOrDefault(dealerIndex).PlayerStatus == PlayerStatus.Lose)
             {
-                gameStat = LoseDealer(gameStat);
-                return gameStat;
+                gameStatistics = LoseDealer(gameStatistics);
+                return gameStatistics;
             }
 
 
-            gameStat.ElementAtOrDefault(dealerIndex).PlayerStatus = PlayerStatus.Won;
+            gameStatistics.ElementAtOrDefault(dealerIndex).PlayerStatus = PlayerStatus.Won;
 
-            foreach (var player in gameStat)
+            foreach (var player in gameStatistics)
             {
-                if (player.PlayerStatus != PlayerStatus.Lose && player.Point > gameStat.ElementAtOrDefault(dealerIndex).Point)
+                if (player.PlayerStatus != PlayerStatus.Lose && player.Point > gameStatistics.ElementAtOrDefault(dealerIndex).Point)
                 {
                     player.PlayerStatus = PlayerStatus.Won;
-                    gameStat.ElementAtOrDefault(dealerIndex).PlayerStatus = PlayerStatus.Lose;
+                    gameStatistics.ElementAtOrDefault(dealerIndex).PlayerStatus = PlayerStatus.Lose;
                 }
-                if (player.PlayerStatus != PlayerStatus.Lose && player.Point > gameStat.ElementAtOrDefault(dealerIndex).Point)
+                if (player.PlayerStatus != PlayerStatus.Lose && player.Point > gameStatistics.ElementAtOrDefault(dealerIndex).Point)
                 {
                     player.PlayerStatus = PlayerStatus.Won;
-                    gameStat.ElementAtOrDefault(dealerIndex).PlayerStatus = PlayerStatus.Lose;
+                    gameStatistics.ElementAtOrDefault(dealerIndex).PlayerStatus = PlayerStatus.Lose;
                 }
-                if (player.PlayerStatus != PlayerStatus.Lose && player.Point <= gameStat.ElementAtOrDefault(dealerIndex).Point && player.PlayerType != PlayerType.Dealer)
+                if (player.PlayerStatus != PlayerStatus.Lose && player.Point <= gameStatistics.ElementAtOrDefault(dealerIndex).Point && player.PlayerType != PlayerType.Dealer)
                 {
                     player.PlayerStatus = PlayerStatus.Lose;
                 }
             }
 
-            await SaveResult(gameStat);
+            await SaveResult(gameStatistics);
 
-            return gameStat;
+            return gameStatistics;
         }
 
-        private IEnumerable<PlayerInGameViewModel> LoseDealer(IEnumerable<PlayerInGameViewModel> gameStat)
+        private IEnumerable<PlayerInGameView> LoseDealer(IEnumerable<PlayerInGameView> gameStatistics)
         {
-            foreach (var player in gameStat)
+            foreach (var player in gameStatistics)
             {
                 if (player.PlayerStatus != PlayerStatus.Lose)
                 {
@@ -253,12 +249,13 @@ namespace BlackJack.BusinessLogic.Service
                 }
             }
 
-            return gameStat;
+            return gameStatistics;
         }
 
         public async Task<List<string>> GetUserOrdered()
         {
-            return (await _playerRepository.GetByType(PlayerType.User)).OrderByDescending(x => x.Name).Select(s => s.Name).ToList();
+            int numberUser = 1000;
+            return (await _playerRepository.GetByType(PlayerType.User, numberUser)).OrderByDescending(x => x.Name).Select(s => s.Name).ToList();
         }
 
         private async Task<bool> RegisterNewPlayer(Player player)
@@ -281,16 +278,16 @@ namespace BlackJack.BusinessLogic.Service
             }
         }
 
-        private async Task<IEnumerable<PlayerInGameViewModel>> CreatPlayersInGame(Game game)
+        private async Task<IEnumerable<PlayerInGameView>> CreatPlayersInGame(Game game)
         {
             var turns = await _turnRepository.GetAllTurns(game.Id);
             List<long> players = turns.Select(p => p.PlayerId).Distinct().ToList();
-            List<PlayerInGameViewModel> playersInGame = new List<PlayerInGameViewModel>();
+            List<PlayerInGameView> playersInGame = new List<PlayerInGameView>();
 
             foreach (var playerId in players)
             {
                 Player player = await _playerRepository.FindById(playerId);
-                PlayerInGameViewModel playerInGame = new PlayerInGameViewModel();
+                PlayerInGameView playerInGame = new PlayerInGameView();
                 playerInGame.PlayerId = player.Id;
                 playerInGame.PlayerName = player.Name;
                 playerInGame.GameId = game.Id;
@@ -304,52 +301,42 @@ namespace BlackJack.BusinessLogic.Service
 
         private List<CardHelper> GetPlayerCard(long playerId, List<Turn> turns)
         {
-            var result = turns.Where(p => p.PlayerId == playerId);
-            var result1 = result.Select(k => new CardHelper { CardLear = k.CardLear, CardNumber = k.CardNumber }).ToList();
-            return result1;
+            var playerTurns = turns.Where(p => p.PlayerId == playerId);
+            var playerCards = playerTurns.Select(k => new CardHelper { CardLear = k.CardLear, CardNumber = k.CardNumber }).ToList();
+
+            return playerCards;
         }
 
-        private async Task<List<PlayerInGameViewModel>> GeneratePlayers(Player player, int botsNumber, long gameId)
+        private async Task<List<PlayerInGameView>> GeneratePlayers(Player player, int botsNumber, long gameId)
         {
-            int rand;
-            List<PlayerInGameViewModel> players = new List<PlayerInGameViewModel>();
-            PlayerInGameViewModel playerTemp = new PlayerInGameViewModel();
-            playerTemp.PlayerId = player.Id;
-            playerTemp.GameId = gameId;
-            playerTemp.PlayerName = player.Name;
-            playerTemp.PlayerType = PlayerType.User;
-            players.Add(playerTemp);
-
-            List<Player> bots = await _playerRepository.GetByType(PlayerType.Bot);
-
-            for (int i = 0; i < botsNumber; i++)
+            int dealerNumber = 1;
+            List<PlayerInGameView> players = new List<PlayerInGameView>();
+            List<Player> bots = await _playerRepository.GetByType(PlayerType.Bot, botsNumber);
+            List<Player> dealer = await _playerRepository.GetByType(PlayerType.Dealer, dealerNumber);
+            players.Add(GetPlayerInGameView(player, gameId));
+            players.Add(GetPlayerInGameView(dealer.FirstOrDefault(), gameId));
+            foreach(var bot in bots)
             {
-                PlayerInGameViewModel playerTemp1 = new PlayerInGameViewModel();
-                rand = _random.Next(0, bots.Count);
-                playerTemp1.PlayerId = bots[rand].Id;
-                playerTemp1.PlayerName = bots[rand].Name;
-                playerTemp1.GameId = gameId;
-                playerTemp1.PlayerType = PlayerType.Bot;
-                players.Add(playerTemp1);
-                bots.RemoveAt(rand);
+                players.Add(GetPlayerInGameView(bot,gameId));
             }
-
-            List<Player> dealer = await _playerRepository.GetByType(PlayerType.Dealer);
-
-            rand = _random.Next(0, dealer.Count);
-            PlayerInGameViewModel playerTemp3 = new PlayerInGameViewModel();
-            playerTemp3.PlayerId = dealer[rand].Id;
-            playerTemp3.PlayerName = dealer[rand].Name;
-            playerTemp3.PlayerType = PlayerType.Dealer;
-            playerTemp3.GameId = gameId;
-            players.Add(playerTemp3);
 
             return players;
         }
 
-        private async Task SaveResult(IEnumerable<PlayerInGameViewModel> gameStat)
+        private PlayerInGameView GetPlayerInGameView(Player player, long gameId)
         {
-            foreach (var player in gameStat)
+            PlayerInGameView playerInGameView = new PlayerInGameView();
+            playerInGameView.PlayerId = player.Id;
+            playerInGameView.GameId = gameId;
+            playerInGameView.PlayerName = player.Name;
+            playerInGameView.PlayerType = PlayerType.User;
+
+            return playerInGameView;
+        }
+
+        private async Task SaveResult(IEnumerable<PlayerInGameView> gameStatistics)
+        {
+            foreach (var player in gameStatistics)
             {
                 await _gameResultRepository.Create(new GameResult
                 {
@@ -367,32 +354,33 @@ namespace BlackJack.BusinessLogic.Service
             return result;
         }
 
-        private bool IsEndGame(PlayerInGameViewModel player)
+        private bool IsEndGame(PlayerInGameView player)
         {
             return player.PlayerType == PlayerType.User && player.PlayerStatus != PlayerStatus.Play || player.PlayerType == PlayerType.Dealer && player.PlayerStatus == PlayerStatus.Lose;
         }
 
-        private async Task<IEnumerable<PlayerInGameViewModel>> CheckEndGame(IEnumerable<PlayerInGameViewModel> gameStat)
+        private async Task<IEnumerable<PlayerInGameView>> CheckEndGame(IEnumerable<PlayerInGameView> gameStatistics)
         {
-            if(gameStat.Where(p => p.PlayerType != PlayerType.Dealer).All(x => x.PlayerStatus == PlayerStatus.Lose))
+            if(gameStatistics.Where(p => p.PlayerType != PlayerType.Dealer).All(x => x.PlayerStatus == PlayerStatus.Lose))
             {
-                var dealer = gameStat.ToList().FindIndex(x => x.PlayerType == PlayerType.Dealer);
-                gameStat.ElementAt(dealer).PlayerStatus = PlayerStatus.Won;
+                var dealer = gameStatistics.ToList().FindIndex(x => x.PlayerType == PlayerType.Dealer);
+                gameStatistics.ElementAt(dealer).PlayerStatus = PlayerStatus.Won;
 
-                return gameStat;
+                return gameStatistics;
             }
 
-            foreach (var player in gameStat)
+            foreach (var player in gameStatistics)
             {
-                if (IsEndGame(player))
+                if (!IsEndGame(player))
                 {
-                    await DropCard(gameStat);
-
-                    return await GetGameResult(gameStat);
+                    continue;
                 }
+                await DropCard(gameStatistics);
+
+                return await GetGameResult(gameStatistics);
             }
 
-            return gameStat;
+            return gameStatistics;
         }
 
         public async Task<bool> IsNewGame(long gameId)
@@ -406,11 +394,11 @@ namespace BlackJack.BusinessLogic.Service
             return false;
         }
 
-        public async Task<IEnumerable<PlayerInGameViewModel>> LoadGame(long gameId)
+        public async Task<IEnumerable<PlayerInGameView>> LoadGame(long gameId)
         {
-            IEnumerable<PlayerInGameViewModel> gameStat = await InitializationGameStat(gameId);
+            IEnumerable<PlayerInGameView> gameStatistics = await InitializationGameStatistics(gameId);
 
-            return gameStat;
+            return gameStatistics;
         }
     }
 }

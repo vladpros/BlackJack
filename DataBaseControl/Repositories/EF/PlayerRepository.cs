@@ -16,9 +16,9 @@ namespace BlackJack.DataAccess.Repositories.EF
             _context = context;
         }
 
-        public async Task<List<Player>> GetByType(PlayerType p)
+        public async Task<List<Player>> GetByType(PlayerType p, int number)
         {
-            var result = await Task.Run(() => _context.Players.Where(x => x.PlayerType == p).ToList());
+            var result = await Task.Run(() => _context.Players.Where(x => x.PlayerType == p).Take(number).ToList());
             return result;
         }
 

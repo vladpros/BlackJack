@@ -48,7 +48,7 @@
     <Compile Include="Service\Interface\IGameService.cs" />
     <Compile Include="Helpers\CardHelper.cs" />
     <Compile Include="Helpers\DeckHelper.cs" />
-    <Compile Include="ViewModel\PlayerInGameViewModel.cs" />
+    <Compile Include="ViewModel\PlayerInGameView.cs" />
     <Compile Include="Service\GameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NinjectServiceRegistration.cs" />

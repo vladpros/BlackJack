@@ -12,7 +12,6 @@ namespace BlackJack.BusinessLogic.Helpers
         private int _maxCardNumber = 14;
         private int _minCardLear = 1;
         private int _minCardNumber = 2;
-        private int _pointCard = 10;
         public List<CardHelper> Cards { get; set; }
         public int NumberCard
         {
@@ -42,7 +41,7 @@ namespace BlackJack.BusinessLogic.Helpers
             }
         }
 
-        public DeckHelper(IEnumerable<PlayerInGameViewModel> players) : this()
+        public DeckHelper(IEnumerable<PlayerInGameView> players) : this()
         {
             foreach (var player in players)
             {
@@ -60,20 +59,6 @@ namespace BlackJack.BusinessLogic.Helpers
             Cards.RemoveAt(rand);
 
             return card;
-        }
-
-        public int GetCardPoint(CardHelper card)
-        {
-            if ((int)card.CardNumber < _pointCard)
-            {
-                return (int)card.CardNumber;
-            }
-            if ((int)card.CardNumber >= _pointCard)
-            {
-                return _pointCard;
-            }
-
-            return (int)card.CardNumber;
         }
 
     }
