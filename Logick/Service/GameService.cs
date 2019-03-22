@@ -191,15 +191,22 @@ namespace BlackJack.BusinessLogic.Service
         private async Task<IEnumerable<PlayerInGameView>> DropCard(IEnumerable<PlayerInGameView> gameStatistics)
         {
             DeckHelper deck = new DeckHelper(gameStatistics);
-            int dealerIndex = gameStatistics.ToList().FindIndex(p => p.PlayerType == PlayerType.Dealer);
+            try
+            {
+                int dealerIndex = gameStatistics.ToList().FindIndex(p => p.PlayerType == PlayerType.Dealer);
 
-            while (CountPoint(gameStatistics.ElementAtOrDefault(dealerIndex)) <= _minPoint)
-            {
-                await DoRoundWithPlayerType(gameStatistics, deck, PlayerType.Dealer);
+                while (CountPoint(gameStatistics.ElementAtOrDefault(dealerIndex)) <= _minPoint)
+                {
+                    await DoRoundWithPlayerType(gameStatistics, deck, PlayerType.Dealer);
+                }
+                if (CountPoint(gameStatistics.ElementAtOrDefault(dealerIndex)) > _maxPoint)
+                {
+                    gameStatistics.ElementAtOrDefault(dealerIndex).PlayerStatus = PlayerStatus.Lose;
+                }
             }
-            if (CountPoint(gameStatistics.ElementAtOrDefault(dealerIndex)) > _maxPoint)
+            catch(Exception exeption)
             {
-                gameStatistics.ElementAtOrDefault(dealerIndex).PlayerStatus = PlayerStatus.Lose;
+                throw new Exception("Could not find dealer", exeption);
             }
 
             return gameStatistics;
