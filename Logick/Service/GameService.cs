@@ -4,6 +4,7 @@ using BlackJack.BusinessLogic.ViewModel;
 using BlackJack.DataAccess.Entities;
 using BlackJack.DataAccess.Entities.Enums;
 using BlackJack.DataAccess.Repositories.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,6 +45,10 @@ namespace BlackJack.BusinessLogic.Service
         {
             IEnumerable<PlayerInGameView> gameStatistics = new List<PlayerInGameView>();
             Player player = await _playerRepository.FindById(game.PlayerId);
+            if (player == null)
+            {
+                throw new Exception("Player Not Found");
+            }
             gameStatistics = await GeneratePlayers(player, game.BotsNumber, game.Id);
 
             return gameStatistics;
@@ -53,6 +58,10 @@ namespace BlackJack.BusinessLogic.Service
         {
             DeckHelper deck = new DeckHelper();
             Game game = await _gameRepository.FindById(gameId);
+            if (game == null)
+            {
+                throw new Exception("Game not found");
+            }
             IEnumerable<PlayerInGameView> gameStatistics = await CreateGameStatistics(game);
             gameStatistics = await DoRound(gameStatistics, deck);
             CheckPoint(gameStatistics);
@@ -72,7 +81,7 @@ namespace BlackJack.BusinessLogic.Service
         {
             foreach (var player in gameStatistics)
             {
-                if (player.PlayerType != playerType && player.PlayerStatus == PlayerStatus.Play)
+                if (!(player.PlayerType != playerType && player.PlayerStatus == PlayerStatus.Play))
                 {
                     continue;
                 }
@@ -87,7 +96,7 @@ namespace BlackJack.BusinessLogic.Service
         {
             foreach (var player in gameStatistics)
             {
-                if (player.PlayerType == playerType && player.PlayerStatus == PlayerStatus.Play)
+                if (!(player.PlayerType == playerType && player.PlayerStatus == PlayerStatus.Play))
                 {
                     continue;
                 }
@@ -101,9 +110,8 @@ namespace BlackJack.BusinessLogic.Service
         private async Task<CardHelper> DoTurn(long playerId, long gameId, DeckHelper deck)
         {
             CardHelper card = deck.GiveCard();
-            Game game = await _gameRepository.FindById(gameId);
             Turn turn = new Turn();
-            turn.GameId = game.Id;
+            turn.GameId = gameId;
             turn.PlayerId = playerId;
             turn.CardLear = card.CardLear;
             turn.CardNumber = card.CardNumber;
@@ -141,6 +149,10 @@ namespace BlackJack.BusinessLogic.Service
         private async Task<IEnumerable<PlayerInGameView>> InitializationGameStatistics(long gameId)
         {
             Game game = await _gameRepository.FindById(gameId);
+            if (game == null)
+            {
+                throw new Exception("Game not found");
+            }
             IEnumerable<PlayerInGameView> gameStatistics = new List<PlayerInGameView>();
             gameStatistics = await CreatePlayersInGame(game);
             CheckPoint(gameStatistics);
@@ -195,7 +207,7 @@ namespace BlackJack.BusinessLogic.Service
 
         public async Task<IEnumerable<PlayerInGameView>> GetGameResult(IEnumerable<PlayerInGameView> gameStatistics) // Enter!!!!!
         {
-            Game game = (await _gameRepository.FindById(gameStatistics.FirstOrDefault().GameId));
+            Game game = await _gameRepository.FindById(gameStatistics.FirstOrDefault().GameId);
             game.GameStatus = GameStatus.Done;
             await _gameRepository.Update(game);
 
@@ -265,7 +277,7 @@ namespace BlackJack.BusinessLogic.Service
 
         public async Task CheсkPlayer(string name)
         {
-            if ((await _playerRepository.SearchPlayerWithName(name)) == null)
+            if (await _playerRepository.SearchPlayerWithName(name) == null)
             {
                 await RegisterNewPlayer(new Player { Name = name });
             }
@@ -280,6 +292,10 @@ namespace BlackJack.BusinessLogic.Service
             foreach (var playerId in players)
             {
                 Player player = await _playerRepository.FindById(playerId);
+                if (player == null)
+                {
+                    throw new Exception("Player not found");
+                }
                 PlayerInGameView playerInGame = new PlayerInGameView();
                 playerInGame.PlayerId = player.Id;
                 playerInGame.PlayerName = player.Name;
@@ -341,9 +357,13 @@ namespace BlackJack.BusinessLogic.Service
 
         public async Task<Game> GetGame(long gameId)
         {
-            var result = await _gameRepository.FindById(gameId);
+            var game = await _gameRepository.FindById(gameId);
+            if (game == null)
+            {
+                throw new Exception("Game not found");
+            }
 
-            return result;
+            return game;
         }
 
         private bool IsEndGame(PlayerInGameView player)

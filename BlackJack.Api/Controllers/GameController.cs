@@ -3,7 +3,8 @@ using BlackJack.BusinessLogic.Service.Interface;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System;
-using System.Web.Http.Results;
+using BlackJack.BusinessLogic.ViewModel;
+using System.Collections.Generic;
 
 namespace BlackJack.Api.Controllers
 {
@@ -20,8 +21,15 @@ namespace BlackJack.Api.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> GetName()
         {
-            var names = await _gameService.GetOrderedUsers();
-
+            IEnumerable<string> names;
+            try
+            {
+                names = await _gameService.GetOrderedUsers();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
             return Ok(names);
         }
 
@@ -34,9 +42,9 @@ namespace BlackJack.Api.Controllers
                 await _gameService.CheсkPlayer(name);
                 gameId = await _gameService.StartGame(name, botsNumber);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                return new ExceptionResult(ex, this);
+                return BadRequest(exception.Message);
             }
             return Ok(gameId);
         }
@@ -44,26 +52,33 @@ namespace BlackJack.Api.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> ShowGame(long? gameId, long? choos)
         {
-            long gameIdLong = (long)gameId;
-            if(gameId == null)
+            IEnumerable<PlayerInGameView> gameStatistics;
+            try
             {
-                return NotFound();
+                long gameIdLong = (long)gameId;
+                if (gameId == null)
+                {
+                    return BadRequest("Game not found");
+                }
+                if ((await _gameService.GetGame(gameIdLong)).GameStatus == GameStatus.Done)
+                {
+                    return BadRequest("Game is done");
+                }
+                if (choos == null && await _gameService.IsNewGame(gameIdLong))
+                {
+                    return Ok(await _gameService.DoFirstTwoRounds(gameIdLong));
+                }
+                if (choos == null && !(await _gameService.IsNewGame(gameIdLong)))
+                {
+                    return Ok(await _gameService.LoadGame(gameIdLong));
+                }
+                gameStatistics = await _gameService.ContinuePlaying(gameIdLong, (long)choos);
             }
-            if ((await _gameService.GetGame(gameIdLong)).GameStatus == GameStatus.Done)
+            catch (Exception exeption)
             {
-                return NotFound();
+                return InternalServerError(exeption);
             }
-            if (choos == null && await _gameService.IsNewGame(gameIdLong))
-            {
-               return Ok(await _gameService.DoFirstTwoRounds(gameIdLong));
-            }
-            if (choos == null && !(await _gameService.IsNewGame(gameIdLong)))
-            {
-                return Ok(await _gameService.LoadGame(gameIdLong));
-            }
-            var gameResult = await _gameService.ContinuePlaying(gameIdLong, (long)choos);
-
-            return Ok(gameResult);
+            return Ok(gameStatistics);
         }
     }
 }
