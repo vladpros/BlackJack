@@ -7,8 +7,8 @@
     <ProjectGuid>{55261EA1-E7E6-41A2-97BE-38EA43629FED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Logick</RootNamespace>
-    <AssemblyName>Logick</AssemblyName>
+    <RootNamespace>BlackJack.BusinessLogick</RootNamespace>
+    <AssemblyName>BlackJack.BusinessLogick</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

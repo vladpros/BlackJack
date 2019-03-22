@@ -7,8 +7,8 @@
     <ProjectGuid>{EAB3856D-A30A-49D5-A02A-69D423FCA973}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataBaseControl</RootNamespace>
-    <AssemblyName>DataBaseControl</AssemblyName>
+    <RootNamespace>BlackJack.DataAccess</RootNamespace>
+    <AssemblyName>BlackJack.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
