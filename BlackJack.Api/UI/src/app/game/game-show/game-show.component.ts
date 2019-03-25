@@ -7,7 +7,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-game-show',
   templateUrl: './game-show.component.html',
   styleUrls: ['./game-show.component.css'],
-  providers: [GameShowService]
+  providers: [
+    GameShowService
+  ]
 })
 export class GameShowComponent implements OnInit {
 
@@ -19,7 +21,7 @@ export class GameShowComponent implements OnInit {
   constructor(
     private activstRout: ActivatedRoute,
     private router: Router,
-    private gameShowService: GameShowService
+    private gameShowService: GameShowService,
     ) {
    }
 
@@ -37,7 +39,6 @@ export class GameShowComponent implements OnInit {
       this.findEndGame();
     },
     error => {
-      console.error(error);
       this.router.navigate(['/startGame']);
     }
     );

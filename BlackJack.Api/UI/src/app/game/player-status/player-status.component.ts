@@ -8,13 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PlayerStatusComponent implements OnInit {
 
-  playerStatusS;
+  playerStatusString;
 
   @Input() playerStatus: PlayerStatus;
   constructor() { }
 
   ngOnInit() {
-    this.playerStatusS = PlayerStatus[this.playerStatus];
+    this.playerStatusString = PlayerStatus[this.playerStatus];
   }
 
 }

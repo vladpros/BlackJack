@@ -63,7 +63,7 @@ namespace BlackJack.Api.Controllers
                 }
                 if ((await _gameService.GetGame(gameIdLong)).GameStatus == GameStatus.Done)
                 {
-                    return Ok(await _gameService.LoadGame(gameIdLong)); // BadRequest("Game is done");
+                    return BadRequest("Game is done");
                 }
                 if (choos == null && await _gameService.IsNewGame(gameIdLong))
                 {
