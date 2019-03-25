@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using BlackJack.BusinessLogic;
-using BlackJack.DataAccess;
 using Microsoft.Owin;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;

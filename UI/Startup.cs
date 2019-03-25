@@ -1,7 +1,6 @@
 ﻿using System.Web.Optimization;
 using System.Web.Routing;
 using BlackJack.BusinessLogic;
-using BlackJack.DataAccess;
 using Microsoft.Owin;
 using Ninject;
 using Ninject.Web.Common.OwinHost;

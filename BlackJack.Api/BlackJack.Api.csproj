@@ -211,6 +211,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="libman.json" />
     <None Include="packages.config" />
     <Content Include="UI\.angulardoc.json" />
     <Content Include="UI\.editorconfig" />
@@ -230,7 +231,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataBaseControl\BlackJack.DataAccess.csproj">
-      <Project>{EAB3856D-A30A-49D5-A02A-69D423FCA973}</Project>
+      <Project>{eab3856d-a30a-49d5-a02a-69d423fca973}</Project>
       <Name>BlackJack.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\Logick\BlackJack.BusinessLogic.csproj">
