@@ -23,12 +23,13 @@ namespace BlackJack.UI.Controllers
             try
             {
                 ViewBag.Player = await _gameService.GetOrderedUsers();
+                return View();
             }
             catch (Exception exeption)
             {
                 return View("~/Views/Shared/Error.cshtml", exeption);
             }
-            return View();
+
         }
 
         [HttpPost]
@@ -39,12 +40,13 @@ namespace BlackJack.UI.Controllers
             {
                 await _gameService.CheсkAndRegisterPlayer(player);
                 gameId = await _gameService.StartGame(player, botsNumber);
+                return RedirectToAction("GameShow", new { gameId });
             }
             catch (Exception exeption)
             {
                 return View("~/Views/Shared/Error.cshtml", exeption);
             }
-            return RedirectToAction("GameShow", new { gameId });
+
         }
 
         public async Task<ActionResult> GameShow(long? gameId)
@@ -57,12 +59,13 @@ namespace BlackJack.UI.Controllers
                     return View("~/Views/Shared/Error.cshtml");
                 }
                 gameStatistics = await _gameService.DoFirstTwoRounds((long)gameId);
+                return View(gameStatistics);
             }
             catch (Exception exeption)
             {
                 return View("~/Views/Shared/Error.cshtml", exeption);
             }
-            return View(gameStatistics);
+
         }
 
         [HttpPost]
@@ -85,13 +88,14 @@ namespace BlackJack.UI.Controllers
                         return RedirectToAction("GameResult", new { gameId });
                     }
                 }
+                return View(gameStatistics);
             }
             catch (Exception exeption)
             {
                 return View("~/Views/Shared/Error.cshtml", exeption);
             }
 
-            return View(gameStatistics);
+
         }
 
         [HttpGet]
@@ -105,12 +109,13 @@ namespace BlackJack.UI.Controllers
                     return View("~/Views/Shared/Error.cshtml");
                 }
                 gameStatistics = await _gameService.LoadGame((long)gameId);
+                return View(gameStatistics);
             }
             catch (Exception exeption)
             {
                 return View("~/Views/Shared/Error.cshtml", exeption);
             }
-            return View(gameStatistics);
+
         }
 
     }

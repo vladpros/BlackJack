@@ -7,15 +7,13 @@
 
 <h2>GameShow</h2>
 
-@helper BuildMenu(IEnumerable<PlayerInGameView> data)
-{
     <table>
         <tr>
             <td><p>Player name</p></td>
             <td><p>Cards</p></td>
             <td></td>
         </tr>
-        @foreach (var b in data)
+        @foreach (var b in Model)
         {
             <tr>
                 <td><p>@b.PlayerName</p></td>
@@ -31,9 +29,8 @@
         }
     </table>
 
-}
 
-@BuildMenu(Model);
+
 
 @using (Html.BeginForm("GameShow", "Game", FormMethod.Post))
 {
