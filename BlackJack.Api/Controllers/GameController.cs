@@ -26,12 +26,13 @@ namespace BlackJack.Api.Controllers
             try
             {
                 names = await _gameService.GetOrderedUsers();
+                return Ok(names);
             }
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
             }
-            return Ok(names);
+            
         }
 
         [HttpGet]
@@ -42,16 +43,17 @@ namespace BlackJack.Api.Controllers
             {
                 await _gameService.CheсkAndRegisterPlayer(name);
                 gameId = await _gameService.StartGame(name, botsNumber);
+                return Ok(gameId);
             }
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
             }
-            return Ok(gameId);
+            
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> ShowGame(long? gameId, long? choos)
+        public async Task<IHttpActionResult> ShowGame(long? gameId, PlayerChoos? choos)
         {
             IEnumerable<PlayerInGameView> gameStatistics;
             try
@@ -74,12 +76,12 @@ namespace BlackJack.Api.Controllers
                     return Ok(await _gameService.LoadGame(gameIdLong));
                 }
                 gameStatistics = await _gameService.ContinuePlaying(gameIdLong, (PlayerChoos)choos);
+                return Ok(gameStatistics);
             }
             catch (Exception exeption)
             {
                 return InternalServerError(exeption);
-            }
-            return Ok(gameStatistics);
+            }           
         }
     }
 }
