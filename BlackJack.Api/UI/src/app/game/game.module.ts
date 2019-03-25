@@ -1,27 +1,21 @@
-import { ReactiveFormsModule } from '@angular/forms';
-import { CardsComponent } from './game-show/cards/cards.component';
-import { CardComponent } from './game-show/cards/card/card.component';
-import { StartGameComponent } from './start-game/start-game.component';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { StartGameModule } from './start-game/start-game.module';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameShowComponent } from './game-show/game-show.component';
-import { PlayerStatusComponent } from './player-status/player-status.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ReactiveFormsModule } from '@angular/forms';
+import { GameRoutingModule } from './game-routing.model';
+
+
 
 @NgModule({
   declarations: [
-    StartGameComponent,
-    GameShowComponent,
-    PlayerStatusComponent,
-    CardComponent,
-    CardsComponent,
   ],
   imports: [
     CommonModule,
+    StartGameModule,
+    ToastrModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-  ]
+    GameRoutingModule,
+  ],
 })
 export class GameModule { }

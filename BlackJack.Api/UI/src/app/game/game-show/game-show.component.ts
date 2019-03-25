@@ -1,5 +1,5 @@
-import { GameInfo } from './../models/game-info';
-import { GameShowService } from './../services/game-show.service';
+import { GameInfo } from './../../sheared/models/game-info';
+import { GameShowService } from './../../sheared/services/game-show.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -56,7 +56,7 @@ export class GameShowComponent implements OnInit {
 
   findEndGame(): boolean {
     this.gameInfo.forEach(element => {
-      if (element.PlayerStatus === 4) {
+      if (element.playerStatus === 4) {
         this.isEnd = true;
       }
     });

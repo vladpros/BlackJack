@@ -1,13 +1,9 @@
-import { StartGameComponent } from './game/start-game/start-game.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GameShowComponent } from './game/game-show/game-show.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'startGame', pathMatch: 'full'},
-  {path: 'startGame', component: StartGameComponent},
-  {path: 'playGame/:id', component: GameShowComponent},
-  {path: 'playGame', redirectTo: 'startGame'},
+  {path: '', redirectTo: 'game', pathMatch: 'full'},
+  {path: 'game',  loadChildren: './game/game.module#GameModule'},
 ];
 
 @NgModule({

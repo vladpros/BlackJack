@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StartGameService } from '../services/start-game.service';
+import { StartGameService } from '../../Sheared/services/start-game.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -45,7 +45,7 @@ export class StartGameComponent implements OnInit {
       return;
     }
     this.startGameService.StartGame(this.myForm.value).subscribe(result => {
-    this.router.navigate(['/playGame', result]);
+    this.router.navigate(['/game/playgame', result]);
     },
     error => {
       console.error(error);

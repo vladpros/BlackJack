@@ -1,20 +1,24 @@
 import { GameModule } from './game/game.module';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorInterceptor } from './game/interseptor/error.interseptor';
+import { ErrorInterceptor } from './sheared/interseptor/error.interseptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
+imports: [
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    GameModule,
     HttpClientModule,
-    GameModule
+    AppRoutingModule,
   ],
   providers: [
     {

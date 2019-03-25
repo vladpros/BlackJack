@@ -25,13 +25,13 @@
   <tbody>
     <tr *ngFor="let player of gameInfo">
       <td>
-        {{ player.PlayerName }}
+        {{ player.playerName }}
       </td>
       <td>
         <app-cards [cards]=player.Cards>No cart</app-cards>
       </td>
       <td>
-        {{ player.Points }}
+        {{ player.points }}
       </td>
       <td>
         <app-player-status [playerStatus]=player.PlayerStatus></app-player-status>
