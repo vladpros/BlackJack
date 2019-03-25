@@ -10,8 +10,8 @@ import { CardLear } from './../../../../sheared/enams/card-lear.enum';
 
 export class CardComponent implements OnInit {
 
-  cardLearS;
-  cardNumberS;
+  cardLearString;
+  cardNumberString;
 
   @Input() cardLear: CardLear;
   @Input() cardNumber: CardNumber;
@@ -20,8 +20,8 @@ export class CardComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.cardLearS = CardLear[this.cardLear];
-    this.cardNumberS = CardNumber[this.cardNumber];
+    this.cardLearString = CardLear[this.cardLear];
+    this.cardNumberString = CardNumber[this.cardNumber];
   }
 
 }

@@ -1,4 +1,4 @@
-import { GameInfo } from './../../sheared/models/game-info';
+import { PlayerInGameView } from '../../sheared/models/player-in-game-view';
 import { GameShowService } from './../../sheared/services/game-show.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +15,7 @@ export class GameShowComponent implements OnInit {
 
   id: number;
   choos: number;
-  gameInfo: [GameInfo];
+  gameInfo: [PlayerInGameView];
   isEnd = false;
 
   constructor(

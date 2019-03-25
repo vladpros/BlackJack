@@ -2,6 +2,8 @@
 using BlackJack.BusinessLogic;
 using BlackJack.DataAccess;
 using Microsoft.Owin;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Ninject;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
@@ -16,7 +18,16 @@ namespace BlackJack.Api
         public static void Configuration(IAppBuilder app)
         {
             var webApiConfiguration = CreateHttpConfiguration();
-
+            webApiConfiguration
+                        .Formatters
+                        .JsonFormatter
+                        .SerializerSettings
+                        .ContractResolver = new CamelCasePropertyNamesContractResolver();
+            webApiConfiguration
+                        .Formatters
+                        .JsonFormatter
+                        .SerializerSettings
+                        .NullValueHandling = NullValueHandling.Ignore;
             app.UseNinjectMiddleware(CreateKernel).UseNinjectWebApi(webApiConfiguration);
         }
 
