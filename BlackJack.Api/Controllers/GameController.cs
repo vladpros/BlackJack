@@ -5,7 +5,7 @@ using System.Web.Http;
 using System;
 using BlackJack.BusinessLogic.ViewModel;
 using System.Collections.Generic;
-using BlackJack.BusinessLogick.ViewModel.Enum;
+using BlackJack.BusinessLogic.ViewModel.Enum;
 
 namespace BlackJack.Api.Controllers
 {
@@ -22,7 +22,7 @@ namespace BlackJack.Api.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> GetName()
         {
-            IEnumerable<string> names;
+            NameView names;
             try
             {
                 names = await _gameService.GetOrderedUsers();

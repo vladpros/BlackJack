@@ -1,7 +1,8 @@
 ﻿using BlackJack.BusinessLogic.Helpers;
 using BlackJack.BusinessLogic.Service.Interface;
 using BlackJack.BusinessLogic.ViewModel;
-using BlackJack.BusinessLogick.ViewModel.Enum;
+using BlackJack.BusinessLogic.ViewModel;
+using BlackJack.BusinessLogic.ViewModel.Enum;
 using BlackJack.DataAccess.Entities;
 using BlackJack.DataAccess.Entities.Enums;
 using BlackJack.DataAccess.Repositories.Interfaces;
@@ -259,9 +260,12 @@ namespace BlackJack.BusinessLogic.Service
             return gameStatistics;
         }
 
-        public async Task<List<string>> GetOrderedUsers()
+        public async Task<NameView> GetOrderedUsers()
         {
-            return (await _playerRepository.GetByType(PlayerType.User)).OrderByDescending(x => x.Name).Select(s => s.Name).ToList();
+            var players = new NameView();
+            players.Names = (await _playerRepository.GetByType(PlayerType.User)).OrderByDescending(x => x.Name).Select(s => s.Name).ToList();
+
+            return players;
         }
 
         private async Task RegisterNewPlayer(Player player)

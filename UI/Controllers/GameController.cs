@@ -3,7 +3,7 @@ using BlackJack.BusinessLogic.Service.Interface;
 using System.Threading.Tasks;
 using BlackJack.BusinessLogic.ViewModel;
 using BlackJack.DataAccess.Entities.Enums;
-using BlackJack.BusinessLogick.ViewModel.Enum;
+using BlackJack.BusinessLogic.ViewModel.Enum;
 using System;
 using System.Collections.Generic;
 
@@ -20,10 +20,11 @@ namespace BlackJack.UI.Controllers
 
         public async Task<ActionResult> Start()
         {
+            NameView names;
             try
             {
-                ViewBag.Player = await _gameService.GetOrderedUsers();
-                return View();
+                names = await _gameService.GetOrderedUsers();
+                return View(names);
             }
             catch (Exception exeption)
             {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { apiWebAdress } from 'src/environments/environment';
+import { NameView} from '../models/name-view';
 
 @Injectable()
 
@@ -11,8 +12,9 @@ export class StartGameService {
    }
 
    private controllerName = '/api/Game/';
-  getNames(): Observable<string[]> {
-    return this.httpClient.get<string[]>(apiWebAdress + this.controllerName + 'GetName');
+
+  getNames(): Observable<NameView> {
+    return this.httpClient.get<NameView>(apiWebAdress + this.controllerName + 'GetName');
   }
 
   StartGame(input): Observable<number> {

@@ -1,4 +1,4 @@
-﻿namespace BlackJack.BusinessLogick.ViewModel.Enum
+﻿namespace BlackJack.BusinessLogic.ViewModel.Enum
 {
     public enum PlayerChoos
     {

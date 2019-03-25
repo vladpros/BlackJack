@@ -2,6 +2,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Start";
 }
+@using BlackJack.BusinessLogic.ViewModel
+@model NameView
 
 <script src='@Url.Content("~/Scripts/jquery-3.3.1.min.js")' type="text/javascript"></script>
 
@@ -23,7 +25,7 @@
 </div>
 
 <datalist id="player">
-    @foreach (var p in @ViewBag.Player)
+    @foreach (var p in Model.Names)
     {
         <option value="@p"></option>
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StartGameService } from '../../Sheared/services/start-game.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NameView } from 'src/app/sheared/models/name-view';
 
 @Component({
   selector: 'app-start-game',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class StartGameComponent implements OnInit {
 
   myForm: FormGroup;
-  names: string[];
+  nameView: NameView;
   isValid = true;
 
   constructor(
@@ -24,7 +25,7 @@ export class StartGameComponent implements OnInit {
 
   ngOnInit() {
     this.startGameService.getNames().subscribe(result => {
-      this.names = result;
+      this.nameView = result;
     },
     error => {
       console.error(error);

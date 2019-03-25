@@ -2,7 +2,8 @@
 using BlackJack.BusinessLogic.ViewModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using BlackJack.BusinessLogick.ViewModel.Enum;
+using BlackJack.BusinessLogic.ViewModel.Enum;
+
 
 namespace BlackJack.BusinessLogic.Service.Interface
 {
@@ -12,7 +13,7 @@ namespace BlackJack.BusinessLogic.Service.Interface
         Task<IEnumerable<PlayerInGameView>> DoFirstTwoRounds(long gameId);
         Task<IEnumerable<PlayerInGameView>> ContinuePlaying(long gameId, PlayerChoos choose);
         Task CheсkAndRegisterPlayer(string name);
-        Task<List<string>> GetOrderedUsers();
+        Task<NameView> GetOrderedUsers();
         Task<Game> GetGame(long gameId);
         Task<IEnumerable<PlayerInGameView>> GetGameResult(IEnumerable<PlayerInGameView> gameStat);
         Task<bool> IsNewGame(long gameId);
