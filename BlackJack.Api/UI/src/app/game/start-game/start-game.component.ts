@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StartgameService } from '../services/startgame.service';
+import { StartGameService } from '../services/start-game.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-start-game',
   templateUrl: './start-game.component.html',
   styleUrls: ['./start-game.component.css'],
-  providers: [StartgameService]
+  providers: [StartGameService]
 })
 export class StartGameComponent implements OnInit {
 
@@ -16,14 +16,14 @@ export class StartGameComponent implements OnInit {
   isValid = true;
 
   constructor(
-    private startgameService: StartgameService,
+    private startGameService: StartGameService,
     private formBuilder: FormBuilder,
     private router: Router,
     ) {
   }
 
   ngOnInit() {
-    this.startgameService.getNames().subscribe(result => {
+    this.startGameService.getNames().subscribe(result => {
       this.names = result;
     },
     error => {
@@ -44,7 +44,7 @@ export class StartGameComponent implements OnInit {
       this.isValid = false;
       return;
     }
-    this.startgameService.StartGame(this.myForm.value).subscribe(result => {
+    this.startGameService.StartGame(this.myForm.value).subscribe(result => {
     this.router.navigate(['/playGame', result]);
     },
     error => {

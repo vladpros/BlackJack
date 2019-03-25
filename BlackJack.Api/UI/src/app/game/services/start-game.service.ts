@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 
-export class StartgameService {
+export class StartGameService {
 
   constructor(private httpClient: HttpClient) {
    }
