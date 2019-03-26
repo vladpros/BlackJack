@@ -86,7 +86,7 @@ namespace BlackJack.UI.Controllers
                 {
                     if (player.PlayerStatus == PlayerStatus.Won)
                     {
-                        return RedirectToAction("GameResult", new { gameId });
+                        return View("~/Views/Game/GameResult.cshtml", gameStatistics);
                     }
                 }
                 return View(gameStatistics);
@@ -96,26 +96,6 @@ namespace BlackJack.UI.Controllers
                 return View("~/Views/Shared/Error.cshtml", exeption);
             }
 
-
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> GameResult(long? gameId)
-        {
-            
-            try
-            {
-                if (gameId == null)
-                {
-                    return View("~/Views/Shared/Error.cshtml");
-                }
-                IEnumerable<ShowGameViewItem> gameStatistics = await _gameService.LoadGame((long)gameId);
-                return View(gameStatistics);
-            }
-            catch (Exception exeption)
-            {
-                return View("~/Views/Shared/Error.cshtml", exeption);
-            }
 
         }
 
