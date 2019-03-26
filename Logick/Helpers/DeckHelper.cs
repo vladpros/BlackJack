@@ -41,7 +41,7 @@ namespace BlackJack.BusinessLogic.Helpers
             }
         }
 
-        public DeckHelper(IEnumerable<PlayerInGameView> players) : this()
+        public DeckHelper(IEnumerable<ShowGameViewItem> players) : this()
         {
             foreach (var player in players)
             {

@@ -12,25 +12,25 @@ import { NameView } from 'src/app/sheared/models/name-view';
 })
 export class StartGameComponent implements OnInit {
 
-  myForm: FormGroup;
-  nameView: NameView;
-  isValid = true;
+  public myForm: FormGroup;
+  public nameView: NameView;
+  public isValid = true;
 
   constructor(
     private startGameService: StartGameService,
     private formBuilder: FormBuilder,
     private router: Router,
     ) {
+      this.startGameService.getNames().subscribe(result => {
+        this.nameView = result;
+      },
+      error => {
+        console.error(error);
+      });
+      this.initForm();
   }
 
   ngOnInit() {
-    this.startGameService.getNames().subscribe(result => {
-      this.nameView = result;
-    },
-    error => {
-      console.error(error);
-    });
-    this.initForm();
   }
 
   initForm() {

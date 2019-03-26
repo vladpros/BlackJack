@@ -13,16 +13,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class GameShowComponent implements OnInit {
 
-  id: number;
-  choos: number;
-  gameInfo: [PlayerInGameView];
-  isEnd = false;
+  private id: number;
+  private choose: number;
+  public gameInfo: PlayerInGameView;
+  public isEnd = false;
 
   constructor(
     private activstRout: ActivatedRoute,
     private router: Router,
     private gameShowService: GameShowService,
     ) {
+
    }
 
   ngOnInit() {
@@ -34,8 +35,9 @@ export class GameShowComponent implements OnInit {
   }
 
   showGame() {
-    this.gameShowService.getGameInfo(this.id, this.choos).subscribe(result => {
+    this.gameShowService.getGameInfo(this.id, this.choose).subscribe(result => {
       this.gameInfo = result;
+      console.log(this.gameInfo);
       this.findEndGame();
     },
     error => {
@@ -45,18 +47,19 @@ export class GameShowComponent implements OnInit {
   }
 
   resumePlay() {
-    this.choos = 1;
+    this.choose = 1;
     this.showGame();
   }
 
   stopPlay() {
-    this.choos = 2;
+    this.choose = 2;
     this.showGame();
   }
 
   findEndGame(): boolean {
-    this.gameInfo.forEach(element => {
-      if (element.playerStatus === 4) {
+    console.log(this.gameInfo);
+    this.gameInfo.playerInGameViewItems.forEach(element => {
+      if (element.playerStatus === 'Won') {
         this.isEnd = true;
       }
     });

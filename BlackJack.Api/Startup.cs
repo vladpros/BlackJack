@@ -27,6 +27,10 @@ namespace BlackJack.Api
                         .JsonFormatter
                         .SerializerSettings
                         .NullValueHandling = NullValueHandling.Ignore;
+            webApiConfiguration.Formatters.JsonFormatter.SerializerSettings.Formatting =
+                Formatting.Indented;
+            webApiConfiguration.Formatters.JsonFormatter.SerializerSettings.Converters.Add
+                (new Newtonsoft.Json.Converters.StringEnumConverter());
             app.UseNinjectMiddleware(CreateKernel).UseNinjectWebApi(webApiConfiguration);
         }
 

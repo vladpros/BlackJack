@@ -52,7 +52,7 @@ namespace BlackJack.UI.Controllers
 
         public async Task<ActionResult> GameShow(long? gameId)
         {
-            IEnumerable<PlayerInGameView> gameStatistics;
+            IEnumerable<ShowGameViewItem> gameStatistics;
             try
             {
                 if (gameId == null)
@@ -72,7 +72,7 @@ namespace BlackJack.UI.Controllers
         [HttpPost]
         public async Task<ActionResult> GameShow(long? gameId, long? number)
         {
-            IEnumerable<PlayerInGameView> gameStatistics;
+            IEnumerable<ShowGameViewItem> gameStatistics;
             try
             {
                 if (gameId == null || number == null)
@@ -80,7 +80,7 @@ namespace BlackJack.UI.Controllers
                     return View("~/Views/Shared/Error.cshtml");
                 }
 
-                gameStatistics = await _gameService.ContinuePlaying((long)gameId, (PlayerChoos)number);
+                gameStatistics = await _gameService.ContinuePlaying((long)gameId, (PlayerChoose)number);
 
                 foreach (var player in gameStatistics)
                 {
@@ -102,7 +102,7 @@ namespace BlackJack.UI.Controllers
         [HttpGet]
         public async Task<ActionResult> GameResult(long? gameId)
         {
-            IEnumerable<PlayerInGameView> gameStatistics;
+            IEnumerable<ShowGameViewItem> gameStatistics;
             try
             {
                 if (gameId == null)

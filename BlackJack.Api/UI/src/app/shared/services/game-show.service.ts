@@ -12,11 +12,11 @@ export class GameShowService {
 
   private controllerName = '/api/Game/';
 
-  getGameInfo(id, choos): Observable<[PlayerInGameView]> {
-    return this.httpClient.get<[PlayerInGameView]>(apiWebAdress + this.controllerName + 'ShowGame?gameId=' + id + '&choos=' + choos);
+  getGameInfo(id, choos): Observable<PlayerInGameView> {
+    return this.httpClient.get<PlayerInGameView>(apiWebAdress + this.controllerName + 'ShowGame?gameId=' + id + '&choos=' + choos);
   }
 
-  getGameResult(id): Observable<[PlayerInGameView]> {
-    return this.httpClient.get<[PlayerInGameView]>(apiWebAdress + this.controllerName + 'GameResult?gameId=' + id);
+  getGameResult(id): Observable<PlayerInGameView> {
+    return this.httpClient.get<PlayerInGameView>(apiWebAdress + this.controllerName + 'GameResult?gameId=' + id);
   }
 }

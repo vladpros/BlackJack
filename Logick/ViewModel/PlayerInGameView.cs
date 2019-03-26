@@ -4,8 +4,16 @@ using System.Collections.Generic;
 
 namespace BlackJack.BusinessLogic.ViewModel
 {
+    public class ShowGameView
+    {
+        public IEnumerable<ShowGameViewItem> playerInGameViewItems { get; set; }
 
-    public class PlayerInGameView
+        public ShowGameView()
+        {
+            playerInGameViewItems = new List<ShowGameViewItem>();
+        }
+    }
+    public class ShowGameViewItem
     {
         public long PlayerId { get; set; }
         public PlayerType PlayerType { get; set; }
@@ -15,7 +23,7 @@ namespace BlackJack.BusinessLogic.ViewModel
         public PlayerStatus PlayerStatus { get; set; }
         public long GameId { get; set; }
 
-        public PlayerInGameView()
+        public ShowGameViewItem()
         {
             PlayerStatus = PlayerStatus.Play;
             Cards = new List<CardView>();

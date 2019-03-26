@@ -23,18 +23,20 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let player of gameInfo">
+    <tr *ngFor="let player of gameInfo.playerInGameViewItems">
       <td>
         {{ player.playerName }}
       </td>
       <td>
-        <app-cards [cards]=player.cards>No cart</app-cards>
+        <p *ngFor="let card of player.cards">
+          {{ card.cardLear }}
+          {{ card.cardNumber }}</p>
       </td>
       <td>
         {{ player.points }}
       </td>
       <td>
-        <app-player-status [playerStatus]=player.playerStatus></app-player-status>
+        {{ player.playerStatus }}
       </td>
     </tr>
   </tbody>

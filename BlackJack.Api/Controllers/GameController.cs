@@ -53,11 +53,11 @@ namespace BlackJack.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> ShowGame(long? gameId, PlayerChoos? choos)
+        public async Task<IHttpActionResult> ShowGame(long? gameId, PlayerChoose? choos)
         {
-            IEnumerable<PlayerInGameView> gameStatistics;
             try
             {
+                ShowGameView gameStatistics = new ShowGameView();
                 long gameIdLong = (long)gameId;
                 if (gameId == null)
                 {
@@ -69,13 +69,16 @@ namespace BlackJack.Api.Controllers
                 }
                 if (choos == null && await _gameService.IsNewGame(gameIdLong))
                 {
-                    return Ok(await _gameService.DoFirstTwoRounds(gameIdLong));
+                    gameStatistics.playerInGameViewItems = await _gameService.DoFirstTwoRounds(gameIdLong);
+                    return Ok(gameStatistics);
                 }
                 if (choos == null && !(await _gameService.IsNewGame(gameIdLong)))
                 {
-                    return Ok(await _gameService.LoadGame(gameIdLong));
+                    gameStatistics.playerInGameViewItems = await _gameService.LoadGame(gameIdLong);
+                    return Ok(gameStatistics);
                 }
-                gameStatistics = await _gameService.ContinuePlaying(gameIdLong, (PlayerChoos)choos);
+                
+                gameStatistics.playerInGameViewItems = await _gameService.ContinuePlaying(gameIdLong, (PlayerChoose)choos);
                 return Ok(gameStatistics);
             }
             catch (Exception exeption)

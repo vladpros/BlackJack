@@ -1,6 +1,6 @@
 ﻿namespace BlackJack.BusinessLogic.ViewModel.Enum
 {
-    public enum PlayerChoos
+    public enum PlayerChoose
     {
         None = 0,
         ContinueGame = 1,

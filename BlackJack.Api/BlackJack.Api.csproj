@@ -184,23 +184,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
-    <Content Include="UI\e2e\protractor.conf.js" />
-    <Content Include="UI\src\app\app.component.css" />
-    <Content Include="UI\src\app\app.component.html" />
-    <Content Include="UI\src\app\game\game-show\cards\cards.component.css" />
-    <Content Include="UI\src\app\game\game-show\cards\cards.component.html" />
-    <Content Include="UI\src\app\game\game-show\cards\card\card.component.css" />
-    <Content Include="UI\src\app\game\game-show\cards\card\card.component.html" />
-    <Content Include="UI\src\app\game\game-show\game-show.component.css" />
-    <Content Include="UI\src\app\game\game-show\game-show.component.html" />
-    <Content Include="UI\src\app\game\player-status\player-status.component.css" />
-    <Content Include="UI\src\app\game\player-status\player-status.component.html" />
-    <Content Include="UI\src\app\game\start-game\start-game.component.css" />
-    <Content Include="UI\src\app\game\start-game\start-game.component.html" />
-    <Content Include="UI\src\favicon.ico" />
-    <Content Include="UI\src\index.html" />
-    <Content Include="UI\src\karma.conf.js" />
-    <Content Include="UI\src\styles.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -217,15 +200,9 @@
     <Content Include="UI\.editorconfig" />
     <Content Include="UI\.gitignore" />
     <Content Include="UI\angular.json" />
-    <Content Include="UI\e2e\tsconfig.e2e.json" />
     <Content Include="UI\package-lock.json" />
     <Content Include="UI\package.json" />
     <Content Include="UI\README.md" />
-    <Content Include="UI\src\assets\.gitkeep" />
-    <Content Include="UI\src\browserslist" />
-    <Content Include="UI\src\tsconfig.app.json" />
-    <Content Include="UI\src\tsconfig.spec.json" />
-    <Content Include="UI\src\tslint.json" />
     <Content Include="UI\tsconfig.json" />
     <Content Include="UI\tslint.json" />
   </ItemGroup>
@@ -238,31 +215,6 @@
       <Project>{55261EA1-E7E6-41A2-97BE-38EA43629FED}</Project>
       <Name>BlackJack.BusinessLogic</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="UI\e2e\src\app.e2e-spec.ts" />
-    <TypeScriptCompile Include="UI\e2e\src\app.po.ts" />
-    <TypeScriptCompile Include="UI\src\app\app-routing.module.ts" />
-    <TypeScriptCompile Include="UI\src\app\app.component.ts" />
-    <TypeScriptCompile Include="UI\src\app\app.module.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\enams\card-lear.enum.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\enams\card-number.enum.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\enams\player-status.enum.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\game-show\cards\cards.component.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\game-show\cards\card\card.component.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\game-show\game-show.component.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\game.module.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\models\card.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\models\game-info.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\player-status\player-status.component.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\services\game-show.service.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\services\startgame.service.ts" />
-    <TypeScriptCompile Include="UI\src\app\game\start-game\start-game.component.ts" />
-    <TypeScriptCompile Include="UI\src\environments\environment.prod.ts" />
-    <TypeScriptCompile Include="UI\src\environments\environment.ts" />
-    <TypeScriptCompile Include="UI\src\main.ts" />
-    <TypeScriptCompile Include="UI\src\polyfills.ts" />
-    <TypeScriptCompile Include="UI\src\test.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
