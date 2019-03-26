@@ -218,7 +218,7 @@
     <TypeScriptCompile Include="UI\src\app\shared\interseptor\error.interseptor.ts" />
     <TypeScriptCompile Include="UI\src\app\shared\models\card-view.ts" />
     <TypeScriptCompile Include="UI\src\app\shared\models\name-view.ts" />
-    <TypeScriptCompile Include="UI\src\app\shared\models\player-in-game-view.ts" />
+    <TypeScriptCompile Include="UI\src\app\shared\models\show-game-view.ts" />
     <TypeScriptCompile Include="UI\src\app\shared\services\game-show.service.ts" />
     <TypeScriptCompile Include="UI\src\app\shared\services\notifications.service.ts" />
     <TypeScriptCompile Include="UI\src\app\shared\services\start-game.service.ts" />
