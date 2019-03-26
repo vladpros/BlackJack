@@ -9,11 +9,11 @@ export class NotificationsService {
   constructor(private toastr: ToastrService) {
   }
 
-  showNotifications(message: string): void {
+  public showNotifications(message: string): void {
     this.toastr.success(message);
   }
 
-  showError(message: string): void {
+  public showError(message: string): void {
     this.toastr.error(message);
   }
 }

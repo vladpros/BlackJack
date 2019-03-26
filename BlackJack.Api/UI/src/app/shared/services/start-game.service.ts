@@ -13,11 +13,11 @@ export class StartGameService {
 
    private controllerName = '/api/Game/';
 
-  getNames(): Observable<GetNameGameView> {
+   public getNames(): Observable<GetNameGameView> {
     return this.httpClient.get<GetNameGameView>(environment.webApiAdress + this.controllerName + 'GetName');
   }
 
-  StartGame(input): Observable<number> {
+  public StartGame(input): Observable<number> {
     return this.httpClient
     .get<number>(environment.webApiAdress + this.controllerName + 'StartGame?name=' + input.name + '&botsNumber=' + input.botsNumber);
   }

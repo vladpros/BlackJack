@@ -12,12 +12,12 @@ export class GameShowService {
 
   private controllerPath = '/api/Game/';
 
-  getGameInfo(id, choos): Observable<ShowGameView> {
+  public getGameInfo(id, choos): Observable<ShowGameView> {
     return this.httpClient
     .get<ShowGameView>(environment.webApiAdress + this.controllerPath + 'ShowGame?gameId=' + id + '&choos=' + choos);
   }
 
-  getGameResult(id): Observable<ShowGameView> {
+  public getGameResult(id): Observable<ShowGameView> {
     return this.httpClient.get<ShowGameView>(environment.webApiAdress + this.controllerPath + 'GameResult?gameId=' + id);
   }
 }

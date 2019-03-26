@@ -33,14 +33,14 @@ export class StartGameComponent implements OnInit {
   ngOnInit() {
   }
 
-  initForm() {
+  private initForm() {
     this.myForm = this.formBuilder.group({
       name: ['', Validators.required],
       botsNumber: [1]
     });
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     if (this.myForm.invalid) {
       this.isValid = false;
       return;
