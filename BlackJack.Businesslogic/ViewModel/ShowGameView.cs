@@ -6,11 +6,11 @@ namespace BlackJack.BusinessLogic.ViewModel
 {
     public class ShowGameView
     {
-        public IEnumerable<ShowGameViewItem> playerInGameViewItems { get; set; }
+        public IEnumerable<ShowGameViewItem> ShowGameViewItems { get; set; }
 
         public ShowGameView()
         {
-            playerInGameViewItems = new List<ShowGameViewItem>();
+            ShowGameViewItems = new List<ShowGameViewItem>();
         }
     }
     public class ShowGameViewItem

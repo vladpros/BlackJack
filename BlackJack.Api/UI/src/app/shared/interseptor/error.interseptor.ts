@@ -23,7 +23,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         return event;
       }),
       catchError((error: HttpErrorResponse) => {
-          this.notificationsService.showError(error.error.Message);
+          this.notificationsService.showError(error.message);
           return throwError(error);
       }));
   }

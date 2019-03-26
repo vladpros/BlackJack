@@ -425,5 +425,15 @@ namespace BlackJack.BusinessLogic.Service
 
             return gameStatistics;
         }
+
+        public async Task<bool> IsDoneGame(long id)
+        {
+            if((await GetGame(id)).GameStatus == GameStatus.Done)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

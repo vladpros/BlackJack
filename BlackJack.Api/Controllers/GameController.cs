@@ -4,7 +4,6 @@ using System.Web.Http;
 using System;
 using BlackJack.BusinessLogic.ViewModel;
 using BlackJack.BusinessLogic.ViewModel.Enum;
-using BlackJack.DataAccess.Entities.Enums;
 
 namespace BlackJack.Api.Controllers
 {
@@ -21,10 +20,10 @@ namespace BlackJack.Api.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> GetName()
         {
-            NameView names;
+            
             try
             {
-                names = await _gameService.GetOrderedUsers();
+                NameView names = await _gameService.GetOrderedUsers();
                 return Ok(names);
             }
             catch (Exception exception)
@@ -37,11 +36,11 @@ namespace BlackJack.Api.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> StartGame(string name, int botsNumber)
         {
-            long gameId;
+            
             try
             {
                 await _gameService.CheсkAndRegisterPlayer(name);
-                gameId = await _gameService.StartGame(name, botsNumber);
+                long gameId = await _gameService.StartGame(name, botsNumber);
                 return Ok(gameId);
             }
             catch (Exception exception)
@@ -57,27 +56,27 @@ namespace BlackJack.Api.Controllers
             try
             {
                 ShowGameView gameStatistics = new ShowGameView();
-                long gameIdLong = (long)gameId;
-                if (gameId == null)
+                
+                if (!gameId.HasValue)
                 {
                     return BadRequest("Game not found");
                 }
-                if ((await _gameService.GetGame(gameIdLong)).GameStatus == GameStatus.Done)
+                if (await _gameService.IsDoneGame(gameId.Value))
                 {
                     return BadRequest("Game is done");
                 }
-                if (choos == null && await _gameService.IsNewGame(gameIdLong))
+                if (choos == null && await _gameService.IsNewGame(gameId.Value))
                 {
-                    gameStatistics.playerInGameViewItems = await _gameService.DoFirstTwoRounds(gameIdLong);
+                    gameStatistics.ShowGameViewItems = await _gameService.DoFirstTwoRounds(gameId.Value);
                     return Ok(gameStatistics);
                 }
-                if (choos == null && !(await _gameService.IsNewGame(gameIdLong)))
+                if (choos == null && !(await _gameService.IsNewGame(gameId.Value)))
                 {
-                    gameStatistics.playerInGameViewItems = await _gameService.LoadGame(gameIdLong);
+                    gameStatistics.ShowGameViewItems = await _gameService.LoadGame(gameId.Value);
                     return Ok(gameStatistics);
                 }
                 
-                gameStatistics.playerInGameViewItems = await _gameService.ContinuePlaying(gameIdLong, (PlayerChoose)choos);
+                gameStatistics.ShowGameViewItems = await _gameService.ContinuePlaying(gameId.Value, (PlayerChoose)choos);
                 return Ok(gameStatistics);
             }
             catch (Exception exeption)

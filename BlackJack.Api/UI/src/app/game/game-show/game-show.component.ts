@@ -1,5 +1,5 @@
 import { PlayerChoose } from './../../shared/enum/player-choose.enum';
-import { PlayerInGameView } from '../../shared/models/player-in-game-view';
+import { ShowGameView } from '../../shared/models/show-game-view';
 import { GameShowService } from './../../shared/services/game-show.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,7 +16,7 @@ export class GameShowComponent implements OnInit {
 
   private id: number;
   private choose: number;
-  public gameInfo: PlayerInGameView;
+  public gameInfo: ShowGameView;
   public isEnd = false;
 
   constructor(
@@ -59,7 +59,7 @@ export class GameShowComponent implements OnInit {
 
   findEndGame(): boolean {
     console.log(this.gameInfo);
-    this.gameInfo.playerInGameViewItems.forEach(element => {
+    this.gameInfo.showGameViewItems.forEach(element => {
       if (element.playerStatus === 'Won') {
         this.isEnd = true;
       }

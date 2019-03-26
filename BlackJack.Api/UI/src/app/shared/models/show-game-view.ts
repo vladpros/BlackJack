@@ -1,10 +1,10 @@
 import { CardView } from './card-view';
 
-export interface PlayerInGameView {
-  playerInGameViewItems: PlayerInGameViewItem[];
+export interface ShowGameView {
+  showGameViewItems: ShowGameViewItem[];
 }
 
-export interface PlayerInGameViewItem {
+export interface ShowGameViewItem {
   playerName: string;
   cards: CardView[];
   points: number;

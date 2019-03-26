@@ -18,5 +18,6 @@ namespace BlackJack.BusinessLogic.Service.Interface
         Task<IEnumerable<ShowGameViewItem>> GetGameResult(IEnumerable<ShowGameViewItem> gameStat);
         Task<bool> IsNewGame(long gameId);
         Task<IEnumerable<ShowGameViewItem>> LoadGame(long gameId);
+        Task<bool> IsDoneGame(long id);
     }
 }

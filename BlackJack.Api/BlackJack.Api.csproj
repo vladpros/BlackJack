@@ -251,10 +251,6 @@
       <Project>{55261EA1-E7E6-41A2-97BE-38EA43629FED}</Project>
       <Name>BlackJack.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlackJack.DataAccess\BlackJack.DataAccess.csproj">
-      <Project>{eab3856d-a30a-49d5-a02a-69d423fca973}</Project>
-      <Name>BlackJack.DataAccess</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

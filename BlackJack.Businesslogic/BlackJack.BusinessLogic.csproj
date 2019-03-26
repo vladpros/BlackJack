@@ -57,7 +57,7 @@
     <Compile Include="ViewModel\CardView.cs" />
     <Compile Include="ViewModel\Enum\PlayerChoose.cs" />
     <Compile Include="ViewModel\NameView.cs" />
-    <Compile Include="ViewModel\PlayerInGameView.cs" />
+    <Compile Include="ViewModel\ShowGameView.cs" />
     <Compile Include="Service\GameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NinjectServiceRegistration.cs" />
