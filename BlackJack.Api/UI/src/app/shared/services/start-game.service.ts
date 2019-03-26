@@ -17,7 +17,7 @@ export class StartGameService {
     return this.httpClient.get<GetNameGameView>(environment.webApiAdress + this.controllerName + 'GetName');
   }
 
-  public StartGame(input): Observable<number> {
+  public StartGame(input: any): Observable<number> {
     return this.httpClient
     .get<number>(environment.webApiAdress + this.controllerName + 'StartGame?name=' + input.name + '&botsNumber=' + input.botsNumber);
   }

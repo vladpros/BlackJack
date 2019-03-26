@@ -1,3 +1,4 @@
+import { PlayerChoose } from './../enum/player-choose.enum';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -12,12 +13,8 @@ export class GameShowService {
 
   private controllerPath = '/api/Game/';
 
-  public getGameInfo(id, choos): Observable<ShowGameView> {
+  public getGameInfo(id: number, choose: PlayerChoose): Observable<ShowGameView> {
     return this.httpClient
-    .get<ShowGameView>(environment.webApiAdress + this.controllerPath + 'Show?gameId=' + id + '&playerChoose=' + choos);
-  }
-
-  public getGameResult(id): Observable<ShowGameView> {
-    return this.httpClient.get<ShowGameView>(environment.webApiAdress + this.controllerPath + 'GameResult?gameId=' + id);
+    .get<ShowGameView>(environment.webApiAdress + this.controllerPath + 'Show?gameId=' + id + '&playerChoose=' + choose);
   }
 }
