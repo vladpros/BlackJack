@@ -21,16 +21,17 @@ export class StartGameComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     ) {
-      this.startGameService.getNames().subscribe(result => {
-        this.nameView = result;
-      },
-      error => {
-        console.error(error);
-      });
-      this.initForm();
+
   }
 
   ngOnInit() {
+    this.startGameService.getNames().subscribe(result => {
+      this.nameView = result;
+    },
+    error => {
+      console.error(error);
+    });
+    this.initForm();
   }
 
   private initForm() {
