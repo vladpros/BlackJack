@@ -55,8 +55,9 @@ namespace BlackJack.UI.Controllers
             
             try
             {
-                IEnumerable<ShowGameViewItem> gameStatistics = await _gameService.DoFirstTwoRounds(gameId);
-                return View(gameStatistics);
+                ShowGameView gameStatistics = new ShowGameView();
+                gameStatistics.ShowGameViewItems = await _gameService.DoFirstTwoRounds(gameId);
+                return View(gameStatistics.ShowGameViewItems);
             }
             catch (Exception exeption)
             {
@@ -71,16 +72,17 @@ namespace BlackJack.UI.Controllers
            
             try
             {
-                IEnumerable<ShowGameViewItem> gameStatistics = await _gameService.ContinuePlaying((long)gameId, number);
+                ShowGameView gameStatistics = new ShowGameView();
+                gameStatistics.ShowGameViewItems = await _gameService.ContinuePlaying((long)gameId, number);
 
-                foreach (var player in gameStatistics)
+                foreach (var player in gameStatistics.ShowGameViewItems)
                 {
                     if (player.PlayerStatus == PlayerStatus.Won)
                     {
-                        return View("~/Views/Game/GameResult.cshtml", gameStatistics);
+                        return View("~/Views/Game/GameResult.cshtml", gameStatistics.ShowGameViewItems);
                     }
                 }
-                return View(gameStatistics);
+                return View(gameStatistics.ShowGameViewItems);
             }
             catch (Exception exeption)
             {
