@@ -35,7 +35,7 @@ export class GameShowComponent implements OnInit {
     this.showGame();
   }
 
-  showGame() {
+  showGame(): void {
     this.gameShowService.getGameInfo(this.id, this.choose).subscribe(result => {
       this.gameInfo = result;
       console.log(this.gameInfo);
@@ -47,12 +47,12 @@ export class GameShowComponent implements OnInit {
     );
   }
 
-  resumePlay() {
+  resumePlay(): void {
     this.choose = PlayerChoose.ContinueGame;
     this.showGame();
   }
 
-  stopPlay() {
+  stopPlay(): void {
     this.choose = PlayerChoose.StopGame;
     this.showGame();
   }

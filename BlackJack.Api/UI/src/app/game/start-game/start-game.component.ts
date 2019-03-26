@@ -40,7 +40,7 @@ export class StartGameComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.myForm.invalid) {
       this.isValid = false;
       return;
