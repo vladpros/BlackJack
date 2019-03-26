@@ -30,7 +30,7 @@ export class GameShowComponent implements OnInit {
   ngOnInit() {
     this.id = +this.activstRout.snapshot.paramMap.get('id');
     if (this.id === null) {
-      this.router.navigate(['/startGame']);
+      this.router.navigate(['/game/startgame']);
     }
     this.showGame();
   }
@@ -42,7 +42,7 @@ export class GameShowComponent implements OnInit {
       this.findEndGame();
     },
     error => {
-      this.router.navigate(['/startGame']);
+      this.router.navigate(['/game/startgame']);
     }
     );
   }
