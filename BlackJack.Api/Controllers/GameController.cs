@@ -51,7 +51,7 @@ namespace BlackJack.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> ShowGame(long gameId, PlayerChoose? playerChoose)
+        public async Task<IHttpActionResult> Show(long gameId, PlayerChoose? playerChoose)
         {
             try
             {

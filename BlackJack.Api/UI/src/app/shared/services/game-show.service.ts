@@ -14,7 +14,7 @@ export class GameShowService {
 
   public getGameInfo(id, choos): Observable<ShowGameView> {
     return this.httpClient
-    .get<ShowGameView>(environment.webApiAdress + this.controllerPath + 'ShowGame?gameId=' + id + '&choos=' + choos);
+    .get<ShowGameView>(environment.webApiAdress + this.controllerPath + 'Show?gameId=' + id + '&playerChoose=' + choos);
   }
 
   public getGameResult(id): Observable<ShowGameView> {

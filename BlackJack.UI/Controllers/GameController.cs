@@ -67,7 +67,7 @@ namespace BlackJack.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> GameShow(long gameId, PlayerChoose number)
+        public async Task<ActionResult> Game(long gameId, PlayerChoose number)
         {
            
             try
