@@ -1,11 +1,10 @@
-﻿using BlackJack.DataAccess.Entities.Enums;
-using BlackJack.BusinessLogic.Service.Interface;
+﻿using BlackJack.BusinessLogic.Service.Interface;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System;
 using BlackJack.BusinessLogic.ViewModel;
-using System.Collections.Generic;
 using BlackJack.BusinessLogic.ViewModel.Enum;
+using BlackJack.DataAccess.Entities.Enums;
 
 namespace BlackJack.Api.Controllers
 {

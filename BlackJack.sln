@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.DataAccess", "DataBaseControl\BlackJack.DataAccess.csproj", "{EAB3856D-A30A-49D5-A02A-69D423FCA973}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.DataAccess", "BlackJack.DataAccess\BlackJack.DataAccess.csproj", "{EAB3856D-A30A-49D5-A02A-69D423FCA973}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.UI", "UI\BlackJack.UI.csproj", "{76854E35-9F9D-41BC-93AE-74CF761957EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.UI", "BlackJack.UI\BlackJack.UI.csproj", "{76854E35-9F9D-41BC-93AE-74CF761957EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.BusinessLogic", "Logick\BlackJack.BusinessLogic.csproj", "{55261EA1-E7E6-41A2-97BE-38EA43629FED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.BusinessLogic", "BlackJack.Businesslogic\BlackJack.BusinessLogic.csproj", "{55261EA1-E7E6-41A2-97BE-38EA43629FED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.Api", "BlackJack.Api\BlackJack.Api.csproj", "{E7768C93-5664-42F3-BAC9-A8E9C64E06C9}"
 EndProject

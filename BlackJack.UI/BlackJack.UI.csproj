@@ -253,9 +253,13 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Logick\BlackJack.BusinessLogic.csproj">
+    <ProjectReference Include="..\BlackJack.Businesslogic\BlackJack.BusinessLogic.csproj">
       <Project>{55261EA1-E7E6-41A2-97BE-38EA43629FED}</Project>
       <Name>BlackJack.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlackJack.DataAccess\BlackJack.DataAccess.csproj">
+      <Project>{EAB3856D-A30A-49D5-A02A-69D423FCA973}</Project>
+      <Name>BlackJack.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

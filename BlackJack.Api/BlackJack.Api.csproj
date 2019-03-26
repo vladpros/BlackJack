@@ -184,6 +184,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <Content Include="UI\src\app\app.component.css" />
+    <Content Include="UI\src\app\app.component.html" />
+    <Content Include="UI\src\app\game\game-show\game-show.component.css" />
+    <Content Include="UI\src\app\game\game-show\game-show.component.html" />
+    <Content Include="UI\src\app\game\start-game\start-game.component.css" />
+    <Content Include="UI\src\app\game\start-game\start-game.component.html" />
+    <Content Include="UI\src\favicon.ico" />
+    <Content Include="UI\src\index.html" />
+    <Content Include="UI\src\karma.conf.js" />
+    <Content Include="UI\src\styles.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -192,7 +202,32 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <TypeScriptCompile Include="UI\src\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="UI\src\app\app.component.ts" />
+    <TypeScriptCompile Include="UI\src\app\app.module.ts" />
+    <TypeScriptCompile Include="UI\src\app\game\game-routing.model.ts" />
+    <TypeScriptCompile Include="UI\src\app\game\game-show\game-show-routing.module.ts" />
+    <TypeScriptCompile Include="UI\src\app\game\game-show\game-show.component.ts" />
+    <TypeScriptCompile Include="UI\src\app\game\game-show\game-show.module.ts" />
+    <TypeScriptCompile Include="UI\src\app\game\game.module.ts" />
+    <TypeScriptCompile Include="UI\src\app\game\start-game\start-game-routing.module.ts" />
+    <TypeScriptCompile Include="UI\src\app\game\start-game\start-game.component.ts" />
+    <TypeScriptCompile Include="UI\src\app\game\start-game\start-game.module.ts" />
+    <TypeScriptCompile Include="UI\src\app\shared\enum\player-choose.enum.ts" />
+    <TypeScriptCompile Include="UI\src\app\shared\interseptor\error.interseptor.ts" />
+    <TypeScriptCompile Include="UI\src\app\shared\models\card-view.ts" />
+    <TypeScriptCompile Include="UI\src\app\shared\models\name-view.ts" />
+    <TypeScriptCompile Include="UI\src\app\shared\models\player-in-game-view.ts" />
+    <TypeScriptCompile Include="UI\src\app\shared\services\game-show.service.ts" />
+    <TypeScriptCompile Include="UI\src\app\shared\services\notifications.service.ts" />
+    <TypeScriptCompile Include="UI\src\app\shared\services\start-game.service.ts" />
+    <TypeScriptCompile Include="UI\src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="UI\src\environments\environment.ts" />
+    <TypeScriptCompile Include="UI\src\main.ts" />
+    <TypeScriptCompile Include="UI\src\polyfills.ts" />
+    <TypeScriptCompile Include="UI\src\test.ts" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="libman.json" />
     <None Include="packages.config" />
@@ -205,15 +240,20 @@
     <Content Include="UI\README.md" />
     <Content Include="UI\tsconfig.json" />
     <Content Include="UI\tslint.json" />
+    <Content Include="UI\src\assets\.gitkeep" />
+    <Content Include="UI\src\browserslist" />
+    <Content Include="UI\src\tsconfig.app.json" />
+    <Content Include="UI\src\tsconfig.spec.json" />
+    <Content Include="UI\src\tslint.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataBaseControl\BlackJack.DataAccess.csproj">
-      <Project>{eab3856d-a30a-49d5-a02a-69d423fca973}</Project>
-      <Name>BlackJack.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Logick\BlackJack.BusinessLogic.csproj">
+    <ProjectReference Include="..\BlackJack.Businesslogic\BlackJack.BusinessLogic.csproj">
       <Project>{55261EA1-E7E6-41A2-97BE-38EA43629FED}</Project>
       <Name>BlackJack.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlackJack.DataAccess\BlackJack.DataAccess.csproj">
+      <Project>{eab3856d-a30a-49d5-a02a-69d423fca973}</Project>
+      <Name>BlackJack.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

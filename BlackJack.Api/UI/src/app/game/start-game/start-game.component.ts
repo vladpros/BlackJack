@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { StartGameService } from '../../Sheared/services/start-game.service';
+import { StartGameService } from '../../shared/services/start-game.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NameView } from 'src/app/sheared/models/name-view';
+import { NameView } from 'src/app/shared/models/name-view';
 
 @Component({
   selector: 'app-start-game',

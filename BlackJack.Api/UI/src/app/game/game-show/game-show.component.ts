@@ -1,5 +1,6 @@
-import { PlayerInGameView } from '../../sheared/models/player-in-game-view';
-import { GameShowService } from './../../sheared/services/game-show.service';
+import { PlayerChoose } from './../../shared/enum/player-choose.enum';
+import { PlayerInGameView } from '../../shared/models/player-in-game-view';
+import { GameShowService } from './../../shared/services/game-show.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -47,12 +48,12 @@ export class GameShowComponent implements OnInit {
   }
 
   resumePlay() {
-    this.choose = 1;
+    this.choose = PlayerChoose.ContinueGame;
     this.showGame();
   }
 
   stopPlay() {
-    this.choose = 2;
+    this.choose = PlayerChoose.StopGame;
     this.showGame();
   }
 

@@ -3,10 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  webApiAdress: 'http://localhost:49784',
 };
-
-export const apiWebAdress = 'http://localhost:49784';
 
 /*
  * For easier debugging in development mode, you can import the following file

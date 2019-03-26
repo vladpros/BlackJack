@@ -63,7 +63,7 @@
     <Compile Include="NinjectServiceRegistration.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataBaseControl\BlackJack.DataAccess.csproj">
+    <ProjectReference Include="..\BlackJack.DataAccess\BlackJack.DataAccess.csproj">
       <Project>{EAB3856D-A30A-49D5-A02A-69D423FCA973}</Project>
       <Name>BlackJack.DataAccess</Name>
     </ProjectReference>
