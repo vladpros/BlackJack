@@ -2,11 +2,11 @@
 
 namespace BlackJack.BusinessLogic.ViewModel
 {
-    public class NameView
+    public class GetNameGameView
     {
         public List<string> Names;
 
-        public NameView()
+        public GetNameGameView()
         {
             Names = new List<string>();
         }

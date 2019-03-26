@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StartGameService } from '../../shared/services/start-game.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NameView } from 'src/app/shared/models/name-view';
+import { GetNameGameView } from 'src/app/shared/models/get-name-game-view';
 
 @Component({
   selector: 'app-start-game',
@@ -13,7 +13,7 @@ import { NameView } from 'src/app/shared/models/name-view';
 export class StartGameComponent implements OnInit {
 
   public myForm: FormGroup;
-  public nameView: NameView;
+  public nameView: GetNameGameView;
   public isValid = true;
 
   constructor(

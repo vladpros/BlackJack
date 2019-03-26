@@ -23,7 +23,7 @@ namespace BlackJack.Api.Controllers
             
             try
             {
-                NameView names = await _gameService.GetOrderedUsers();
+                GetNameGameView names = await _gameService.GetOrderedUsers();
                 return Ok(names);
             }
             catch (Exception exception)
@@ -51,32 +51,28 @@ namespace BlackJack.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> ShowGame(long? gameId, PlayerChoose? choos)
+        public async Task<IHttpActionResult> ShowGame(long gameId, PlayerChoose? choos)
         {
             try
             {
                 ShowGameView gameStatistics = new ShowGameView();
                 
-                if (!gameId.HasValue)
-                {
-                    return BadRequest("Game not found");
-                }
-                if (await _gameService.IsDoneGame(gameId.Value))
+                if (await _gameService.IsDoneGame(gameId))
                 {
                     return BadRequest("Game is done");
                 }
-                if (choos == null && await _gameService.IsNewGame(gameId.Value))
+                if (choos == null && await _gameService.IsNewGame(gameId))
                 {
-                    gameStatistics.ShowGameViewItems = await _gameService.DoFirstTwoRounds(gameId.Value);
+                    gameStatistics.ShowGameViewItems = await _gameService.DoFirstTwoRounds(gameId);
                     return Ok(gameStatistics);
                 }
-                if (choos == null && !(await _gameService.IsNewGame(gameId.Value)))
+                if (choos == null && !(await _gameService.IsNewGame(gameId)))
                 {
-                    gameStatistics.ShowGameViewItems = await _gameService.LoadGame(gameId.Value);
+                    gameStatistics.ShowGameViewItems = await _gameService.LoadGame(gameId);
                     return Ok(gameStatistics);
                 }
                 
-                gameStatistics.ShowGameViewItems = await _gameService.ContinuePlaying(gameId.Value, (PlayerChoose)choos);
+                gameStatistics.ShowGameViewItems = await _gameService.ContinuePlaying(gameId, (PlayerChoose)choos);
                 return Ok(gameStatistics);
             }
             catch (Exception exeption)

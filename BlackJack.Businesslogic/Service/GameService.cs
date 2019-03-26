@@ -259,9 +259,9 @@ namespace BlackJack.BusinessLogic.Service
             return gameStatistics;
         }
 
-        public async Task<NameView> GetOrderedUsers()
+        public async Task<GetNameGameView> GetOrderedUsers()
         {
-            var players = new NameView();
+            var players = new GetNameGameView();
             players.Names = (await _playerRepository.GetByType(PlayerType.User)).OrderByDescending(x => x.Name).Select(s => s.Name).ToList();
 
             return players;
